@@ -73,7 +73,7 @@ export default function Home() {
           <p className="text-sm font-semibold uppercase tracking-widest text-blue-400">
             DGIST
           </p>
-          <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
+          <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Simulation and Machine Learning
             <br />
             for <span className="text-blue-400">Soft Matter Lab</span>
