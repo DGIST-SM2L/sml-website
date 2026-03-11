@@ -1384,18 +1384,22 @@ function Dashboard() {
   };
 
   const commitToGithub = async () => {
-    if (dirty.size > 0) {
-      await saveAll();
-    }
     setCommitting(true);
     setMessage(null);
     try {
+      const files: Record<string, unknown> = {};
+      if (publications) files.publications = publications;
+      if (members) files.members = members;
+      if (research) files.research = research;
+      if (news) files.news = news;
+      if (gallery) files.gallery = gallery;
+
       await api("/api/github/commit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          types: ["publications", "members", "research", "news", "gallery"],
           message: "Update content via admin dashboard",
+          files,
         }),
       });
       setMessage({

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
 
 const CONTENT_FILES: Record<string, string> = {
   publications: "content/publications.json",
   members: "content/members.json",
   research: "content/research.json",
+  news: "content/news.json",
+  gallery: "content/gallery.json",
 };
 
 async function getFileSha(
@@ -78,17 +78,17 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { types, message } = await request.json();
-    const filesToCommit: string[] = Array.isArray(types) ? types : [types];
-    const results = [];
+    const { message, files } = await request.json();
+    // files: { [type]: data } — content sent directly from frontend
+    if (!files || typeof files !== "object") {
+      return NextResponse.json({ error: "No files provided" }, { status: 400 });
+    }
 
-    for (const type of filesToCommit) {
+    const results = [];
+    for (const [type, data] of Object.entries(files)) {
       const repoPath = CONTENT_FILES[type];
       if (!repoPath) continue;
-
-      const localPath = path.join(process.cwd(), repoPath);
-      const content = await fs.readFile(localPath, "utf-8");
-
+      const content = JSON.stringify(data, null, 2);
       const result = await commitFile(
         githubRepo,
         repoPath,
