@@ -75,7 +75,7 @@ type GalleryItem = {
   date: string;
 };
 
-type Tab = "publications" | "members" | "research" | "news" | "gallery" | "contact";
+type Tab = "publications" | "members" | "research" | "news-gallery" | "contact";
 
 // ─── Helper ──────────────────────────────────────────────────────
 async function api(path: string, options?: RequestInit) {
@@ -1946,8 +1946,7 @@ function Dashboard() {
     { key: "publications", label: "Publications" },
     { key: "members", label: "Members" },
     { key: "research", label: "Research" },
-    { key: "news", label: "News" },
-    { key: "gallery", label: "Gallery" },
+    { key: "news-gallery", label: "News & Gallery" },
     { key: "contact", label: "Contact" },
   ];
 
@@ -1955,8 +1954,8 @@ function Dashboard() {
     publications: "/publications",
     members: "/people",
     research: "/research",
-    news: "/news",
-    gallery: "/gallery",
+    "news-gallery": "/news",
+    contact: "/contact",
   };
 
   const previewUrl = typeof window !== "undefined"
@@ -2072,23 +2071,31 @@ function Dashboard() {
             }}
           />
         )}
-        {tab === "news" && (
-          <NewsTab
-            data={news}
-            onChange={(d) => {
-              setNews(d);
-              markDirty("news");
-            }}
-          />
-        )}
-        {tab === "gallery" && (
-          <GalleryTab
-            data={gallery}
-            onChange={(d) => {
-              setGallery(d);
-              markDirty("gallery");
-            }}
-          />
+        {tab === "news-gallery" && (
+          <div className="space-y-10">
+            {/* ── News section ── */}
+            <div>
+              <h2 className="mb-4 text-base font-bold text-slate-700 border-b border-slate-200 pb-2">📰 News Posts</h2>
+              <NewsTab
+                data={news}
+                onChange={(d) => {
+                  setNews(d);
+                  markDirty("news");
+                }}
+              />
+            </div>
+            {/* ── Gallery section ── */}
+            <div>
+              <h2 className="mb-4 text-base font-bold text-slate-700 border-b border-slate-200 pb-2">🖼️ Photo Gallery</h2>
+              <GalleryTab
+                data={gallery}
+                onChange={(d) => {
+                  setGallery(d);
+                  markDirty("gallery");
+                }}
+              />
+            </div>
+          </div>
         )}
         {tab === "contact" && (
           <ContactTab
