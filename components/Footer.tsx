@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -15,6 +16,15 @@ export default function Footer() {
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-500">
               333 Techno jungang-daero, Hyeonpung-eup, Dalseong-gun, Daegu
             </p>
+            <a href="https://www.dgist.ac.kr" target="_blank" rel="noopener noreferrer" className="mt-4 inline-block">
+              <Image
+                src="/images/dgist-logo.png"
+                alt="DGIST"
+                width={120}
+                height={40}
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity dark:brightness-90"
+              />
+            </a>
           </div>
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
