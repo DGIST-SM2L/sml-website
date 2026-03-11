@@ -334,6 +334,28 @@ function MembersTab({
   const [piForm, setPiForm] = useState(data.pi);
   const [showPiEdit, setShowPiEdit] = useState(false);
   const [editingAlumni, setEditingAlumni] = useState<number | null>(null);
+  const [uploadingPhoto, setUploadingPhoto] = useState<string | null>(null); // "member" | "alumni-{i}"
+
+  const uploadPhoto = async (
+    file: File,
+    key: string,
+    onDone: (url: string) => void
+  ) => {
+    setUploadingPhoto(key);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("folder", "members");
+      const res = await fetch("/api/upload", { method: "POST", body: fd, credentials: "include" });
+      if (!res.ok) throw new Error("Upload failed");
+      const { url } = await res.json();
+      onDone(url);
+    } catch {
+      alert("Photo upload failed");
+    } finally {
+      setUploadingPhoto(null);
+    }
+  };
 
   useEffect(() => {
     setPiForm(data.pi);
@@ -385,6 +407,22 @@ function MembersTab({
 
   const removeAlumni = (idx: number) => {
     onChange({ ...data, alumni: data.alumni.filter((_, i) => i !== idx) });
+  };
+
+  const moveToMembers = (idx: number) => {
+    const a = data.alumni[idx];
+    const member: Member = {
+      name: a.name,
+      position: a.degree,
+      research: a.research,
+      education: "",
+      photo: a.photo,
+    };
+    onChange({
+      ...data,
+      alumni: data.alumni.filter((_, i) => i !== idx),
+      members: [...data.members, member],
+    });
   };
 
   const updateAlumni = (idx: number, updated: Alumni) => {
@@ -712,14 +750,30 @@ function MembersTab({
             }
             className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
           />
-          <input
-            placeholder="Photo path (e.g. /images/members/name.jpg)"
-            value={memberForm.photo}
-            onChange={(e) =>
-              setMemberForm({ ...memberForm, photo: e.target.value })
-            }
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
+          <div className="flex gap-2 items-center">
+            <input
+              placeholder="Photo path (e.g. /images/members/name.jpg)"
+              value={memberForm.photo}
+              onChange={(e) =>
+                setMemberForm({ ...memberForm, photo: e.target.value })
+              }
+              className="flex-1 rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+            />
+            <label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50 whitespace-nowrap">
+              {uploadingPhoto === "member" ? "Uploading..." : "📷 Upload"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                disabled={uploadingPhoto === "member"}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) uploadPhoto(file, "member", (url) => setMemberForm({ ...memberForm, photo: url }));
+                  e.target.value = "";
+                }}
+              />
+            </label>
+          </div>
         </div>
         <div className="mt-4 flex gap-2">
           <button
@@ -828,12 +882,28 @@ function MembersTab({
                         }
                         className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
                       />
-                      <input
-                        placeholder="Photo path"
-                        value={a.photo}
-                        onChange={(e) => updateAlumni(i, { ...a, photo: e.target.value })}
-                        className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none sm:col-span-2"
-                      />
+                      <div className="flex gap-2 items-center sm:col-span-2">
+                        <input
+                          placeholder="Photo path"
+                          value={a.photo}
+                          onChange={(e) => updateAlumni(i, { ...a, photo: e.target.value })}
+                          className="flex-1 rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                        />
+                        <label className="cursor-pointer rounded border border-slate-300 px-2 py-1.5 text-xs hover:bg-slate-50 whitespace-nowrap">
+                          {uploadingPhoto === `alumni-${i}` ? "Uploading..." : "📷 Upload"}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            disabled={uploadingPhoto === `alumni-${i}`}
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) uploadPhoto(file, `alumni-${i}`, (url) => updateAlumni(i, { ...a, photo: url }));
+                              e.target.value = "";
+                            }}
+                          />
+                        </label>
+                      </div>
                     </div>
                     <textarea
                       placeholder="Research topics"
@@ -848,6 +918,12 @@ function MembersTab({
                         className="rounded bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
                       >
                         Done
+                      </button>
+                      <button
+                        onClick={() => { moveToMembers(i); setEditingAlumni(null); }}
+                        className="rounded px-3 py-1.5 text-xs text-green-700 hover:bg-green-50 border border-green-200"
+                      >
+                        ↑ Restore to Members
                       </button>
                       <button
                         onClick={() => removeAlumni(i)}
@@ -879,6 +955,13 @@ function MembersTab({
                         className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
                       >
                         Edit
+                      </button>
+                      <button
+                        onClick={() => moveToMembers(i)}
+                        className="rounded px-2 py-1 text-xs text-green-700 hover:bg-green-50"
+                        title="Restore to Members"
+                      >
+                        ↑
                       </button>
                       <button
                         onClick={() => removeAlumni(i)}
