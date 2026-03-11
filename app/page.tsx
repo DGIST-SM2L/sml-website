@@ -74,9 +74,9 @@ export default function Home() {
             DGIST
           </p>
           <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
-            Soft Matter
+            Simulation and Machine Learning
             <br />
-            <span className="text-blue-400">Lab</span>
+            for <span className="text-blue-400">Soft Matter Lab</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
             Computational Polymer Science &amp; AI — developing mesoscale
