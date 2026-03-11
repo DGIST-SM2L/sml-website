@@ -140,13 +140,10 @@ export default function PublicationsPage() {
           <div className="space-y-12">
             {grouped.map(([year, pubs]) => (
               <div key={year}>
-                <div className="mb-4 flex items-center gap-3">
+                <div className="mb-4">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                     {year}
                   </h3>
-                  <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-                    {pubs.length}
-                  </span>
                 </div>
                 <div className="space-y-4">
                   {pubs.map((pub, i) => (
