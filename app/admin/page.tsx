@@ -1577,21 +1577,25 @@ function ContactTab({
   );
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-8 w-full">
-      <h3 className="mb-6 text-lg font-semibold">Contact Information</h3>
-      <div className="flex flex-col gap-5">
-        {field("Lab Name", "labName")}
-        {field("Address (use \\n for line breaks)", "address", true)}
-        {field("Institution", "institution")}
-        {field("Email", "email")}
-        {field("Phone", "phone")}
-        {field("Office", "office")}
-        {field("Google Maps Embed URL", "mapEmbed")}
-        <div className="border-t border-slate-100 pt-4">
-          <p className="mb-4 text-sm font-semibold text-slate-700">Join Us Section</p>
-          {field("Title", "joinTitle")}
+    <div className="space-y-6">
+      <div className="rounded-lg border border-slate-200 bg-white p-6">
+        <h3 className="mb-5 text-lg font-semibold">Basic Info</h3>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="sm:col-span-2">{field("Lab Name", "labName")}</div>
+          <div className="sm:col-span-2">{field("Address (줄바꿈은 \\n)", "address", true)}</div>
+          <div className="sm:col-span-2">{field("Institution", "institution")}</div>
+          <div>{field("Email", "email")}</div>
+          <div>{field("Phone", "phone")}</div>
+          <div className="sm:col-span-2">{field("Office", "office")}</div>
+          <div className="sm:col-span-2">{field("Google Maps Embed URL", "mapEmbed")}</div>
         </div>
-        {field("Text", "joinText", true)}
+      </div>
+      <div className="rounded-lg border border-slate-200 bg-white p-6">
+        <h3 className="mb-5 text-lg font-semibold">Join Us Section</h3>
+        <div className="grid grid-cols-1 gap-4">
+          {field("Title", "joinTitle")}
+          {field("Text", "joinText", true)}
+        </div>
       </div>
     </div>
   );
