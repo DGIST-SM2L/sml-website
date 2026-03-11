@@ -75,7 +75,7 @@ type GalleryItem = {
   date: string;
 };
 
-type Tab = "publications" | "members" | "research" | "news" | "gallery";
+type Tab = "publications" | "members" | "research" | "news" | "gallery" | "contact";
 
 // ─── Helper ──────────────────────────────────────────────────────
 async function api(path: string, options?: RequestInit) {
@@ -1536,6 +1536,67 @@ function NewsTab({
 // ─── Gallery Tab ──────────────────────────────────────────────────
 const GALLERY_ALBUMS = ["Lab Life", "Conference", "Group Photo", "Research", "Event"];
 
+// ─── Contact Tab ─────────────────────────────────────────────────
+type ContactData = {
+  labName: string;
+  address: string;
+  institution: string;
+  email: string;
+  phone: string;
+  office: string;
+  mapEmbed: string;
+  joinTitle: string;
+  joinText: string;
+};
+
+function ContactTab({
+  data,
+  onChange,
+}: {
+  data: ContactData;
+  onChange: (d: ContactData) => void;
+}) {
+  const field = (label: string, key: keyof ContactData, multiline = false) => (
+    <div className="col-span-full">
+      <label className="mb-1 block text-xs font-medium text-slate-600">{label}</label>
+      {multiline ? (
+        <textarea
+          value={data[key] as string}
+          rows={3}
+          onChange={(e) => onChange({ ...data, [key]: e.target.value })}
+          className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+      ) : (
+        <input
+          value={data[key] as string}
+          onChange={(e) => onChange({ ...data, [key]: e.target.value })}
+          className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+      )}
+    </div>
+  );
+
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-6">
+      <h3 className="mb-4 text-lg font-semibold">Contact Information</h3>
+      <div className="grid gap-4">
+        {field("Lab Name", "labName")}
+        {field("Address (use \\n for line breaks)", "address", true)}
+        {field("Institution", "institution")}
+        {field("Email", "email")}
+        {field("Phone", "phone")}
+        {field("Office", "office")}
+        {field("Google Maps Embed URL", "mapEmbed")}
+        <div className="col-span-full border-t border-slate-100 pt-4">
+          <p className="mb-3 text-sm font-semibold text-slate-700">Join Us Section</p>
+        </div>
+        {field("Title", "joinTitle")}
+        {field("Text", "joinText", true)}
+      </div>
+    </div>
+  );
+}
+
 function GalleryTab({
   data,
   onChange,
@@ -1713,6 +1774,10 @@ function Dashboard() {
   const [research, setResearch] = useState<ResearchData | null>(null);
   const [news, setNews] = useState<NewsItem[]>([]);
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [contact, setContact] = useState<ContactData>({
+    labName: "", address: "", institution: "", email: "",
+    phone: "", office: "", mapEmbed: "", joinTitle: "", joinText: "",
+  });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [committing, setCommitting] = useState(false);
@@ -1724,18 +1789,20 @@ function Dashboard() {
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [pubs, mem, res, nws, gal] = await Promise.all([
+      const [pubs, mem, res, nws, gal, con] = await Promise.all([
         api("/api/content/publications"),
         api("/api/content/members"),
         api("/api/content/research"),
         api("/api/content/news"),
         api("/api/content/gallery"),
+        api("/api/content/contact"),
       ]);
       setPublications(pubs);
       setMembers(mem);
       setResearch(res);
       setNews(nws);
       setGallery(gal);
+      setContact(con);
     } catch (err) {
       setMessage({
         type: "error",
@@ -1804,6 +1871,15 @@ function Dashboard() {
           })
         );
       }
+      if (dirty.has("contact")) {
+        promises.push(
+          api("/api/content/contact", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(contact),
+          })
+        );
+      }
       await Promise.all(promises);
       setMessage({ type: "success", text: "Changes saved locally." });
       setDirty(new Set());
@@ -1827,6 +1903,7 @@ function Dashboard() {
       if (research) files.research = research;
       if (news) files.news = news;
       if (gallery) files.gallery = gallery;
+      if (contact) files.contact = contact;
 
       await api("/api/github/commit", {
         method: "POST",
@@ -1871,6 +1948,7 @@ function Dashboard() {
     { key: "research", label: "Research" },
     { key: "news", label: "News" },
     { key: "gallery", label: "Gallery" },
+    { key: "contact", label: "Contact" },
   ];
 
   const TAB_URLS: Record<string, string> = {
@@ -2009,6 +2087,15 @@ function Dashboard() {
             onChange={(d) => {
               setGallery(d);
               markDirty("gallery");
+            }}
+          />
+        )}
+        {tab === "contact" && (
+          <ContactTab
+            data={contact}
+            onChange={(d) => {
+              setContact(d);
+              markDirty("contact");
             }}
           />
         )}

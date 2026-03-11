@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
-const VALID_TYPES = ["publications", "members", "research", "news", "gallery"];
+const VALID_TYPES = ["publications", "members", "research", "news", "gallery", "contact"];
 
 function getContentPath(type: string) {
   return path.join(process.cwd(), "content", `${type}.json`);

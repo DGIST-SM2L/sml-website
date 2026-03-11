@@ -1,0 +1,11 @@
+{
+  "labName": "Soft Matter Lab",
+  "address": "333 Techno jungang-daero, Hyeonpung-eup,\nDalseong-gun, Daegu, South Korea",
+  "institution": "DGIST (Daegu Gyeongbuk Institute of Science and Technology)",
+  "email": "XXXXX",
+  "phone": "XXXXX",
+  "office": "XXXXX",
+  "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.5!2d128.3945!3d35.7965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e3e0d46e2e95%3A0x7b22bacf4c2d11d2!2sDGIST!5e0!3m2!1sen!2skr!4v1700000000000!5m2!1sen!2skr",
+  "joinTitle": "Interested in Joining?",
+  "joinText": "We are always looking for motivated students and postdoctoral researchers interested in computational polymer science, soft matter physics, and machine learning for materials design. Please send your CV and a brief statement of research interests to the PI."
+}

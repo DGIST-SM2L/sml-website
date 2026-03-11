@@ -6,6 +6,7 @@ const CONTENT_FILES: Record<string, string> = {
   research: "content/research.json",
   news: "content/news.json",
   gallery: "content/gallery.json",
+  contact: "content/contact.json",
 };
 
 async function getFileSha(
