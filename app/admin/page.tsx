@@ -2117,7 +2117,19 @@ function Dashboard() {
   };
 
   const previewUrl = typeof window !== "undefined"
-    ? `${window.location.origin}${TAB_URLS[tab] ?? "/"}`
+    ? (() => {
+        const origin = window.location.origin;
+        const base = `${origin}${TAB_URLS[tab] ?? "/"}`;
+        if (tab === "home") {
+          const params = new URLSearchParams({
+            bg: encodeURIComponent(hero.backgroundImage),
+            oc: hero.overlayColor.replace("#", ""),
+            oo: String(hero.overlayOpacity),
+          });
+          return `${base}?${params}`;
+        }
+        return base;
+      })()
     : "/";
 
   return (

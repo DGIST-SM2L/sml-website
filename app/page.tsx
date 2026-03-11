@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { motion } from "framer-motion";
 import publications from "@/content/publications.json";
 import research from "@/content/research.json";
@@ -44,7 +46,20 @@ const categoryImages = [
 
 
 
-export default function Home() {
+function HomeInner() {
+  const searchParams = useSearchParams();
+
+  // Admin preview mode: ?bg=encoded&oc=hexNoHash&oo=0.65
+  const previewBg = searchParams.get("bg");
+  const previewOc = searchParams.get("oc");
+  const previewOo = searchParams.get("oo");
+
+  const hero = {
+    backgroundImage: previewBg ? decodeURIComponent(previewBg) : (heroData as { backgroundImage: string }).backgroundImage,
+    overlayColor: previewOc ? `#${previewOc}` : (heroData as { overlayColor: string }).overlayColor,
+    overlayOpacity: previewOo ? parseFloat(previewOo) : (heroData as { overlayOpacity: number }).overlayOpacity,
+  };
+
   const recentPubs = publications.slice(0, 3);
   const recentNews = (newsData as NewsItem[])
     .sort((a, b) => {
@@ -59,15 +74,15 @@ export default function Home() {
       <section className="relative overflow-hidden bg-slate-900">
         <div className="absolute inset-0">
           <img
-            src={(heroData as { backgroundImage: string }).backgroundImage}
+            src={hero.backgroundImage}
             alt="SML Lab Hero Background"
             className="h-full w-full object-cover"
           />
           <div
             className="absolute inset-0"
             style={{
-              backgroundColor: (heroData as { overlayColor: string }).overlayColor,
-              opacity: (heroData as { overlayOpacity: number }).overlayOpacity,
+              backgroundColor: hero.overlayColor,
+              opacity: hero.overlayOpacity,
             }}
           />
         </div>
@@ -298,5 +313,13 @@ export default function Home() {
         </motion.div>
       </section>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeInner />
+    </Suspense>
   );
 }
