@@ -27,9 +27,14 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-          <span className="text-blue-600 dark:text-blue-400">SML</span>{" "}
-          <span className="hidden sm:inline">Soft Matter Lab</span>
+        <Link href="/" className="flex items-center gap-3">
+          <span className="text-2xl font-black tracking-tight text-blue-600 dark:text-blue-400">
+            SM<sup className="text-lg">2</sup>L
+          </span>
+          <span className="hidden flex-col sm:flex leading-tight">
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">Simulation and Machine Learning</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">Soft Matter Lab</span>
+          </span>
         </Link>
 
         {/* Desktop nav */}
