@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import publications from "@/content/publications.json";
+import pubsJson from "@/content/publications.json";
+import { getPreviewData } from "@/hooks/usePreviewData";
 
 interface Publication {
   year: number;
@@ -15,16 +16,17 @@ interface Publication {
 }
 
 export default function PublicationsPage() {
+  const publications = getPreviewData<Publication[]>("publications", pubsJson as Publication[]);
   const [search, setSearch] = useState("");
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
   const allYears = useMemo(() => {
-    const years = Array.from(new Set((publications as Publication[]).map((p) => p.year)));
+    const years = Array.from(new Set(publications.map((p) => p.year)));
     return years.sort((a, b) => b - a);
-  }, []);
+  }, [publications]);
 
   const filtered = useMemo(() => {
-    let result = publications as Publication[];
+    let result = publications;
     if (selectedYear !== null) {
       result = result.filter((p) => p.year === selectedYear);
     }
@@ -51,7 +53,7 @@ export default function PublicationsPage() {
     return Array.from(map.entries()).sort((a, b) => b[0] - a[0]);
   }, [filtered]);
 
-  const totalCount = (publications as Publication[]).length;
+  const totalCount = publications.length;
 
   return (
     <>

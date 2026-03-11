@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import newsData from "@/content/news.json";
-import galleryData from "@/content/gallery.json";
+import newsJson from "@/content/news.json";
+import galleryJson from "@/content/gallery.json";
+import { getPreviewData } from "@/hooks/usePreviewData";
 
 type NewsItem = {
   id: string;
@@ -145,6 +146,8 @@ function PhotoCard({ item, onClick }: { item: UnifiedItem; onClick: () => void }
 }
 
 export default function NewsGalleryPage() {
+  const newsData = getPreviewData("news", newsJson);
+  const galleryData = getPreviewData("gallery", galleryJson);
   const [catFilter, setCatFilter] = useState("All");
   const [yearFilter, setYearFilter] = useState<number | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);

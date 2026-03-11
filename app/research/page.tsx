@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import research from "@/content/research.json";
+import researchJson from "@/content/research.json";
+import { getPreviewData } from "@/hooks/usePreviewData";
 
 type Topic = {
   title: string;
@@ -29,6 +30,7 @@ const categoryStyles = [
 ];
 
 export default function ResearchPage() {
+  const research = getPreviewData("research", researchJson);
   return (
     <>
       {/* Hero banner */}
@@ -96,7 +98,7 @@ function CategorySection({
   style,
   ci,
 }: {
-  category: (typeof research.categories)[0];
+  category: (typeof researchJson.categories)[0];
   style: (typeof categoryStyles)[0];
   ci: number;
 }) {

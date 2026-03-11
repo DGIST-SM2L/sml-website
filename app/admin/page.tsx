@@ -2123,33 +2123,47 @@ function Dashboard() {
     const base = `${origin}${TAB_URLS[tab] ?? "/"}`;
     if (tab === "home") {
       const params = new URLSearchParams({
+        preview: "1",
         bg: encodeURIComponent(hero.backgroundImage),
         oc: hero.overlayColor.replace("#", ""),
         oo: String(hero.overlayOpacity),
       });
       setPreviewUrl(`${base}?${params}`);
     } else {
-      setPreviewUrl(base);
+      setPreviewUrl(`${base}?preview=1`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab]); // tab 전환 시에만 URL 업데이트 (hero는 🔄 버튼으로 수동 갱신)
+  }, [tab]);
 
-  // 🔄 Refresh 클릭 시 현재 hero 설정 반영
+  // sessionStorage에 현재 데이터 저장 (preview 페이지에서 읽음)
+  const syncPreviewStorage = useCallback(() => {
+    sessionStorage.setItem("preview_publications", JSON.stringify(publications));
+    if (members) sessionStorage.setItem("preview_members", JSON.stringify(members));
+    if (research) sessionStorage.setItem("preview_research", JSON.stringify(research));
+    sessionStorage.setItem("preview_news", JSON.stringify(news));
+    sessionStorage.setItem("preview_gallery", JSON.stringify(gallery));
+    sessionStorage.setItem("preview_contact", JSON.stringify(contact));
+    sessionStorage.setItem("preview_hero", JSON.stringify(hero));
+  }, [publications, members, research, news, gallery, contact, hero]);
+
+  // 🔄 Refresh 클릭 시 현재 설정 반영
   const refreshPreview = useCallback(() => {
+    syncPreviewStorage();
     const origin = window.location.origin;
     const base = `${origin}${TAB_URLS[tab] ?? "/"}`;
     if (tab === "home") {
       const params = new URLSearchParams({
+        preview: "1",
         bg: encodeURIComponent(hero.backgroundImage),
         oc: hero.overlayColor.replace("#", ""),
         oo: String(hero.overlayOpacity),
       });
       setPreviewUrl(`${base}?${params}`);
     } else {
-      setPreviewUrl(base);
+      setPreviewUrl(`${base}?preview=1`);
     }
     setPreviewKey((k) => k + 1);
-  }, [tab, hero]);
+  }, [tab, hero, syncPreviewStorage]);
 
   return (
     <div className="flex min-h-screen bg-slate-50">
@@ -2180,7 +2194,11 @@ function Dashboard() {
               {committing ? "Committing..." : "Commit & Deploy"}
             </button>
             <button
-              onClick={() => setShowPreview((v) => !v)}
+              onClick={() => {
+                const next = !showPreview;
+                setShowPreview(next);
+                if (next) { syncPreviewStorage(); setPreviewKey((k) => k + 1); }
+              }}
               className={`rounded border px-4 py-2 text-sm font-medium transition-colors ${
                 showPreview
                   ? "border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100"

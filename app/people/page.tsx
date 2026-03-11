@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import members from "@/content/members.json";
+import membersJson from "@/content/members.json";
+import { getPreviewData } from "@/hooks/usePreviewData";
 import SectionHeading from "@/components/SectionHeading";
 
 function Avatar({ name, photo, size = "lg" }: { name: string; photo?: string; size?: "sm" | "lg" }) {
@@ -47,6 +48,7 @@ function Avatar({ name, photo, size = "lg" }: { name: string; photo?: string; si
 }
 
 export default function PeoplePage() {
+  const members = getPreviewData("members", membersJson);
   const [alumniOpen, setAlumniOpen] = useState(false);
   const { pi } = members;
 

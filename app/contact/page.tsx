@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import contactData from "@/content/contact.json";
+import contactJson from "@/content/contact.json";
+import { getPreviewData } from "@/hooks/usePreviewData";
 
 export default function ContactPage() {
-  const c = contactData;
+  const c = getPreviewData("contact", contactJson);
 
   return (
     <>
