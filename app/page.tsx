@@ -74,9 +74,7 @@ export default function Home() {
             DGIST
           </p>
           <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
-            Simulation and
-            <br />
-            Machine Learning
+            Simulation and Machine Learning
             <br />
             for <span className="text-blue-400">Soft Matter Lab</span>
           </h1>

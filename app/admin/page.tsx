@@ -1557,29 +1557,29 @@ function ContactTab({
   onChange: (d: ContactData) => void;
 }) {
   const field = (label: string, key: keyof ContactData, multiline = false) => (
-    <div className="col-span-full">
-      <label className="mb-1 block text-xs font-medium text-slate-600">{label}</label>
+    <div>
+      <label className="mb-1.5 block text-sm font-medium text-slate-700">{label}</label>
       {multiline ? (
         <textarea
           value={data[key] as string}
-          rows={3}
+          rows={4}
           onChange={(e) => onChange({ ...data, [key]: e.target.value })}
-          className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       ) : (
         <input
           value={data[key] as string}
           onChange={(e) => onChange({ ...data, [key]: e.target.value })}
-          className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       )}
     </div>
   );
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-6">
-      <h3 className="mb-4 text-lg font-semibold">Contact Information</h3>
-      <div className="grid gap-4">
+    <div className="rounded-lg border border-slate-200 bg-white p-8 max-w-3xl">
+      <h3 className="mb-6 text-lg font-semibold">Contact Information</h3>
+      <div className="flex flex-col gap-5">
         {field("Lab Name", "labName")}
         {field("Address (use \\n for line breaks)", "address", true)}
         {field("Institution", "institution")}
@@ -1587,10 +1587,10 @@ function ContactTab({
         {field("Phone", "phone")}
         {field("Office", "office")}
         {field("Google Maps Embed URL", "mapEmbed")}
-        <div className="col-span-full border-t border-slate-100 pt-4">
-          <p className="mb-3 text-sm font-semibold text-slate-700">Join Us Section</p>
+        <div className="border-t border-slate-100 pt-4">
+          <p className="mb-4 text-sm font-semibold text-slate-700">Join Us Section</p>
+          {field("Title", "joinTitle")}
         </div>
-        {field("Title", "joinTitle")}
         {field("Text", "joinText", true)}
       </div>
     </div>
