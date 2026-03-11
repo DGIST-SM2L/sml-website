@@ -147,12 +147,22 @@ function ExpandedContent({ item }: { item: NewsItem }) {
 }
 
 export default function NewsPage() {
-  const [filter, setFilter] = useState("All");
+  const [catFilter, setCatFilter] = useState("All");
+  const [yearFilter, setYearFilter] = useState<number | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  const allNews = (newsData as NewsItem[]).filter(
-    (n) => filter === "All" || n.category === filter
-  );
+  const allItems = newsData as NewsItem[];
+
+  // All available years (for buttons)
+  const allYears = Array.from(
+    new Set(allItems.map((n) => new Date(n.date).getFullYear()))
+  ).sort((a, b) => b - a);
+
+  const allNews = allItems.filter((n) => {
+    const matchCat = catFilter === "All" || n.category === catFilter;
+    const matchYear = yearFilter === null || new Date(n.date).getFullYear() === yearFilter;
+    return matchCat && matchYear;
+  });
 
   // Pinned first, then by date desc
   const sorted = [...allNews].sort((a, b) => {
@@ -164,7 +174,7 @@ export default function NewsPage() {
   const pinned = sorted.filter((n) => n.pinned);
   const normal = sorted.filter((n) => !n.pinned);
 
-  // Group normal items by year
+  // Group normal items by year (only when not filtered by year)
   const byYear: Record<number, NewsItem[]> = {};
   for (const item of normal) {
     const year = new Date(item.date).getFullYear();
@@ -241,21 +251,50 @@ export default function NewsPage() {
       </section>
 
       <section className="mx-auto max-w-4xl px-6 py-12">
-        {/* Category filter */}
-        <div className="mb-8 flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
+        {/* Filters */}
+        <div className="mb-8 space-y-3">
+          {/* Year filter */}
+          <div className="flex flex-wrap gap-2">
             <button
-              key={cat}
-              onClick={() => setFilter(cat)}
+              onClick={() => setYearFilter(null)}
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                filter === cat
-                  ? "bg-blue-600 text-white"
+                yearFilter === null
+                  ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
               }`}
             >
-              {cat}
+              All Years
             </button>
-          ))}
+            {allYears.map((y) => (
+              <button
+                key={y}
+                onClick={() => setYearFilter(yearFilter === y ? null : y)}
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  yearFilter === y
+                    ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
+                }`}
+              >
+                {y}
+              </button>
+            ))}
+          </div>
+          {/* Category filter */}
+          <div className="flex flex-wrap gap-2">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setCatFilter(cat)}
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  catFilter === cat
+                    ? "bg-blue-600 text-white"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
         {sorted.length === 0 ? (
