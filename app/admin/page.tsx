@@ -2116,21 +2116,40 @@ function Dashboard() {
     contact: "/contact",
   };
 
-  const previewUrl = typeof window !== "undefined"
-    ? (() => {
-        const origin = window.location.origin;
-        const base = `${origin}${TAB_URLS[tab] ?? "/"}`;
-        if (tab === "home") {
-          const params = new URLSearchParams({
-            bg: encodeURIComponent(hero.backgroundImage),
-            oc: hero.overlayColor.replace("#", ""),
-            oo: String(hero.overlayOpacity),
-          });
-          return `${base}?${params}`;
-        }
-        return base;
-      })()
-    : "/";
+  const [previewUrl, setPreviewUrl] = useState("/");
+
+  useEffect(() => {
+    const origin = window.location.origin;
+    const base = `${origin}${TAB_URLS[tab] ?? "/"}`;
+    if (tab === "home") {
+      const params = new URLSearchParams({
+        bg: encodeURIComponent(hero.backgroundImage),
+        oc: hero.overlayColor.replace("#", ""),
+        oo: String(hero.overlayOpacity),
+      });
+      setPreviewUrl(`${base}?${params}`);
+    } else {
+      setPreviewUrl(base);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]); // tab 전환 시에만 URL 업데이트 (hero는 🔄 버튼으로 수동 갱신)
+
+  // 🔄 Refresh 클릭 시 현재 hero 설정 반영
+  const refreshPreview = useCallback(() => {
+    const origin = window.location.origin;
+    const base = `${origin}${TAB_URLS[tab] ?? "/"}`;
+    if (tab === "home") {
+      const params = new URLSearchParams({
+        bg: encodeURIComponent(hero.backgroundImage),
+        oc: hero.overlayColor.replace("#", ""),
+        oo: String(hero.overlayOpacity),
+      });
+      setPreviewUrl(`${base}?${params}`);
+    } else {
+      setPreviewUrl(base);
+    }
+    setPreviewKey((k) => k + 1);
+  }, [tab, hero]);
 
   return (
     <div className="flex min-h-screen bg-slate-50">
@@ -2199,7 +2218,7 @@ function Dashboard() {
           {tabs.map((t) => (
             <button
               key={t.key}
-              onClick={() => { setTab(t.key); if (showPreview) setPreviewKey((k) => k + 1); }}
+              onClick={() => { setTab(t.key); if (showPreview) setPreviewKey((k) => k + 1); /* previewUrl updates via useEffect */ }}
               className={`border-b-2 px-6 py-3 text-sm font-medium transition-colors ${
                 tab === t.key
                   ? "border-blue-600 text-blue-600"
@@ -2308,7 +2327,7 @@ function Dashboard() {
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <button
-                onClick={() => setPreviewKey((k) => k + 1)}
+                onClick={refreshPreview}
                 className="rounded border border-slate-300 px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-50"
                 title="Refresh preview"
               >
