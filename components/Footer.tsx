@@ -20,9 +20,9 @@ export default function Footer() {
               <Image
                 src="/images/dgist-logo.png"
                 alt="DGIST"
-                width={120}
-                height={40}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity dark:brightness-90"
+                width={243}
+                height={28}
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
             </a>
           </div>
