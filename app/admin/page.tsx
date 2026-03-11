@@ -45,7 +45,7 @@ type MembersData = {
   alumni: Alumni[];
 };
 
-type ResearchTopic = { title: string; description: string };
+type ResearchTopic = { title: string; description: string; image?: string };
 type ResearchCategory = {
   id: string;
   title: string;
@@ -614,10 +614,32 @@ function ResearchTab({
   onChange: (d: ResearchData) => void;
 }) {
   const [editingCat, setEditingCat] = useState<number | null>(null);
-  const [newTopic, setNewTopic] = useState<{ title: string; description: string }>({
+  const [newTopic, setNewTopic] = useState<{ title: string; description: string; image?: string }>({
     title: "",
     description: "",
+    image: "",
   });
+  const [topicUploading, setTopicUploading] = useState<string | null>(null); // "new" | "ci-ti"
+
+  const uploadTopicImage = async (
+    file: File,
+    key: string,
+    onDone: (url: string) => void
+  ) => {
+    setTopicUploading(key);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body: fd, credentials: "include" });
+      if (!res.ok) throw new Error("Upload failed");
+      const { url } = await res.json();
+      onDone(url);
+    } catch {
+      alert("Image upload failed");
+    } finally {
+      setTopicUploading(null);
+    }
+  };
 
   const updateCategory = (idx: number, updates: Partial<ResearchCategory>) => {
     const cats = data.categories.map((c, i) =>
@@ -629,8 +651,8 @@ function ResearchTab({
   const addTopic = (catIdx: number) => {
     if (!newTopic.title) return;
     const cat = data.categories[catIdx];
-    updateCategory(catIdx, { topics: [...cat.topics, newTopic] });
-    setNewTopic({ title: "", description: "" });
+    updateCategory(catIdx, { topics: [...cat.topics, { title: newTopic.title, description: newTopic.description, image: newTopic.image || "" }] });
+    setNewTopic({ title: "", description: "", image: "" });
   };
 
   const removeTopic = (catIdx: number, topicIdx: number) => {
@@ -700,11 +722,52 @@ function ResearchTab({
                 key={ti}
                 className="flex items-start justify-between gap-3 rounded border border-slate-100 bg-slate-50 p-3"
               >
-                <div>
+                <div className="flex-1">
                   <p className="text-sm font-medium text-slate-800">
                     {topic.title}
                   </p>
                   <p className="text-xs text-slate-500">{topic.description}</p>
+                  <div className="mt-2 flex items-center gap-3">
+                    {topic.image && (
+                      <img
+                        src={topic.image}
+                        alt={topic.title}
+                        className="h-14 w-20 rounded object-cover border border-slate-200"
+                      />
+                    )}
+                    <label className="cursor-pointer rounded border border-slate-300 bg-white px-2 py-1 text-xs text-slate-600 hover:bg-slate-50">
+                      {topicUploading === `${ci}-${ti}` ? "Uploading..." : topic.image ? "Change Figure" : "Add Figure"}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        disabled={topicUploading !== null}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          uploadTopicImage(file, `${ci}-${ti}`, (url) => {
+                            const updated = cat.topics.map((t, i) =>
+                              i === ti ? { ...t, image: url } : t
+                            );
+                            updateCategory(ci, { topics: updated });
+                          });
+                        }}
+                      />
+                    </label>
+                    {topic.image && (
+                      <button
+                        onClick={() => {
+                          const updated = cat.topics.map((t, i) =>
+                            i === ti ? { ...t, image: "" } : t
+                          );
+                          updateCategory(ci, { topics: updated });
+                        }}
+                        className="text-xs text-red-500 hover:underline"
+                      >
+                        Remove figure
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <button
                   onClick={() => removeTopic(ci, ti)}
@@ -738,6 +801,27 @@ function ResearchTab({
                 }
                 className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
               />
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <label className="cursor-pointer rounded border border-slate-300 bg-white px-2 py-1 text-xs text-slate-600 hover:bg-slate-50">
+                {topicUploading === "new" ? "Uploading..." : newTopic.image ? "✓ Figure selected" : "Add Figure"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  disabled={topicUploading !== null}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    uploadTopicImage(file, "new", (url) => {
+                      setNewTopic((t) => ({ ...t, image: url }));
+                    });
+                  }}
+                />
+              </label>
+              {newTopic.image && (
+                <img src={newTopic.image} alt="preview" className="h-10 w-14 rounded object-cover border border-slate-200" />
+              )}
             </div>
             <button
               onClick={() => addTopic(ci)}
