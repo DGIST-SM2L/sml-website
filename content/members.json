@@ -9,23 +9,73 @@
     "office": "XXXXX",
     "photo": "/images/members/hur-sumi.jpg",
     "education": [
-      { "degree": "Ph.D.", "field": "Chemical Engineering", "institution": "UC Santa Barbara", "years": "2006-2011" },
-      { "degree": "M.S.", "field": "Chemical Engineering", "institution": "Seoul National University", "years": "2000-2002" },
-      { "degree": "B.S.", "field": "Chemical Engineering", "institution": "Seoul National University", "years": "1996-2000" }
+      {
+        "degree": "Ph.D.",
+        "field": "Chemical Engineering",
+        "institution": "UC Santa Barbara",
+        "years": "2006-2011"
+      },
+      {
+        "degree": "M.S.",
+        "field": "Chemical Engineering",
+        "institution": "Seoul National University",
+        "years": "2000-2002"
+      },
+      {
+        "degree": "B.S.",
+        "field": "Chemical Engineering",
+        "institution": "Seoul National University",
+        "years": "1996-2000"
+      }
     ],
     "experience": [
-      { "role": "Professor", "institution": "DGIST", "years": "2025-present" },
-      { "role": "Professor", "institution": "Chonnam National University", "years": "2015-2024" },
-      { "role": "Postdoc", "institution": "Argonne National Lab", "years": "2014-2015" },
-      { "role": "Postdoc", "institution": "University of Chicago", "years": "2012-2014" },
-      { "role": "Postdoc", "institution": "University of Wisconsin, Madison", "years": "2012" }
+      {
+        "role": "Professor",
+        "institution": "DGIST",
+        "years": "2025-present"
+      },
+      {
+        "role": "Professor",
+        "institution": "Chonnam National University",
+        "years": "2015-2024"
+      },
+      {
+        "role": "Postdoc",
+        "institution": "Argonne National Lab",
+        "years": "2014-2015"
+      },
+      {
+        "role": "Postdoc",
+        "institution": "University of Chicago",
+        "years": "2012-2014"
+      },
+      {
+        "role": "Postdoc",
+        "institution": "University of Wisconsin, Madison",
+        "years": "2012"
+      }
     ],
     "awards": [
-      { "name": "LG Chem Mid-Career Academic Award", "year": 2024 },
-      { "name": "ASML Research Incentive Award", "year": 2018 },
-      { "name": "ASML Tech Talk Young Prof Award", "year": 2017 },
-      { "name": "Doh Wonsuk Memorial Award", "year": 2010 },
-      { "name": "IBM Ph.D. Fellowship Award", "year": "2009, 2010" }
+      {
+        "name": "LG Chem Mid-Career Academic Award",
+        "year": 2024
+      },
+      {
+        "name": "ASML Research Incentive Award",
+        "year": 2018
+      },
+      {
+        "name": "ASML Tech Talk Young Prof Award",
+        "year": 2017
+      },
+      {
+        "name": "Doh Wonsuk Memorial Award",
+        "year": 2010
+      },
+      {
+        "name": "IBM Ph.D. Fellowship Award",
+        "year": "2009, 2010"
+      }
     ]
   },
   "members": [
