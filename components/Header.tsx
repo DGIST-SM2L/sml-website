@@ -12,8 +12,7 @@ const navLinks = [
   { href: "/research", label: "Research" },
   { href: "/people", label: "People" },
   { href: "/publications", label: "Publications" },
-  { href: "/news", label: "News" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/news", label: "News & Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 

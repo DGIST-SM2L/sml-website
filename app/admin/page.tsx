@@ -1269,7 +1269,7 @@ function ResearchTab({
 }
 
 // ─── News Tab ─────────────────────────────────────────────────────
-const NEWS_CATEGORIES = ["Paper", "Award", "Conference", "Member", "General"];
+const NEWS_CATEGORIES = ["Award", "Conference", "Member", "Lab Life", "Group Photo", "Event"];
 
 function NewsTab({
   data,
@@ -1284,7 +1284,7 @@ function NewsTab({
     date: new Date().toISOString().split("T")[0],
     title: "",
     content: "",
-    category: "General",
+    category: "Event",
     image: null,
     pinned: false,
   });
@@ -1302,7 +1302,7 @@ function NewsTab({
       date: new Date().toISOString().split("T")[0],
       title: "",
       content: "",
-      category: "General",
+      category: "Event",
       image: null,
       pinned: false,
     });
