@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
-const VALID_FOLDERS = ["gallery", "news", "members", "research"];
+const VALID_FOLDERS = ["gallery", "news", "members", "research", "home"];
 
 async function getFileSha(
   repo: string,

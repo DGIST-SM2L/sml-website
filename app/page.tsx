@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import publications from "@/content/publications.json";
 import research from "@/content/research.json";
 import newsData from "@/content/news.json";
+import heroData from "@/content/hero.json";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -58,11 +59,17 @@ export default function Home() {
       <section className="relative overflow-hidden bg-slate-900">
         <div className="absolute inset-0">
           <img
-            src="/images/home/group-photo.jpg"
-            alt="SML Lab Group Photo"
-            className="h-full w-full object-cover opacity-40"
+            src={(heroData as { backgroundImage: string }).backgroundImage}
+            alt="SML Lab Hero Background"
+            className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-slate-900/30" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundColor: (heroData as { overlayColor: string }).overlayColor,
+              opacity: (heroData as { overlayOpacity: number }).overlayOpacity,
+            }}
+          />
         </div>
         <motion.div
           initial={{ opacity: 0, y: 40 }}

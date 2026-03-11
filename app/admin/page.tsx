@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 // ─── Types ───────────────────────────────────────────────────────
 type Publication = {
@@ -75,7 +76,7 @@ type GalleryItem = {
   date: string;
 };
 
-type Tab = "publications" | "members" | "research" | "news-gallery" | "contact";
+type Tab = "publications" | "members" | "research" | "news-gallery" | "contact" | "home";
 
 // ─── Helper ──────────────────────────────────────────────────────
 async function api(path: string, options?: RequestInit) {
@@ -1549,6 +1550,139 @@ type ContactData = {
   joinText: string;
 };
 
+// ─── HomeTab ────────────────────────────────────────────────────
+function HomeTab({
+  data,
+  uploading,
+  onUpload,
+  onChange,
+}: {
+  data: { backgroundImage: string; overlayColor: string; overlayOpacity: number };
+  uploading: boolean;
+  onUpload: (file: File) => void;
+  onChange: (d: { backgroundImage: string; overlayColor: string; overlayOpacity: number }) => void;
+}) {
+  const opacityPct = Math.round(data.overlayOpacity * 100);
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-xl font-bold text-slate-800">Home Hero Settings</h2>
+
+      {/* Preview */}
+      <div className="relative h-56 w-full overflow-hidden rounded-xl border border-slate-200">
+        <img
+          src={data.backgroundImage}
+          alt="Hero preview"
+          className="h-full w-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: data.overlayColor, opacity: data.overlayOpacity }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400">DGIST</p>
+            <p className="mt-1 text-lg font-extrabold text-white">Simulation and Machine Learning</p>
+            <p className="text-sm font-bold text-blue-400">for Soft Matter Lab</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {/* Background Image */}
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 className="mb-3 text-sm font-semibold text-slate-700">Background Image</h3>
+          <div className="mb-3 flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2">
+            <span className="flex-1 truncate text-xs text-slate-500">{data.backgroundImage}</span>
+          </div>
+          <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-500 transition-colors">
+            {uploading ? (
+              <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />Uploading...</>
+            ) : (
+              <><span>📷</span> Choose Image</>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              disabled={uploading}
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) onUpload(f);
+                e.target.value = "";
+              }}
+            />
+          </label>
+          <p className="mt-2 text-xs text-slate-400">Upload a new hero background photo. Will be saved to /images/home/.</p>
+        </div>
+
+        {/* Overlay Settings */}
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 className="mb-3 text-sm font-semibold text-slate-700">Overlay (Dark Filter)</h3>
+
+          {/* Color picker */}
+          <label className="mb-4 block">
+            <span className="mb-1 block text-xs font-medium text-slate-600">Color</span>
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                value={data.overlayColor}
+                onChange={(e) => onChange({ ...data, overlayColor: e.target.value })}
+                className="h-10 w-16 cursor-pointer rounded border border-slate-200 p-0.5"
+              />
+              <span className="font-mono text-sm text-slate-600">{data.overlayColor}</span>
+            </div>
+          </label>
+
+          {/* Opacity slider */}
+          <label className="block">
+            <span className="mb-1 flex items-center justify-between text-xs font-medium text-slate-600">
+              <span>Opacity</span>
+              <span className="font-mono font-bold text-blue-600">{opacityPct}%</span>
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={opacityPct}
+              onChange={(e) => onChange({ ...data, overlayOpacity: Number(e.target.value) / 100 })}
+              className="w-full accent-blue-600"
+            />
+            <div className="mt-1 flex justify-between text-xs text-slate-400">
+              <span>투명 (0%)</span>
+              <span>불투명 (100%)</span>
+            </div>
+          </label>
+
+          {/* Quick presets */}
+          <div className="mt-4">
+            <p className="mb-2 text-xs font-medium text-slate-600">빠른 프리셋</p>
+            <div className="flex gap-2">
+              {[
+                { label: "밝게", opacity: 0.4 },
+                { label: "기본", opacity: 0.65 },
+                { label: "어둡게", opacity: 0.85 },
+              ].map((p) => (
+                <button
+                  key={p.label}
+                  onClick={() => onChange({ ...data, overlayOpacity: p.opacity })}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                    Math.abs(data.overlayOpacity - p.opacity) < 0.02
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ContactTab({
   data,
   onChange,
@@ -1782,6 +1916,12 @@ function Dashboard() {
     labName: "", address: "", institution: "", email: "",
     phone: "", office: "", mapEmbed: "", joinTitle: "", joinText: "",
   });
+  const [hero, setHero] = useState<{ backgroundImage: string; overlayColor: string; overlayOpacity: number }>({
+    backgroundImage: "/images/home/group-photo.jpg",
+    overlayColor: "#0f172a",
+    overlayOpacity: 0.65,
+  });
+  const [heroUploading, setHeroUploading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [committing, setCommitting] = useState(false);
@@ -1793,13 +1933,14 @@ function Dashboard() {
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [pubs, mem, res, nws, gal, con] = await Promise.all([
+      const [pubs, mem, res, nws, gal, con, her] = await Promise.all([
         api("/api/content/publications"),
         api("/api/content/members"),
         api("/api/content/research"),
         api("/api/content/news"),
         api("/api/content/gallery"),
         api("/api/content/contact"),
+        api("/api/content/hero"),
       ]);
       setPublications(pubs);
       setMembers(mem);
@@ -1807,6 +1948,7 @@ function Dashboard() {
       setNews(nws);
       setGallery(gal);
       setContact(con);
+      setHero(her);
     } catch (err) {
       setMessage({
         type: "error",
@@ -1884,6 +2026,15 @@ function Dashboard() {
           })
         );
       }
+      if (dirty.has("hero")) {
+        promises.push(
+          api("/api/content/hero", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(hero),
+          })
+        );
+      }
       await Promise.all(promises);
       setMessage({ type: "success", text: "Changes saved locally." });
       setDirty(new Set());
@@ -1908,6 +2059,7 @@ function Dashboard() {
       if (news) files.news = news;
       if (gallery) files.gallery = gallery;
       if (contact) files.contact = contact;
+      if (hero) files.hero = hero;
 
       await api("/api/github/commit", {
         method: "POST",
@@ -1947,6 +2099,7 @@ function Dashboard() {
   }
 
   const tabs: { key: Tab; label: string }[] = [
+    { key: "home", label: "🏠 Home" },
     { key: "publications", label: "Publications" },
     { key: "members", label: "Members" },
     { key: "research", label: "Research" },
@@ -1955,6 +2108,7 @@ function Dashboard() {
   ];
 
   const TAB_URLS: Record<string, string> = {
+    home: "/",
     publications: "/publications",
     members: "/people",
     research: "/research",
@@ -2048,6 +2202,26 @@ function Dashboard() {
 
       {/* Content */}
       <div className="mx-auto max-w-6xl px-6 py-6">
+        {tab === "home" && (
+          <HomeTab
+            data={hero}
+            uploading={heroUploading}
+            onUpload={async (file) => {
+              setHeroUploading(true);
+              try {
+                const fd = new FormData();
+                fd.append("file", file);
+                fd.append("folder", "home");
+                const res = await api("/api/upload", { method: "POST", body: fd });
+                setHero((prev) => ({ ...prev, backgroundImage: res.url }));
+                markDirty("hero");
+              } finally {
+                setHeroUploading(false);
+              }
+            }}
+            onChange={(d) => { setHero(d); markDirty("hero"); }}
+          />
+        )}
         {tab === "publications" && (
           <PublicationsTab
             data={publications}
