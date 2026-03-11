@@ -51,11 +51,26 @@ export default function PeoplePage() {
   const { pi } = members;
 
   return (
+    <>
+      {/* Hero banner */}
+      <section className="border-b border-slate-200 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 px-6 py-20 text-white dark:border-slate-800">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-4xl text-center"
+        >
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            People
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-blue-200">
+            Meet our team of researchers and students driving innovation in
+            computational materials science and machine learning.
+          </p>
+        </motion.div>
+      </section>
+
     <div className="mx-auto max-w-6xl px-6 py-16">
-      <SectionHeading
-        title="People"
-        subtitle="Meet our team of researchers and students"
-      />
 
       {/* PI Section */}
       <motion.section
@@ -226,5 +241,6 @@ export default function PeoplePage() {
         </AnimatePresence>
       </section>
     </div>
+    </>
   );
 }
