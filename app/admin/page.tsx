@@ -1577,7 +1577,7 @@ function ContactTab({
   );
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-8 max-w-3xl">
+    <div className="rounded-lg border border-slate-200 bg-white p-8 w-full">
       <h3 className="mb-6 text-lg font-semibold">Contact Information</h3>
       <div className="flex flex-col gap-5">
         {field("Lab Name", "labName")}
