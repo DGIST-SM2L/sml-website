@@ -145,6 +145,98 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
 }
 
 // ─── Publications Tab ────────────────────────────────────────────
+const EMPTY_PUB: Publication = {
+  year: new Date().getFullYear(),
+  authors: "",
+  title: "",
+  journal: "",
+  volume: "",
+  doi: "",
+  featured: false,
+};
+
+function PubForm({
+  value,
+  onChange,
+  onSave,
+  onCancel,
+  saveLabel,
+}: {
+  value: Publication;
+  onChange: (p: Publication) => void;
+  onSave: () => void;
+  onCancel?: () => void;
+  saveLabel: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <input
+          type="number"
+          placeholder="Year"
+          value={value.year}
+          onChange={(e) => onChange({ ...value, year: +e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="DOI / URL"
+          value={value.doi}
+          onChange={(e) => onChange({ ...value, doi: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Authors"
+          value={value.authors}
+          onChange={(e) => onChange({ ...value, authors: e.target.value })}
+          className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Title"
+          value={value.title}
+          onChange={(e) => onChange({ ...value, title: e.target.value })}
+          className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Journal"
+          value={value.journal}
+          onChange={(e) => onChange({ ...value, journal: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Volume"
+          value={value.volume}
+          onChange={(e) => onChange({ ...value, volume: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <label className="col-span-full flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={value.featured || false}
+            onChange={(e) => onChange({ ...value, featured: e.target.checked })}
+          />
+          Featured publication
+        </label>
+      </div>
+      <div className="flex gap-2 pt-1">
+        <button
+          onClick={onSave}
+          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
+          {saveLabel}
+        </button>
+        {onCancel && (
+          <button
+            onClick={onCancel}
+            className="rounded border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function PublicationsTab({
   data,
   onChange,
@@ -153,162 +245,190 @@ function PublicationsTab({
   onChange: (d: Publication[]) => void;
 }) {
   const [editing, setEditing] = useState<number | null>(null);
-  const [form, setForm] = useState<Publication>({
-    year: new Date().getFullYear(),
-    authors: "",
-    title: "",
-    journal: "",
-    volume: "",
-    doi: "",
-    featured: false,
-  });
+  const [editForm, setEditForm] = useState<Publication>(EMPTY_PUB);
+  const [addForm, setAddForm] = useState<Publication>(EMPTY_PUB);
 
   const sorted = [...data].sort((a, b) => b.year - a.year);
 
-  const resetForm = () => {
-    setForm({
-      year: new Date().getFullYear(),
-      authors: "",
-      title: "",
-      journal: "",
-      volume: "",
-      doi: "",
-      featured: false,
-    });
+  const handleAdd = () => {
+    if (!addForm.title || !addForm.authors) return;
+    onChange([addForm, ...data]);
+    setAddForm({ ...EMPTY_PUB });
+  };
+
+  const startEdit = (sortedIdx: number) => {
+    const original = data.indexOf(sorted[sortedIdx]);
+    setEditing(original);
+    setEditForm({ ...sorted[sortedIdx] });
+  };
+
+  const saveEdit = () => {
+    if (editing === null) return;
+    onChange(data.map((p, i) => (i === editing ? editForm : p)));
     setEditing(null);
   };
 
-  const handleSave = () => {
-    if (!form.title || !form.authors) return;
-    if (editing !== null) {
-      const updated = data.map((p, i) => (i === editing ? form : p));
-      onChange(updated);
-    } else {
-      onChange([form, ...data]);
-    }
-    resetForm();
-  };
-
-  const handleEdit = (idx: number) => {
-    const original = data.indexOf(sorted[idx]);
-    setEditing(original);
-    setForm({ ...sorted[idx] });
-  };
-
-  const handleDelete = (idx: number) => {
-    const original = data.indexOf(sorted[idx]);
+  const handleDelete = (sortedIdx: number) => {
+    const original = data.indexOf(sorted[sortedIdx]);
     onChange(data.filter((_, i) => i !== original));
   };
 
   return (
     <div className="space-y-6">
+      {/* Add new */}
       <div className="rounded-lg border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-lg font-semibold">
-          {editing !== null ? "Edit Publication" : "Add Publication"}
-        </h3>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <input
-            type="number"
-            placeholder="Year"
-            value={form.year}
-            onChange={(e) => setForm({ ...form, year: +e.target.value })}
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="DOI / URL"
-            value={form.doi}
-            onChange={(e) => setForm({ ...form, doi: e.target.value })}
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Authors"
-            value={form.authors}
-            onChange={(e) => setForm({ ...form, authors: e.target.value })}
-            className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Title"
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Journal"
-            value={form.journal}
-            onChange={(e) => setForm({ ...form, journal: e.target.value })}
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Volume"
-            value={form.volume}
-            onChange={(e) => setForm({ ...form, volume: e.target.value })}
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <label className="col-span-full flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={form.featured || false}
-              onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-            />
-            Featured publication
-          </label>
-        </div>
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={handleSave}
-            className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            {editing !== null ? "Update" : "Add"}
-          </button>
-          {editing !== null && (
-            <button
-              onClick={resetForm}
-              className="rounded border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
-            >
-              Cancel
-            </button>
-          )}
-        </div>
+        <h3 className="mb-4 text-lg font-semibold">Add Publication</h3>
+        <PubForm
+          value={addForm}
+          onChange={setAddForm}
+          onSave={handleAdd}
+          saveLabel="Add"
+        />
       </div>
 
+      {/* List with inline edit */}
       <div className="space-y-2">
-        {sorted.map((pub, i) => (
-          <div
-            key={i}
-            className="flex items-start justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4"
+        {sorted.map((pub, i) => {
+          const originalIdx = data.indexOf(pub);
+          const isEditing = editing === originalIdx;
+          return (
+            <div
+              key={i}
+              className="rounded-lg border border-slate-200 bg-white p-4"
+            >
+              {isEditing ? (
+                <PubForm
+                  value={editForm}
+                  onChange={setEditForm}
+                  onSave={saveEdit}
+                  onCancel={() => setEditing(null)}
+                  saveLabel="Save"
+                />
+              ) : (
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-slate-900">
+                      {pub.featured && (
+                        <span className="mr-2 inline-block rounded bg-yellow-100 px-1.5 py-0.5 text-xs text-yellow-700">
+                          Featured
+                        </span>
+                      )}
+                      {pub.title}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-500">{pub.authors}</p>
+                    <p className="text-xs text-slate-400">
+                      {pub.journal}, {pub.volume} ({pub.year})
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 gap-1">
+                    <button
+                      onClick={() => startEdit(i)}
+                      className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(i)}
+                      className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── MemberForm (shared for Add + inline Edit) ───────────────────
+function MemberForm({
+  value,
+  onChange,
+  onSave,
+  onCancel,
+  saveLabel,
+  uploadingPhoto,
+  onUpload,
+  uploadKey,
+}: {
+  value: Member;
+  onChange: (m: Member) => void;
+  onSave: () => void;
+  onCancel?: () => void;
+  saveLabel: string;
+  uploadingPhoto: string | null;
+  onUpload: (file: File) => void;
+  uploadKey: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <input
+          placeholder="Name"
+          value={value.name}
+          onChange={(e) => onChange({ ...value, name: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Position (e.g. Postdoc, Ph.D. student)"
+          value={value.position}
+          onChange={(e) => onChange({ ...value, position: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Research areas"
+          value={value.research}
+          onChange={(e) => onChange({ ...value, research: e.target.value })}
+          className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <input
+          placeholder="Education"
+          value={value.education}
+          onChange={(e) => onChange({ ...value, education: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <div className="flex gap-2 items-center">
+          <input
+            placeholder="Photo path"
+            value={value.photo}
+            onChange={(e) => onChange({ ...value, photo: e.target.value })}
+            className="flex-1 rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          />
+          <label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50 whitespace-nowrap">
+            {uploadingPhoto === uploadKey ? "Uploading..." : "📷 Upload"}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              disabled={uploadingPhoto === uploadKey}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) onUpload(file);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </div>
+      </div>
+      <div className="flex gap-2 pt-1">
+        <button
+          onClick={onSave}
+          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
+          {saveLabel}
+        </button>
+        {onCancel && (
+          <button
+            onClick={onCancel}
+            className="rounded border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
           >
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-slate-900">
-                {pub.featured && (
-                  <span className="mr-2 inline-block rounded bg-yellow-100 px-1.5 py-0.5 text-xs text-yellow-700">
-                    Featured
-                  </span>
-                )}
-                {pub.title}
-              </p>
-              <p className="mt-1 text-xs text-slate-500">
-                {pub.authors}
-              </p>
-              <p className="text-xs text-slate-400">
-                {pub.journal}, {pub.volume} ({pub.year})
-              </p>
-            </div>
-            <div className="flex shrink-0 gap-1">
-              <button
-                onClick={() => handleEdit(i)}
-                className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(i)}
-                className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+            Cancel
+          </button>
+        )}
       </div>
     </div>
   );
@@ -322,14 +442,9 @@ function MembersTab({
   data: MembersData;
   onChange: (d: MembersData) => void;
 }) {
-  const [editingMember, setEditingMember] = useState<number | null>(null);
-  const [memberForm, setMemberForm] = useState<Member>({
-    name: "",
-    position: "",
-    research: "",
-    education: "",
-    photo: "",
-  });
+    const [editingMember, setEditingMember] = useState<number | null>(null);
+  const [memberEditForm, setMemberEditForm] = useState<Member>({ name: "", position: "", research: "", education: "", photo: "" });
+  const [addMemberForm, setAddMemberForm] = useState<Member>({ name: "", position: "", research: "", education: "", photo: "" });
 
   const [piForm, setPiForm] = useState(data.pi);
   const [showPiEdit, setShowPiEdit] = useState(false);
@@ -366,22 +481,21 @@ function MembersTab({
     setShowPiEdit(false);
   };
 
-  const resetMemberForm = () => {
-    setMemberForm({ name: "", position: "", research: "", education: "", photo: "" });
-    setEditingMember(null);
+  const addMember = () => {
+    if (!addMemberForm.name) return;
+    onChange({ ...data, members: [...data.members, addMemberForm] });
+    setAddMemberForm({ name: "", position: "", research: "", education: "", photo: "" });
   };
 
-  const saveMember = () => {
-    if (!memberForm.name) return;
-    if (editingMember !== null) {
-      const updated = data.members.map((m, i) =>
-        i === editingMember ? memberForm : m
-      );
-      onChange({ ...data, members: updated });
-    } else {
-      onChange({ ...data, members: [...data.members, memberForm] });
-    }
-    resetMemberForm();
+  const startEditMember = (idx: number) => {
+    setEditingMember(idx);
+    setMemberEditForm({ ...data.members[idx] });
+  };
+
+  const saveEditMember = () => {
+    if (editingMember === null) return;
+    onChange({ ...data, members: data.members.map((m, i) => i === editingMember ? memberEditForm : m) });
+    setEditingMember(null);
   };
 
   const deleteMember = (idx: number) => {
@@ -712,85 +826,18 @@ function MembersTab({
         )}
       </div>
 
-      {/* Add/Edit Member Form */}
+      {/* Add Member Form */}
       <div className="rounded-lg border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-lg font-semibold">
-          {editingMember !== null ? "Edit Member" : "Add Member"}
-        </h3>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <input
-            placeholder="Name"
-            value={memberForm.name}
-            onChange={(e) =>
-              setMemberForm({ ...memberForm, name: e.target.value })
-            }
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Position (e.g. Postdoc, Ph.D. student)"
-            value={memberForm.position}
-            onChange={(e) =>
-              setMemberForm({ ...memberForm, position: e.target.value })
-            }
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Research areas"
-            value={memberForm.research}
-            onChange={(e) =>
-              setMemberForm({ ...memberForm, research: e.target.value })
-            }
-            className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <input
-            placeholder="Education"
-            value={memberForm.education}
-            onChange={(e) =>
-              setMemberForm({ ...memberForm, education: e.target.value })
-            }
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <div className="flex gap-2 items-center">
-            <input
-              placeholder="Photo path (e.g. /images/members/name.jpg)"
-              value={memberForm.photo}
-              onChange={(e) =>
-                setMemberForm({ ...memberForm, photo: e.target.value })
-              }
-              className="flex-1 rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-            />
-            <label className="cursor-pointer rounded border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50 whitespace-nowrap">
-              {uploadingPhoto === "member" ? "Uploading..." : "📷 Upload"}
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                disabled={uploadingPhoto === "member"}
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) uploadPhoto(file, "member", (url) => setMemberForm({ ...memberForm, photo: url }));
-                  e.target.value = "";
-                }}
-              />
-            </label>
-          </div>
-        </div>
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={saveMember}
-            className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            {editingMember !== null ? "Update" : "Add Member"}
-          </button>
-          {editingMember !== null && (
-            <button
-              onClick={resetMemberForm}
-              className="rounded border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
-            >
-              Cancel
-            </button>
-          )}
-        </div>
+        <h3 className="mb-4 text-lg font-semibold">Add Member</h3>
+        <MemberForm
+          value={addMemberForm}
+          onChange={setAddMemberForm}
+          onSave={addMember}
+          saveLabel="Add Member"
+          uploadingPhoto={uploadingPhoto}
+          onUpload={(file) => uploadPhoto(file, "member-add", (url) => setAddMemberForm({ ...addMemberForm, photo: url }))}
+          uploadKey="member-add"
+        />
       </div>
 
       {/* Current Members */}
@@ -800,39 +847,48 @@ function MembersTab({
         </h3>
         <div className="space-y-2">
           {data.members.map((m, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4"
-            >
-              <div>
-                <p className="text-sm font-medium text-slate-900">{m.name}</p>
-                <p className="text-xs text-slate-500">
-                  {m.position} &middot; {m.research}
-                </p>
-              </div>
-              <div className="flex shrink-0 gap-1">
-                <button
-                  onClick={() => {
-                    setEditingMember(i);
-                    setMemberForm({ ...m });
-                  }}
-                  className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => moveToAlumni(i)}
-                  className="rounded px-2 py-1 text-xs text-amber-600 hover:bg-amber-50"
-                >
-                  Move to Alumni
-                </button>
-                <button
-                  onClick={() => deleteMember(i)}
-                  className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
-                >
-                  Delete
-                </button>
-              </div>
+            <div key={i} className="rounded-lg border border-slate-200 bg-white p-4">
+              {editingMember === i ? (
+                <MemberForm
+                  value={memberEditForm}
+                  onChange={setMemberEditForm}
+                  onSave={saveEditMember}
+                  onCancel={() => setEditingMember(null)}
+                  saveLabel="Save"
+                  uploadingPhoto={uploadingPhoto}
+                  onUpload={(file) => uploadPhoto(file, `member-${i}`, (url) => setMemberEditForm({ ...memberEditForm, photo: url }))}
+                  uploadKey={`member-${i}`}
+                />
+              ) : (
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-medium text-slate-900">{m.name}</p>
+                    <p className="text-xs text-slate-500">
+                      {m.position} &middot; {m.research}
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 gap-1">
+                    <button
+                      onClick={() => startEditMember(i)}
+                      className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => moveToAlumni(i)}
+                      className="rounded px-2 py-1 text-xs text-amber-600 hover:bg-amber-50"
+                    >
+                      → Alumni
+                    </button>
+                    <button
+                      onClick={() => deleteMember(i)}
+                      className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
