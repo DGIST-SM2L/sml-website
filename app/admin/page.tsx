@@ -1718,6 +1718,8 @@ function Dashboard() {
   const [committing, setCommitting] = useState(false);
   const [dirty, setDirty] = useState<Set<string>>(new Set());
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewKey, setPreviewKey] = useState(0); // increment to force iframe reload
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -1836,8 +1838,10 @@ function Dashboard() {
       });
       setMessage({
         type: "success",
-        text: "Committed to GitHub. Deploy will start automatically.",
+        text: "Committed to GitHub. Deploy will start automatically. (~1 min)",
       });
+      // Auto-refresh preview after ~75s (typical Vercel deploy time)
+      setTimeout(() => setPreviewKey((k) => k + 1), 75000);
     } catch (err) {
       setMessage({
         type: "error",
@@ -1869,8 +1873,22 @@ function Dashboard() {
     { key: "gallery", label: "Gallery" },
   ];
 
+  const TAB_URLS: Record<string, string> = {
+    publications: "/publications",
+    members: "/people",
+    research: "/research",
+    news: "/news",
+    gallery: "/gallery",
+  };
+
+  const previewUrl = typeof window !== "undefined"
+    ? `${window.location.origin}${TAB_URLS[tab] ?? "/"}`
+    : "/";
+
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-slate-50">
+      {/* Main area */}
+      <div className={`flex flex-1 flex-col min-w-0 transition-all duration-300 ${showPreview ? "mr-[45vw]" : ""}`}>
       {/* Top bar */}
       <header className="border-b border-slate-200 bg-white px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
@@ -1894,6 +1912,16 @@ function Dashboard() {
               className="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
             >
               {committing ? "Committing..." : "Commit & Deploy"}
+            </button>
+            <button
+              onClick={() => setShowPreview((v) => !v)}
+              className={`rounded border px-4 py-2 text-sm font-medium transition-colors ${
+                showPreview
+                  ? "border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100"
+                  : "border-slate-300 text-slate-600 hover:bg-slate-50"
+              }`}
+            >
+              {showPreview ? "✕ Preview" : "👁 Preview"}
             </button>
             <button
               onClick={logout}
@@ -1924,7 +1952,7 @@ function Dashboard() {
           {tabs.map((t) => (
             <button
               key={t.key}
-              onClick={() => setTab(t.key)}
+              onClick={() => { setTab(t.key); if (showPreview) setPreviewKey((k) => k + 1); }}
               className={`border-b-2 px-6 py-3 text-sm font-medium transition-colors ${
                 tab === t.key
                   ? "border-blue-600 text-blue-600"
@@ -1985,6 +2013,48 @@ function Dashboard() {
           />
         )}
       </div>
+      </div> {/* end main area */}
+
+      {/* Preview Side Panel */}
+      {showPreview && (
+        <div className="fixed right-0 top-0 h-screen w-[45vw] flex flex-col border-l border-slate-200 bg-white shadow-xl z-50">
+          <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-sm font-medium text-slate-700 truncate">{previewUrl}</span>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => setPreviewKey((k) => k + 1)}
+                className="rounded border border-slate-300 px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-50"
+                title="Refresh preview"
+              >
+                🔄 Refresh
+              </button>
+              <a
+                href={previewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded border border-slate-300 px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-50"
+                title="Open in new tab"
+              >
+                ↗
+              </a>
+              <button
+                onClick={() => setShowPreview(false)}
+                className="rounded px-2 py-1.5 text-xs text-slate-400 hover:text-slate-600"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+          <iframe
+            key={previewKey}
+            src={previewUrl}
+            className="flex-1 w-full"
+            title="Site Preview"
+          />
+        </div>
+      )}
     </div>
   );
 }
