@@ -70,9 +70,15 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative mx-auto max-w-5xl px-6 py-32 sm:py-44"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-400">
-            DGIST
-          </p>
+          <div className="mb-3">
+            <Image
+              src="/images/dgist-wordmark.png"
+              alt="DGIST"
+              width={152}
+              height={38}
+              className="object-contain brightness-110"
+            />
+          </div>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Simulation and Machine Learning
             <br />
