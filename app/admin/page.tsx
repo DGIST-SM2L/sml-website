@@ -23,8 +23,11 @@ type Member = {
 
 type Alumni = {
   name: string;
-  position: string;
-  currentAffiliation?: string;
+  degree: string;
+  period: string;
+  research: string;
+  currentPosition: string | null;
+  photo: string;
 };
 
 type MembersData = {
@@ -330,6 +333,7 @@ function MembersTab({
 
   const [piForm, setPiForm] = useState(data.pi);
   const [showPiEdit, setShowPiEdit] = useState(false);
+  const [editingAlumni, setEditingAlumni] = useState<number | null>(null);
 
   useEffect(() => {
     setPiForm(data.pi);
@@ -366,7 +370,11 @@ function MembersTab({
     const member = data.members[idx];
     const alumnus: Alumni = {
       name: member.name,
-      position: member.position,
+      degree: member.position,
+      period: "",
+      research: member.research,
+      currentPosition: null,
+      photo: member.photo,
     };
     onChange({
       ...data,
@@ -377,6 +385,12 @@ function MembersTab({
 
   const removeAlumni = (idx: number) => {
     onChange({ ...data, alumni: data.alumni.filter((_, i) => i !== idx) });
+  };
+
+  const updateAlumni = (idx: number, updated: Alumni) => {
+    const newAlumni = [...data.alumni];
+    newAlumni[idx] = updated;
+    onChange({ ...data, alumni: newAlumni });
   };
 
   return (
@@ -780,18 +794,101 @@ function MembersTab({
             {data.alumni.map((a, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4"
+                className="rounded-lg border border-slate-200 bg-white p-4"
               >
-                <div>
-                  <p className="text-sm font-medium text-slate-900">{a.name}</p>
-                  <p className="text-xs text-slate-500">{a.position}</p>
-                </div>
-                <button
-                  onClick={() => removeAlumni(i)}
-                  className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
-                >
-                  Remove
-                </button>
+                {editingAlumni === i ? (
+                  <div className="space-y-3">
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      <input
+                        placeholder="Name"
+                        value={a.name}
+                        onChange={(e) => updateAlumni(i, { ...a, name: e.target.value })}
+                        className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                      />
+                      <input
+                        placeholder="Degree (e.g. M.S., Ph.D.)"
+                        value={a.degree}
+                        onChange={(e) => updateAlumni(i, { ...a, degree: e.target.value })}
+                        className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                      />
+                      <input
+                        placeholder="Period (e.g. 03/2020 – 08/2023)"
+                        value={a.period}
+                        onChange={(e) => updateAlumni(i, { ...a, period: e.target.value })}
+                        className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                      />
+                      <input
+                        placeholder="Current position (e.g. Samsung Electronics)"
+                        value={a.currentPosition ?? ""}
+                        onChange={(e) =>
+                          updateAlumni(i, {
+                            ...a,
+                            currentPosition: e.target.value || null,
+                          })
+                        }
+                        className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                      />
+                      <input
+                        placeholder="Photo path"
+                        value={a.photo}
+                        onChange={(e) => updateAlumni(i, { ...a, photo: e.target.value })}
+                        className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none sm:col-span-2"
+                      />
+                    </div>
+                    <textarea
+                      placeholder="Research topics"
+                      value={a.research}
+                      rows={2}
+                      onChange={(e) => updateAlumni(i, { ...a, research: e.target.value })}
+                      className="w-full rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setEditingAlumni(null)}
+                        className="rounded bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
+                      >
+                        Done
+                      </button>
+                      <button
+                        onClick={() => removeAlumni(i)}
+                        className="rounded px-3 py-1.5 text-xs text-red-600 hover:bg-red-50"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-slate-900">
+                        {a.name}{a.degree ? ` (${a.degree})` : ""}
+                      </p>
+                      {a.period && (
+                        <p className="text-xs text-slate-500">{a.period}</p>
+                      )}
+                      {a.research && (
+                        <p className="mt-0.5 text-xs text-slate-400 line-clamp-1">{a.research}</p>
+                      )}
+                      {a.currentPosition && (
+                        <p className="mt-0.5 text-xs font-medium text-blue-600">→ {a.currentPosition}</p>
+                      )}
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <button
+                        onClick={() => setEditingAlumni(i)}
+                        className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => removeAlumni(i)}
+                        className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
