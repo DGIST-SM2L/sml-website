@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { spaceGrotesk } from "@/lib/fonts";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
@@ -28,7 +29,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-3">
-          <span className="text-2xl font-black tracking-tight text-blue-600 dark:text-blue-400">
+          <span className={`${spaceGrotesk.className} text-2xl font-black tracking-tight text-blue-600 dark:text-blue-400`}>
             SM<sup className="text-lg">2</sup>L
           </span>
           <span className="hidden flex-col sm:flex leading-tight">
