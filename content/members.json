@@ -1,0 +1,154 @@
+{
+  "pi": {
+    "name": "Su-Mi Hur",
+    "nameKo": "허수미",
+    "title": "Professor, DGIST",
+    "department": "XXXXX",
+    "email": "XXXXX",
+    "phone": "XXXXX",
+    "office": "XXXXX",
+    "photo": "/images/members/hur-sumi.jpg",
+    "education": [
+      { "degree": "Ph.D.", "field": "Chemical Engineering", "institution": "UC Santa Barbara", "years": "2006-2011" },
+      { "degree": "M.S.", "field": "Chemical Engineering", "institution": "Seoul National University", "years": "2000-2002" },
+      { "degree": "B.S.", "field": "Chemical Engineering", "institution": "Seoul National University", "years": "1996-2000" }
+    ],
+    "experience": [
+      { "role": "Professor", "institution": "DGIST", "years": "2025-present" },
+      { "role": "Professor", "institution": "Chonnam National University", "years": "2015-2024" },
+      { "role": "Postdoc", "institution": "Argonne National Lab", "years": "2014-2015" },
+      { "role": "Postdoc", "institution": "University of Chicago", "years": "2012-2014" },
+      { "role": "Postdoc", "institution": "University of Wisconsin, Madison", "years": "2012" }
+    ],
+    "awards": [
+      { "name": "LG Chem Mid-Career Academic Award", "year": 2024 },
+      { "name": "ASML Research Incentive Award", "year": 2018 },
+      { "name": "ASML Tech Talk Young Prof Award", "year": 2017 },
+      { "name": "Doh Wonsuk Memorial Award", "year": 2010 },
+      { "name": "IBM Ph.D. Fellowship Award", "year": "2009, 2010" }
+    ]
+  },
+  "members": [
+    {
+      "name": "Allan Perez Ramirez",
+      "position": "Postdoc",
+      "research": "Boundary Directed Epitaxy, Dielectric Spectroscopy",
+      "education": "Ph.D., Metropolitan Autonomous University",
+      "photo": "/images/members/allan.jpg"
+    },
+    {
+      "name": "Vikram Thapar",
+      "position": "Postdoc",
+      "research": "Kinetics and Thermodynamics of BCP thin films",
+      "education": "Ph.D., Cornell University",
+      "photo": "/images/members/vikram.png"
+    },
+    {
+      "name": "Jihun Ahn",
+      "position": "Postdoc",
+      "research": "Machine Learning for Materials Design, MD: Phase Transition of 2D Colloidal System",
+      "education": "Ph.D., Chonnam National University",
+      "photo": "/images/members/jihun.jpg"
+    },
+    {
+      "name": "Gabriella Pasya Irianti",
+      "position": "Ph.D. student",
+      "research": "CG-MD of Polymeric Systems, ML for Materials Design",
+      "education": "B.S., University of Indonesia",
+      "photo": "/images/members/gabriella.jpg"
+    },
+    {
+      "name": "Sehyun Yun",
+      "position": "Ph.D. student",
+      "research": "DSA on VIA Pattern, ML for Battery SOH",
+      "education": "B.S., Chonnam National University",
+      "photo": "/images/members/sehyun.jpg"
+    },
+    {
+      "name": "Raehyun Jung",
+      "position": "Ph.D. student",
+      "research": "ML for Battery SOH, Mesoporous Particle-Polymer",
+      "education": "B.S., Chonnam National University",
+      "photo": "/images/members/raehyun.jpg"
+    },
+    {
+      "name": "Hyunseok Kim",
+      "position": "M.S. student",
+      "research": "EUV Lithography, Polymer Rod Brush",
+      "education": "B.S., Chonnam National University",
+      "photo": "/images/members/hyunseok.png"
+    },
+    {
+      "name": "Sangyeop Lee",
+      "position": "M.S. student",
+      "research": "Bottlebrush Polymer Phase (CG Simulation)",
+      "education": "B.S., Chonnam National University",
+      "photo": "/images/members/sangyeop.jpg"
+    },
+    {
+      "name": "Seunggeon Lee",
+      "position": "M.S. student",
+      "research": "MD for Anion Exchange Membrane",
+      "education": "Chonnam National University",
+      "photo": "/images/members/seunggeon.jpg"
+    }
+  ],
+  "alumni": [
+    {
+      "name": "Changhyeon Lee",
+      "degree": "M.S.",
+      "period": "09/2022 – 08/2024",
+      "research": "Directed Self-assembly on EUV pattern, DSA on VIA pattern, EUV lithography Photoresist",
+      "currentPosition": null,
+      "photo": "/images/members/alumni-changhyeon.png"
+    },
+    {
+      "name": "Yeojin Choe",
+      "degree": "M.S.",
+      "period": "02/2022 – 02/2024",
+      "research": "Solution Assembly of Grafting Polymer, Molecular Dynamic Simulation for Thermal Expansion",
+      "currentPosition": null,
+      "photo": "/images/members/alumni-yeojin.png"
+    },
+    {
+      "name": "Taeyi Kim",
+      "degree": "M.S.",
+      "period": "03/2020 – 08/2023",
+      "research": "Polymer Brushes, Extreme Ultraviolet Resist",
+      "currentPosition": "Samsung Electronics",
+      "photo": "/images/members/alumni-taeyi.png"
+    },
+    {
+      "name": "Luis Adrian Padilla Salas",
+      "degree": "Postdoc",
+      "period": "05/2021 – 02/2023",
+      "research": "Self-assembly of polymers and colloids, phase transitions, computational physics",
+      "currentPosition": null,
+      "photo": "/images/members/alumni-luis.png"
+    },
+    {
+      "name": "Juhae Park",
+      "degree": "M.S. + Researcher",
+      "period": "03/2018 – 08/2021",
+      "research": "Studies of EUV Resist for Sub-10nm Patterning from Molecular Approach",
+      "currentPosition": "Ph.D. at New York University",
+      "photo": "/images/members/alumni-juhae.png"
+    },
+    {
+      "name": "Ga Ryang Kang",
+      "degree": "M.S.",
+      "period": "09/2017 – 08/2019",
+      "research": "Phase behavior of block copolymer (BCP) brushes",
+      "currentPosition": "Korea Testing & Research Institute (KTR)",
+      "photo": "/images/members/alumni-garyang.png"
+    },
+    {
+      "name": "Yeong Yoon Kim",
+      "degree": "Postdoc",
+      "period": "2018 – 2019",
+      "research": "Cell nucleation of nano polymeric foam",
+      "currentPosition": null,
+      "photo": "/images/members/alumni-yeongyoon.png"
+    }
+  ]
+}

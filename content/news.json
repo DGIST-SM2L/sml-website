@@ -1,0 +1,326 @@
+[
+  {
+    "id": "2025-04-sangyeop-psk-award",
+    "date": "2025-04-17",
+    "title": "Sangyeop won Excellent Paper Presentation Award (Oral) from Polymer Society of Korea",
+    "content": "Sangyeop won the Excellent Paper Presentation Award in the oral presentation category at the 2025 Spring Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2025-spring-sangyeop-psk-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2025-04-raehyun-psk-award",
+    "date": "2025-04-17",
+    "title": "Raehyun won Excellent Paper Presentation Award (Poster) from Polymer Society of Korea",
+    "content": "Raehyun won the Excellent Paper Presentation Award in the poster category at the 2025 Spring Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2025-spring-raehyun-psk-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2025-06-jihun-hoimyung-award",
+    "date": "2025-06-01",
+    "title": "Jihun won HOIMYUNG Graduate School Award from KICHE",
+    "content": "Jihun won the HOIMYUNG Graduate School Research Award from KICHE (The Korean Institute of Chemical Engineers) at the 2025 Spring General Meeting & Conference. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2025-jihun-kiche-award.jpg",
+    "pinned": false
+  },
+  {
+    "id": "2025-03-aps-march-meeting",
+    "date": "2025-03-01",
+    "title": "Sehyun and Raehyun attended APS 2025 March Meeting",
+    "content": "Sehyun and Raehyun attended APS 2025 March Meeting and shared their research materials. Hope it was a good experience!",
+    "category": "Conference",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2025-01-gabriella-coins-award",
+    "date": "2025-01-15",
+    "title": "Gabriella won Best Poster Award from COINS 2025",
+    "content": "Gabriella won the Best Poster Award at COINS (COlloids and Interface Symposium) 2025 in Bordeaux, France. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2025-gabriella-coins-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2025-01-seunggeun-join",
+    "date": "2025-01-01",
+    "title": "Seunggeun joined our group as an undergraduate student",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2024-10-prof-hur-lg-chem-award",
+    "date": "2024-10-15",
+    "title": "Prof. Hur won the LG Chem Mid-Career Academic Award",
+    "content": "Prof. Hur won the LG Chem Mid-Career Academic Award (LG화학 중견학술상) at the 2024 Polymeric Fall Conference!",
+    "category": "Award",
+    "image": "/images/news/2024-prof-hur-lg-chem-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2024-10-raehyun-fall-conf-award",
+    "date": "2024-10-01",
+    "title": "Raehyun won Best Presentation Award at 2024 Polymeric Fall Conference",
+    "content": "Raehyun won the TCI Best Paper Presentation Award (Oral, English) at the 2024 Fall Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2024-fall-raehyun-best-oral.png",
+    "pinned": false
+  },
+  {
+    "id": "2024-10-gabriella-fall-conf-award",
+    "date": "2024-10-01",
+    "title": "Gabriella won Best Poster Award at 2024 Polymeric Fall Conference",
+    "content": "Gabriella won the Best Paper Presentation Award (Poster) at the 2024 Fall Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2024-fall-gabriella-best-poster.png",
+    "pinned": false
+  },
+  {
+    "id": "2024-08-sehyun-ngl-award",
+    "date": "2024-08-13",
+    "title": "Sehyun won Innovation Paper Award from 2024 Next Generation Lithography + Patterning Conference",
+    "content": "Sehyun won the Innovation Paper Award at the 2024 Next Generation Lithography + Patterning Conference for the paper 'Advancing High-Resolution VIA Pattern through DSA and EUVL Integration'. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2024-sehyun-ngl-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2024-04-vikram-join",
+    "date": "2024-04-15",
+    "title": "New post doctor Vikram Thapar joined our group",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2024-04-sehyun-psk-award",
+    "date": "2024-04-04",
+    "title": "Sehyun won Excellent Paper Presentation Award (Oral) from Polymer Society of Korea",
+    "content": "Sehyun won the Excellent Paper Presentation Award in the oral category at the 2024 Spring Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2024-spring-sehyun-psk-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2024-04-hyunseok-psk-award",
+    "date": "2024-04-04",
+    "title": "Hyunseok won Excellent Paper Presentation Award (Poster) from Polymer Society of Korea",
+    "content": "Hyunseok won the Excellent Paper Presentation Award in the poster category at the 2024 Spring Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2024-spring-hyunseok-psk-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2024-01-jihyeon-join",
+    "date": "2024-01-01",
+    "title": "Jihyeon joined our group as an undergraduate student",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2023-11-jihun-mrs-award",
+    "date": "2023-11-17",
+    "title": "Jihun won award from Materials Research Society of Korea",
+    "content": "Jihun won the Excellent Presentation Paper Award (Poster) at the 2023 Fall Korean Materials Society Conference for the paper 'Enhancing Deep Learning Predictive Models with HAPPY Representation'. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2023-jihun-mrs-korea-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2023-10-gabriella-psk-award",
+    "date": "2023-10-12",
+    "title": "Gabriella won award from Polymer Society of Korea",
+    "content": "Gabriella won the Outstanding Paper Presentation Award (Oral, English) at the 2023 Fall Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2023-gabriella-psk-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2023-09-sehyun-masters",
+    "date": "2023-09-01",
+    "title": "Sehyun completed his undergraduate course and embarked on his master's journey",
+    "content": "Let's show our support!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2023-03-aps-march-meeting",
+    "date": "2023-03-01",
+    "title": "Jihun and Yeojin attended APS 2023 March Meeting",
+    "content": "Jihun and Yeojin attended APS 2023 March Meeting and shared their research materials. Hope it was a good experience!",
+    "category": "Conference",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2023-02-hyunseok-sangyeop-join",
+    "date": "2023-02-01",
+    "title": "Hyunseok and Sangyeop joined our group as undergraduate students",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2022-11-sehyun-raehyun-join",
+    "date": "2022-11-01",
+    "title": "Sehyun and Raehyun joined our group as undergraduate students",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2022-09-gabriella-changhyeon-masters",
+    "date": "2022-09-01",
+    "title": "Gabriella Pasya joined our group! Gabriella and ChangHyeon started their master's program",
+    "content": "Welcome!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2022-08-jihun-samsung-gts",
+    "date": "2022-08-15",
+    "title": "Jihun won 4 awards at Samsung Global Technology Symposium",
+    "content": "Jihun won the Certificate of Qualification, Excellence in Poster Award, CONNECT Award, and INSPIRE Award at the Samsung Global Technology Symposium. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2022-jihun-samsung-gts-awards.jpg",
+    "pinned": false
+  },
+  {
+    "id": "2022-08-jihun-psk-fall-award",
+    "date": "2022-08-02",
+    "title": "Jihun won award from Polymer Society of Korea",
+    "content": "Jihun won the Outstanding Paper Presentation Award (Poster) at the 2022 Fall Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2022-jihun-psk-fall-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2022-08-changhyeon-psk-fall-award",
+    "date": "2022-08-02",
+    "title": "Changhyeon won award from Polymer Society of Korea",
+    "content": "Changhyeon won the Outstanding Paper Presentation Award (Poster) at the 2022 Fall Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2022-changhyeon-psk-fall-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2022-08-taeyi-changhyeon-graduation",
+    "date": "2022-08-01",
+    "title": "Taeyi and Changhyeon completed the master's and bachelor's courses",
+    "content": "Congratulations!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2022-06-allan-postdoc-join",
+    "date": "2022-06-01",
+    "title": "New post doctor Allan Perez Ramirez joined our group",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2022-03-yeojin-saqib-masters",
+    "date": "2022-03-01",
+    "title": "Yeojin and Saqib start their master's program",
+    "content": "We cheer for them to do great research!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2021-12-saqib-join",
+    "date": "2021-12-01",
+    "title": "Iqbal Saqib joined our group",
+    "content": "We're looking forward to you coming!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2021-10-jihun-iupac-macro-award",
+    "date": "2021-10-15",
+    "title": "Jihun won Outstanding Online Short Talk Student Award at IUPAC-MACRO 2020+",
+    "content": "Jihun won the IUPAC-MACRO 2020+ Online Short Talk Student Award at the 48th World Polymer Congress in Jeju, Korea. Congratulations!",
+    "category": "Award",
+    "image": "/images/news/2021-jihun-iupac-macro-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2021-10-taeyi-iupac-macro-award",
+    "date": "2021-10-15",
+    "title": "Taeyi won Macromolecular Research Best Presentation Award at IUPAC-MACRO 2020+",
+    "content": "Taeyi won the Macromolecular Research Online Short Talk Award at IUPAC-MACRO 2020+. Congratulations!",
+    "category": "Award",
+    "image": "/images/news/2021-taeyi-iupac-macro-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2021-10-luis-postdoc-join",
+    "date": "2021-10-02",
+    "title": "Luis Adrian Padilla Salas joined our group as a postdoc",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2021-10-jihun-psk-fall-award",
+    "date": "2021-10-01",
+    "title": "Jihun won award from Polymer Society of Korea",
+    "content": "Jihun won the Outstanding Paper Presentation Award (Oral, English) at the 2021 Fall Research Paper Presentation Conference of the Polymer Society of Korea. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2021-jihun-psk-fall-award.png",
+    "pinned": false
+  },
+  {
+    "id": "2021-08-juhae-departure",
+    "date": "2021-08-01",
+    "title": "Juhae Park left for the University of Chicago for her Ph.D course",
+    "content": "After about 4 years in our group, Juhae Park left for the University of Chicago for her Ph.D course. We always wish you good luck!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2021-07-changhyeon-join",
+    "date": "2021-07-01",
+    "title": "ChangHyeon Lee joined our group as an undergraduate student",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2020-09-yeojin-join",
+    "date": "2020-09-01",
+    "title": "Yeojin Choe joined our group as an undergraduate student",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2019-11-jihun-icms-award",
+    "date": "2019-11-05",
+    "title": "Jihun won Best Poster Presentation Award from ICMS 2019",
+    "content": "Jihun won the Best Poster Presentation Award at the 5th International Conference on Molecular Simulation (ICMS 2019) in Jeju, Korea for the paper 'Detection and classification of defects in directed self-assembly of block copolymers using machine learning'. Well done on your achievement!",
+    "category": "Award",
+    "image": "/images/news/2019-jihun-icms-ceremony.jpg",
+    "pinned": false
+  }
+]

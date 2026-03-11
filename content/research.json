@@ -1,0 +1,105 @@
+{
+  "categories": [
+    {
+      "id": "mathematical-models",
+      "title": "Developing Mathematical Models for Complex Polymeric Systems",
+      "description": "We develop coarse-grained simulation models and computational methods to study the self-assembly, thermodynamics, and dynamics of complex polymeric systems at the mesoscale.",
+      "topics": [
+        {
+          "title": "Coarse-grained Model of Bottlebrushes",
+          "description": "Development of coarse-grained models for bottlebrush polymers to study their single-chain properties and self-assembly behavior, enabling efficient simulation of these complex architectures.",
+          "image": "/images/research/bottlebrush.png"
+        },
+        {
+          "title": "Morphological Diversity in Graft-Linear Block Copolymer (BCPs)",
+          "description": "Investigation of the rich morphological phase space in graft-linear block copolymers, exploring how molecular architecture influences self-assembled structures.",
+          "image": "/images/research/morphological-diversity.png"
+        },
+        {
+          "title": "Mesoscale Simulation Model for Solution Assembly",
+          "description": "Building mesoscale simulation frameworks to capture the solution-phase assembly of polymeric systems, bridging the gap between atomistic and continuum approaches.",
+          "image": "/images/research/solution-assembly.png"
+        },
+        {
+          "title": "Solution Assembly of Amphiphilic Grafting Polymer",
+          "description": "Studying how amphiphilic graft polymers organize in solution to form micelles, vesicles, and other nanostructures through simulation and theory.",
+          "image": "/images/research/grafting-polymer.png"
+        },
+        {
+          "title": "Modeling of EUV Photoresist & Patterning Process",
+          "description": "Computational modeling of extreme ultraviolet (EUV) photoresist materials and the patterning process for next-generation semiconductor lithography.",
+          "image": "/images/research/euv-patterning.png"
+        },
+        {
+          "title": "High-resolution Patterning Combined with EUV and DSA",
+          "description": "Integrating EUV lithography with directed self-assembly (DSA) of block copolymers to achieve sub-10nm patterning for advanced semiconductor manufacturing.",
+          "image": "/images/research/euv-dsa.png"
+        },
+        {
+          "title": "Dielectric Spectroscopy of Low Permittivity Polymers",
+          "description": "Computational investigation of dielectric properties of low-permittivity polymers, correlating molecular structure with macroscopic dielectric response.",
+          "image": "/images/research/dielectric.png"
+        },
+        {
+          "title": "Infiltration of Biopolymers into Mesoporous Particles",
+          "description": "Modeling the infiltration and confinement of biopolymers within mesoporous particles, exploring confinement effects on polymer behavior.",
+          "image": "/images/research/infiltration.png"
+        },
+        {
+          "title": "Solvent Vapor Annealing",
+          "description": "Simulation studies of solvent vapor annealing processes for block copolymer thin films, understanding how solvent-polymer interactions drive ordering kinetics.",
+          "image": "/images/research/solvent-vapor.png"
+        },
+        {
+          "title": "Nanoscale Organic Lattices with Strongly-Correlated Disorder",
+          "description": "Exploring the physics of nanoscale organic lattices that exhibit strongly-correlated disorder, bridging condensed matter physics and polymer science.",
+          "image": "/images/research/nanoscale-lattice.png"
+        }
+      ]
+    },
+    {
+      "id": "data-science-ml",
+      "title": "Materials/Systems Design through Data Science and Machine Learning",
+      "description": "We leverage artificial intelligence, machine learning, and data-driven approaches to accelerate the design of novel polymer materials and predict system behavior.",
+      "topics": [
+        {
+          "title": "Defect Detection and Classification",
+          "description": "Application of machine learning and computer vision techniques for automated detection and classification of defects in polymer thin films and patterned structures.",
+          "image": "/images/research/defect-detection.png"
+        },
+        {
+          "title": "HAPPY (HierArchically Abstracted rePeat unit of PolYmer) - Novel String Representation",
+          "description": "Development of HAPPY, a novel hierarchical string representation for polymers that enables efficient machine learning on polymer datasets by encoding structural information.",
+          "image": "/images/research/happy.png"
+        },
+        {
+          "title": "Battery State-of-Health (SOH) Prediction",
+          "description": "Using machine learning models to predict battery state-of-health from electrochemical data, enabling better battery management and lifecycle prediction.",
+          "image": "/images/research/battery-soh.png"
+        },
+        {
+          "title": "Molecular Dynamic Simulations Combined with Machine Learning",
+          "description": "Combining molecular dynamics simulations with machine learning to develop surrogate models and accelerate the exploration of materials design spaces.",
+          "image": "/images/research/md-ml.png"
+        }
+      ]
+    },
+    {
+      "id": "boundary-self-assembly",
+      "title": "Non-simple Boundary and Its Effects on Self-assembly",
+      "description": "We investigate how complex boundaries and confinement geometries influence the self-assembly of block copolymers and other soft matter systems.",
+      "topics": [
+        {
+          "title": "Emulsified BCP Droplets",
+          "description": "Studying the self-assembly of block copolymers within emulsified droplets, where spherical confinement leads to frustrated and novel morphologies.",
+          "image": "/images/research/emulsified-droplet-1.png"
+        },
+        {
+          "title": "Boundary Directed Epitaxy",
+          "description": "Developing boundary-directed epitaxy as a novel approach to direct the self-assembly of block copolymers using lithographically defined chemical patterns.",
+          "image": "/images/research/boundary-epitaxy.jpg"
+        }
+      ]
+    }
+  ]
+}
