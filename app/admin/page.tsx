@@ -444,6 +444,202 @@ function MembersTab({
               onChange={(e) => setPiForm({ ...piForm, photo: e.target.value })}
               className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
             />
+
+            {/* Education */}
+            <div className="col-span-full mt-2">
+              <div className="mb-2 flex items-center justify-between">
+                <h4 className="text-sm font-semibold text-slate-700">Education</h4>
+                <button
+                  onClick={() =>
+                    setPiForm({
+                      ...piForm,
+                      education: [
+                        ...piForm.education,
+                        { degree: "", field: "", institution: "", years: "" },
+                      ],
+                    })
+                  }
+                  className="text-xs text-blue-600 hover:underline"
+                >
+                  + Add
+                </button>
+              </div>
+              <div className="space-y-2">
+                {piForm.education.map((edu, i) => (
+                  <div key={i} className="flex gap-2">
+                    <input
+                      placeholder="Degree (e.g. Ph.D.)"
+                      value={edu.degree}
+                      onChange={(e) => {
+                        const updated = [...piForm.education];
+                        updated[i] = { ...edu, degree: e.target.value };
+                        setPiForm({ ...piForm, education: updated });
+                      }}
+                      className="w-24 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <input
+                      placeholder="Field"
+                      value={edu.field}
+                      onChange={(e) => {
+                        const updated = [...piForm.education];
+                        updated[i] = { ...edu, field: e.target.value };
+                        setPiForm({ ...piForm, education: updated });
+                      }}
+                      className="flex-1 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <input
+                      placeholder="Institution"
+                      value={edu.institution}
+                      onChange={(e) => {
+                        const updated = [...piForm.education];
+                        updated[i] = { ...edu, institution: e.target.value };
+                        setPiForm({ ...piForm, education: updated });
+                      }}
+                      className="flex-1 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <input
+                      placeholder="Years"
+                      value={edu.years}
+                      onChange={(e) => {
+                        const updated = [...piForm.education];
+                        updated[i] = { ...edu, years: e.target.value };
+                        setPiForm({ ...piForm, education: updated });
+                      }}
+                      className="w-24 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        const updated = piForm.education.filter((_, j) => j !== i);
+                        setPiForm({ ...piForm, education: updated });
+                      }}
+                      className="text-red-400 hover:text-red-600"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Experience */}
+            <div className="col-span-full mt-2">
+              <div className="mb-2 flex items-center justify-between">
+                <h4 className="text-sm font-semibold text-slate-700">Experience</h4>
+                <button
+                  onClick={() =>
+                    setPiForm({
+                      ...piForm,
+                      experience: [
+                        ...piForm.experience,
+                        { role: "", institution: "", years: "" },
+                      ],
+                    })
+                  }
+                  className="text-xs text-blue-600 hover:underline"
+                >
+                  + Add
+                </button>
+              </div>
+              <div className="space-y-2">
+                {piForm.experience.map((exp, i) => (
+                  <div key={i} className="flex gap-2">
+                    <input
+                      placeholder="Role"
+                      value={exp.role}
+                      onChange={(e) => {
+                        const updated = [...piForm.experience];
+                        updated[i] = { ...exp, role: e.target.value };
+                        setPiForm({ ...piForm, experience: updated });
+                      }}
+                      className="w-28 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <input
+                      placeholder="Institution"
+                      value={exp.institution}
+                      onChange={(e) => {
+                        const updated = [...piForm.experience];
+                        updated[i] = { ...exp, institution: e.target.value };
+                        setPiForm({ ...piForm, experience: updated });
+                      }}
+                      className="flex-1 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <input
+                      placeholder="Years"
+                      value={exp.years}
+                      onChange={(e) => {
+                        const updated = [...piForm.experience];
+                        updated[i] = { ...exp, years: e.target.value };
+                        setPiForm({ ...piForm, experience: updated });
+                      }}
+                      className="w-24 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        const updated = piForm.experience.filter((_, j) => j !== i);
+                        setPiForm({ ...piForm, experience: updated });
+                      }}
+                      className="text-red-400 hover:text-red-600"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Awards */}
+            <div className="col-span-full mt-2">
+              <div className="mb-2 flex items-center justify-between">
+                <h4 className="text-sm font-semibold text-slate-700">Awards</h4>
+                <button
+                  onClick={() =>
+                    setPiForm({
+                      ...piForm,
+                      awards: [...piForm.awards, { name: "", year: "" }],
+                    })
+                  }
+                  className="text-xs text-blue-600 hover:underline"
+                >
+                  + Add
+                </button>
+              </div>
+              <div className="space-y-2">
+                {piForm.awards.map((award, i) => (
+                  <div key={i} className="flex gap-2">
+                    <input
+                      placeholder="Award name"
+                      value={award.name}
+                      onChange={(e) => {
+                        const updated = [...piForm.awards];
+                        updated[i] = { ...award, name: e.target.value };
+                        setPiForm({ ...piForm, awards: updated });
+                      }}
+                      className="flex-1 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <input
+                      placeholder="Year"
+                      value={String(award.year)}
+                      onChange={(e) => {
+                        const updated = [...piForm.awards];
+                        updated[i] = { ...award, year: e.target.value };
+                        setPiForm({ ...piForm, awards: updated });
+                      }}
+                      className="w-24 rounded border border-slate-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        const updated = piForm.awards.filter((_, j) => j !== i);
+                        setPiForm({ ...piForm, awards: updated });
+                      }}
+                      className="text-red-400 hover:text-red-600"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="col-span-full">
               <button
                 onClick={savePi}
