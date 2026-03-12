@@ -2130,13 +2130,7 @@ function Dashboard() {
     window.location.reload();
   };
 
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-50">
-        <p className="text-slate-500">Loading...</p>
-      </div>
-    );
-  }
+  // ── All hooks must be ABOVE early returns (React rules of hooks) ──
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "home", label: "🏠 Home" },
@@ -2204,6 +2198,16 @@ function Dashboard() {
     }
     setPreviewKey((k) => k + 1);
   }, [tab, hero, syncPreviewStorage]);
+
+  // ── Early return AFTER all hooks ──
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50">
+        <p className="text-slate-500">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-slate-50">
