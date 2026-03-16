@@ -2,9 +2,9 @@
   "pi": {
     "name": "Su-Mi Hur",
     "nameKo": "허수미",
-    "title": "Professor, DGIST",
-    "department": "XXXXX",
-    "email": "XXXXX",
+    "title": "Professor",
+    "department": "Energy Science and Engineering,",
+    "email": "DGIST",
     "phone": "XXXXX",
     "office": "XXXXX",
     "photo": "/images/members/hur-sumi.jpg",
@@ -12,7 +12,7 @@
       {
         "degree": "Ph.D.",
         "field": "Chemical Engineering",
-        "institution": "UC Santa Barbara",
+        "institution": "University of California, Santa Barbara",
         "years": "2006-2011"
       },
       {
@@ -31,27 +31,27 @@
     "experience": [
       {
         "role": "Professor",
-        "institution": "DGIST",
-        "years": "2025-present"
+        "institution": "Energy Science and Engineering, DGIST",
+        "years": "2026-present"
       },
       {
         "role": "Professor",
-        "institution": "Chonnam National University",
-        "years": "2015-2024"
+        "institution": "School of Polymer Science and Engineering, Chonnam National University",
+        "years": "2015-2025"
       },
       {
         "role": "Postdoc",
-        "institution": "Argonne National Lab",
+        "institution": "Material Sciecne Division, Argonne National Laboratory",
         "years": "2014-2015"
       },
       {
         "role": "Postdoc",
-        "institution": "University of Chicago",
+        "institution": "Institute for Molecular Engineering, University of Chicago",
         "years": "2012-2014"
       },
       {
         "role": "Postdoc",
-        "institution": "University of Wisconsin, Madison",
+        "institution": "Chemical & Biological Engineering, University of Wisconsin, Madison",
         "years": "2012"
       }
     ],
@@ -69,7 +69,7 @@
         "year": 2017
       },
       {
-        "name": "Doh Wonsuk Memorial Award",
+        "name": "Doh Wonsuk Memorial Award by Korean Institue of Chemical Engineering US Chapter",
         "year": 2010
       },
       {
