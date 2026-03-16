@@ -1,5 +1,23 @@
 [
   {
+    "id": "2026-02-20-gabriella-sehyun-and-raehyun-completed-t",
+    "date": "2026-02-20",
+    "title": "Gabriella, Sehyun, and Raehyun completed their master's degrees and started the PhD program, while Seunggeon completed his bachelor's degree and started the master's program!",
+    "content": "Congratulations and best wishes for the next journey!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
+    "id": "2026-02-06-manoj-kumar-maurya-joined-our-group-as-a",
+    "date": "2026-02-06",
+    "title": "Manoj joined our group as a postdoctoral researcher!",
+    "content": "Welcome to our lab!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
     "id": "2025-04-sangyeop-psk-award",
     "date": "2025-04-17",
     "title": "Sangyeop won Excellent Paper Presentation Award (Oral) from Polymer Society of Korea",
@@ -47,7 +65,7 @@
   {
     "id": "2025-01-seunggeun-join",
     "date": "2025-01-01",
-    "title": "Seunggeun joined our group as an undergraduate student",
+    "title": "Seunggeun joined our group as an undergraduate student!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -92,7 +110,7 @@
   {
     "id": "2024-04-vikram-join",
     "date": "2024-04-15",
-    "title": "New post doctor Vikram Thapar joined our group",
+    "title": "Vikram joined our group as a postdoctoral researcher!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -119,7 +137,7 @@
   {
     "id": "2024-01-jihyeon-join",
     "date": "2024-01-01",
-    "title": "Jihyeon joined our group as an undergraduate student",
+    "title": "Jihyeon joined our group as an undergraduate student!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -146,8 +164,8 @@
   {
     "id": "2023-09-sehyun-masters",
     "date": "2023-09-01",
-    "title": "Sehyun completed his undergraduate course and embarked on his master's journey",
-    "content": "Let's show our support!",
+    "title": "Sehyun completed his undergraduate course and embarked on his master's program!",
+    "content": "Congratulations and best wishes for the next journey!",
     "category": "Member",
     "image": null,
     "pinned": false
@@ -164,7 +182,7 @@
   {
     "id": "2023-02-hyunseok-sangyeop-join",
     "date": "2023-02-01",
-    "title": "Hyunseok and Sangyeop joined our group as undergraduate students",
+    "title": "Hyunseok and Sangyeop joined our group as undergraduate students!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -173,7 +191,7 @@
   {
     "id": "2022-11-sehyun-raehyun-join",
     "date": "2022-11-01",
-    "title": "Sehyun and Raehyun joined our group as undergraduate students",
+    "title": "Sehyun and Raehyun joined our group as undergraduate students!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -182,8 +200,8 @@
   {
     "id": "2022-09-gabriella-changhyeon-masters",
     "date": "2022-09-01",
-    "title": "Gabriella Pasya joined our group! Gabriella and ChangHyeon started their master's program",
-    "content": "Welcome!",
+    "title": "Gabriella joined our group as a master's student, and Changhyeon started the master's program.",
+    "content": "Welcome and congratulations!",
     "category": "Member",
     "image": null,
     "pinned": false
@@ -218,7 +236,7 @@
   {
     "id": "2022-08-taeyi-changhyeon-graduation",
     "date": "2022-08-01",
-    "title": "Taeyi and Changhyeon completed the master's and bachelor's courses",
+    "title": "Taeyi completed the master's course!",
     "content": "Congratulations!",
     "category": "Member",
     "image": null,
@@ -227,7 +245,7 @@
   {
     "id": "2022-06-allan-postdoc-join",
     "date": "2022-06-01",
-    "title": "New post doctor Allan Perez Ramirez joined our group",
+    "title": "Allan joined our group as a postdoctoral researcher!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -236,8 +254,8 @@
   {
     "id": "2022-03-yeojin-saqib-masters",
     "date": "2022-03-01",
-    "title": "Yeojin and Saqib start their master's program",
-    "content": "We cheer for them to do great research!",
+    "title": "Yeojin and Saqib start their master's program!",
+    "content": "We look forward to their great research ahead!",
     "category": "Member",
     "image": null,
     "pinned": false
@@ -245,8 +263,8 @@
   {
     "id": "2021-12-saqib-join",
     "date": "2021-12-01",
-    "title": "Iqbal Saqib joined our group",
-    "content": "We're looking forward to you coming!",
+    "title": "Saqib joined our group as a master student!",
+    "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
     "pinned": false
@@ -272,7 +290,7 @@
   {
     "id": "2021-10-luis-postdoc-join",
     "date": "2021-10-02",
-    "title": "Luis Adrian Padilla Salas joined our group as a postdoc",
+    "title": "Luis joined our group as a postdoctoral researcher!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -290,7 +308,7 @@
   {
     "id": "2021-08-juhae-departure",
     "date": "2021-08-01",
-    "title": "Juhae Park left for the University of Chicago for her Ph.D course",
+    "title": "Juhae left for the University of Chicago for her Ph.D course",
     "content": "After about 4 years in our group, Juhae Park left for the University of Chicago for her Ph.D course. We always wish you good luck!",
     "category": "Member",
     "image": null,
@@ -299,7 +317,7 @@
   {
     "id": "2021-07-changhyeon-join",
     "date": "2021-07-01",
-    "title": "ChangHyeon Lee joined our group as an undergraduate student",
+    "title": "Changhyeon joined our group as an undergraduate student!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -308,7 +326,7 @@
   {
     "id": "2020-09-yeojin-join",
     "date": "2020-09-01",
-    "title": "Yeojin Choe joined our group as an undergraduate student",
+    "title": "Yeojin joined our group as an undergraduate student!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
