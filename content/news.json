@@ -1,5 +1,14 @@
 [
   {
+    "id": "2026-02-23-jihun-completed-his-ph-d-program-and-sta",
+    "date": "2026-02-23",
+    "title": "Jihun completed his Ph.D program and started his postdoctoral research!",
+    "content": "Congratulations and best wishes for the next journey!",
+    "category": "Member",
+    "image": null,
+    "pinned": false
+  },
+  {
     "id": "2026-02-20-gabriella-sehyun-and-raehyun-completed-t",
     "date": "2026-02-20",
     "title": "Gabriella, Sehyun, and Raehyun completed their master's degrees and started the PhD program, while Seunggeon completed his bachelor's degree and started the master's program!",
@@ -164,7 +173,7 @@
   {
     "id": "2023-09-sehyun-masters",
     "date": "2023-09-01",
-    "title": "Sehyun completed his undergraduate course and embarked on his master's program!",
+    "title": "Sehyun completed the undergraduate degree and embarked on the master's program!",
     "content": "Congratulations and best wishes for the next journey!",
     "category": "Member",
     "image": null,
@@ -201,7 +210,7 @@
     "id": "2022-09-gabriella-changhyeon-masters",
     "date": "2022-09-01",
     "title": "Gabriella joined our group as a master's student, and Changhyeon started the master's program.",
-    "content": "Welcome and congratulations!",
+    "content": "Welcome and we look forward to their great research ahead!",
     "category": "Member",
     "image": null,
     "pinned": false
@@ -236,7 +245,7 @@
   {
     "id": "2022-08-taeyi-changhyeon-graduation",
     "date": "2022-08-01",
-    "title": "Taeyi completed the master's course!",
+    "title": "Taeyi completed the master's degree!",
     "content": "Congratulations!",
     "category": "Member",
     "image": null,
@@ -254,7 +263,7 @@
   {
     "id": "2022-03-yeojin-saqib-masters",
     "date": "2022-03-01",
-    "title": "Yeojin and Saqib start their master's program!",
+    "title": "Yeojin and Saqib started their master's program!",
     "content": "We look forward to their great research ahead!",
     "category": "Member",
     "image": null,
@@ -263,7 +272,7 @@
   {
     "id": "2021-12-saqib-join",
     "date": "2021-12-01",
-    "title": "Saqib joined our group as a master student!",
+    "title": "Saqib joined our group as a master's student!",
     "content": "Welcome to our lab!",
     "category": "Member",
     "image": null,
@@ -308,8 +317,8 @@
   {
     "id": "2021-08-juhae-departure",
     "date": "2021-08-01",
-    "title": "Juhae left for the University of Chicago for her Ph.D course",
-    "content": "After about 4 years in our group, Juhae Park left for the University of Chicago for her Ph.D course. We always wish you good luck!",
+    "title": "Juhae left for the University of Chicago for her Ph.D program.",
+    "content": "After about 4 years in our group, Juhae Park left for the University of Chicago for her Ph.D program. We always wish you good luck!",
     "category": "Member",
     "image": null,
     "pinned": false
