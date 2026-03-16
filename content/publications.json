@@ -1,5 +1,41 @@
 [
   {
+    "year": 2015,
+    "authors": "Nabil Laachi, Kris T. Delaney, Bongkeun Kim, Su-Mi Hur, Robert Bristol, David Shykind, Corey J. Weinheimer, Glenn H. Fredrickson*",
+    "title": "Self‐consistent field theory investigation of directed self‐assembly in cylindrical confinement",
+    "journal": "Journal of Polymer Science Part B: Polymer Physics",
+    "volume": "53.2 (2015): 142-153.",
+    "doi": "https://onlinelibrary.wiley.com/doi/full/10.1002/polb.23452",
+    "featured": false
+  },
+  {
+    "year": 2026,
+    "authors": "Grant Garner, Lance Williamson, Robert Seidel, Paulina Rincon Delgadillo, Su-Mi Hur, Roel Gronheid, Paul F. Nealey, Juan J. de Pablo*",
+    "title": "The effects of geometry and chemistry of nanopatterned substrates on the directed self-assembly of block-copolymer melts",
+    "journal": "Alternative Lithographic Technologies VII. Vol. 9423. SPIE,",
+    "volume": "2015.",
+    "doi": "https://www.spiedigitallibrary.org/conference-proceedings-of-spie/9423/1/The-effects-of-geometry-and-chemistry-of-nanopatterned-substrates-on/10.1117/12.2085987.full",
+    "featured": false
+  },
+  {
+    "year": 2018,
+    "authors": "H Kang, S An, WJ Lee, GR Kang, S Kim, SM Hur*, K Paeng*, M Kim*",
+    "title": "Stable polymer brushes with effectively varied grafting density synthesized from highly crosslinked random copolymer thin films",
+    "journal": "RSC Advances",
+    "volume": "8 (43), 24166-24174",
+    "doi": "https://pubs.rsc.org/en/content/articlelanding/2018/ra/c8ra04480e",
+    "featured": false
+  },
+  {
+    "year": 2019,
+    "authors": "YC Kim, TJ Shin, SM Hur*, SJ Kwon*, SY Kim*",
+    "title": "Shear-solvo defect annihilation of diblock copolymer thin films over a large area",
+    "journal": "Sci. Adv.",
+    "volume": "5,eaaw3974(2019).",
+    "doi": "https://www.science.org/doi/10.1126/sciadv.aaw3974",
+    "featured": false
+  },
+  {
     "year": 2021,
     "authors": "In-Hwa Kang, Tae-Yi Kim, Su-Mi Hur, Chung-Hyun Ban, Jang-Gun Park, Hye-Keun Oh",
     "title": "Line width roughness variation and printing failures caused by stochastic effect at extreme-ultraviolet exposure",
@@ -87,7 +123,7 @@
     "journal": "npj Computational Materials",
     "volume": "10, 110 (2024)",
     "doi": "https://www.nature.com/articles/s41524-024-01293-8",
-    "featured": false
+    "featured": true
   },
   {
     "year": 2024,
@@ -199,16 +235,16 @@
   },
   {
     "year": 2020,
-    "authors": "RM Jacobberger, V Thapar , GP Wu*, TH Chang, V Saraswat, AJ Way, KR Jinkins, Z Ma, PF Nealey, SM Hur * , S Xiong*, MS Arnold*",
+    "authors": "RM Jacobberger, V Thapar, GP Wu*, TH Chang, V Saraswat, AJ Way, KR Jinkins, Z Ma, PF Nealey, SM Hur* , S Xiong*, MS Arnold*",
     "title": "Boundary-directed epitaxy of block copolymers",
     "journal": "Nature Communications",
     "volume": "11, 4151, selected as editor's highlight",
     "doi": "https://www.nature.com/articles/s41467-020-17938-3",
-    "featured": false
+    "featured": true
   },
   {
     "year": 2019,
-    "authors": "J Park , SG Lee, Y Vesters, J Severi, M Kim, D De Simone, HK Oh*, SM Hur *",
+    "authors": "J Park, SG Lee, Y Vesters, J Severi, M Kim, D De Simone, HK Oh*, SM Hur*",
     "title": "Molecular Modeling of EUV Photoresist Revealing the Effect of Chain Conformation on Line-Edge Roughness Formation",
     "journal": "Polymers",
     "volume": "11 (12), 1923",
@@ -217,7 +253,7 @@
   },
   {
     "year": 2019,
-    "authors": "W Wei, TY Kim , A Balamurugan, J Sun, R Chen, A Ghosh, F Rodolakis, J L McChesney, A Lakkham, P G Evans, SM Hur , P Gopalan*",
+    "authors": "W Wei, TY Kim, A Balamurugan, J Sun, R Chen, A Ghosh, F Rodolakis, J L McChesney, A Lakkham, P G Evans, SM Hur, P Gopalan*",
     "title": "Phase Behavior of Mixed Polymer Brushes Grown from Ultrathin Coatings",
     "journal": "ACS Macro Letters",
     "volume": "8 (9), 1086-1090",
@@ -226,7 +262,7 @@
   },
   {
     "year": 2018,
-    "authors": "SM Hur *. V Thapar , A Ramírez-Hernández, PF Nealey, JJ de Pablo*",
+    "authors": "SM Hur*, V Thapar, A Ramírez-Hernández, PF Nealey, JJ de Pablo*",
     "title": "Defect Annihilation Pathways in Directed Assembly of Lamellar Block Copolymer Thin Films",
     "journal": "ACS nano",
     "volume": "12 (10), 9974-9981",
@@ -235,7 +271,7 @@
   },
   {
     "year": 2018,
-    "authors": "S Xiong*, D Li, SM Hur , GSW Craig, CG Arges, XP Qu, PF Nealey*",
+    "authors": "S Xiong*, D Li, SM Hur, GSW Craig, CG Arges, XP Qu, PF Nealey*",
     "title": "The Solvent Distribution Effect on the Self-Assembly of Symmetric Triblock Copolymers during Solvent Vapor Annealing",
     "journal": "Macromolecules",
     "volume": "51 (18), 7145-7151",
@@ -244,7 +280,7 @@
   },
   {
     "year": 2017,
-    "authors": "A Ramírez-Hernández*, SM Hur , JC Armas-Pérez, MO Cruz, JJ de Pablo*",
+    "authors": "A Ramírez-Hernández*, SM Hur, JC Armas-Pérez, MO Cruz, JJ de Pablo*",
     "title": "Demixing by a Nematic Mean Field: Coarse-Grained Simulations of Liquid Crystalline Polymers",
     "journal": "Polymers",
     "volume": "9 (3), 88",
@@ -253,7 +289,7 @@
   },
   {
     "year": 2017,
-    "authors": "S Noh, DN Nguyen, CS Park, Y Kim, HJ Kong, S Kim, S Kim, SM Hur , H Yoon*",
+    "authors": "S Noh, DN Nguyen, CS Park, Y Kim, HJ Kong, S Kim, S Kim, SM Hur, H Yoon*",
     "title": "Development of Effective Porosity in Carbon Nanofibers Based on Phase Behavior of Ternary Polymer Blend Precursors: Toward High-Performance Electrode Materials",
     "journal": "The Journal of Physical Chemistry C",
     "volume": "121 (34), 18480-18489",
@@ -262,7 +298,7 @@
   },
   {
     "year": 2017,
-    "authors": "S Park, Y Kim, W Lee, SM Hur *, DY Ryu*",
+    "authors": "S Park, Y Kim, W Lee, SM Hur*, DY Ryu*",
     "title": "Gyroid Structures in Solvent Annealed PS-b-PMMA Films: Controlled Orientation by Substrate Interactions",
     "journal": "Macromolecules",
     "volume": "50 (13), 5033-5041",
@@ -271,7 +307,7 @@
   },
   {
     "year": 2015,
-    "authors": "SM Hur , MS Onses, A Ramírez-Hernández, PF Nealey*, JA Rogers*, JJ de Pablo*",
+    "authors": "SM Hur, MS Onses, A Ramírez-Hernández, PF Nealey*, JA Rogers*, JJ de Pablo*",
     "title": "Interplay of Surface Energy and Bulk Thermodynamic Forces in Ordered Block Copolymer Droplets",
     "journal": "Macromolecules",
     "volume": "48(13), 4717–4723",
@@ -280,12 +316,12 @@
   },
   {
     "year": 2015,
-    "authors": "SM Hur , V Thapar , A Ramírez-Hernández, G Khaira, T Segal-Peretz, PA Rincon-Delgadillo, W Li, M Muller, PF Nealey, JJ de Pablo*",
+    "authors": "SM Hur, V Thapar, A Ramírez-Hernández, G Khaira, T Segal-Peretz, PA Rincon-Delgadillo, W Li, M Muller, PF Nealey, JJ de Pablo*",
     "title": "Molecular pathways for defect annihilation in directed self-assembly",
     "journal": "PNAS",
     "volume": "112 (46) 14144-14149",
     "doi": "https://www.pnas.org/doi/abs/10.1073/pnas.1508225112",
-    "featured": true
+    "featured": false
   },
   {
     "year": 2015,
@@ -298,7 +334,7 @@
   },
   {
     "year": 2015,
-    "authors": "Su-Mi Hur , Gurdaman S. Khaira, Abelardo Ramírez-Hernández, Marcus Müller, Paul F. Nealey, Juan J. de Pablo*",
+    "authors": "Su-Mi Hur, Gurdaman S. Khaira, Abelardo Ramírez-Hernández, Marcus Müller, Paul F. Nealey, Juan J. de Pablo*",
     "title": "Simulation of Defect Reduction in Block Copolymer Thin Films by Solvent Annealing",
     "journal": "ACS Macro Letters",
     "volume": "4.1 (2015): 11-15.",
