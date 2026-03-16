@@ -1,5 +1,14 @@
 [
   {
+    "year": 2023,
+    "authors": "Carlos Salinas-Soto, Yeojin Choe, Su-Mi Hur*, Abelardo Ramírez-Hernández*",
+    "title": "Exploring conformations of comb-like polymers with varying grafting density in dilute solutions",
+    "journal": "J. Chem. Phys.",
+    "volume": "159, 114901 (2023)",
+    "doi": "https://pubs.aip.org/aip/jcp/article/159/11/114901/2911490/Exploring-conformations-of-comb-like-polymers-with",
+    "featured": false
+  },
+  {
     "year": 2025,
     "authors": "Sehyun Yun, Jihun Ahn, Vikram Thapar, Sangyeop Lee, Sheng Li*, Su-Mi Hur*",
     "title": "Defect Rectification in High-Density Patterns through Directed Self-Assembly of Advanced Block Copolymer Architectures",
@@ -91,28 +100,28 @@
   },
   {
     "year": 2023,
-    "authors": "Tae-Yi Kim, Su-Mi Hur*, Abelardo Ramírez-Hernández*",
+    "authors": "Tae-Yi Kim, Su-Mi Hur*, Abelardo Ramírez-Hernández*",
     "title": "Effect of Block Sequence on the Solution Self-Assembly of Symmetric ABCBA Pentablock Polymers in a Selective, Solvent",
-    "journal": "J. Phys. Chem. B,  2023, 127, 11, 2575-2586",
-    "volume": "",
+    "journal": "J. Phys. Chem. B,",
+    "volume": "2023, 127, 11, 2575-2586",
     "doi": "https://pubs.acs.org/doi/full/10.1021/acs.jpcb.2c07930",
     "featured": false
   },
   {
     "year": 2023,
-    "authors": "",
-    "title": "Julia D. Smith, Luis Adrian Padilla Salas,  Carter Kreft, Su-Mi Hur*,  Padma Gopalan* \"Chain End-Functionalized Dense Polymer Brushes from an Inimer C",
-    "journal": "",
-    "volume": "",
+    "authors": "Julia D. Smith, Luis Adrian Padilla Salas, Carter Kreft, Su-Mi Hur*,  Padma Gopalan*",
+    "title": "Chain End-Functionalized Dense Polymer Brushes from an Inimer Coating by SI-RAFT",
+    "journal": "Langmuir",
+    "volume": "2023, 39, 23, 8267–8278",
     "doi": "https://pubs.acs.org/doi/full/10.1021/acs.langmuir.3c00733",
     "featured": false
   },
   {
     "year": 2023,
-    "authors": "",
-    "title": "Tae-Yi Kim , In-Hwa Kang, Juhae Park , Myungwoong Kim*, Hye-Keun Oh*,  Su-Mi Hur*  \"Coarse-Grained Modeling of EUV Patterning Process Reflecting Photo",
-    "journal": "",
-    "volume": "",
+    "authors": "Tae-Yi Kim, In-Hwa Kang, Juhae Park, Myungwoong Kim*, Hye-Keun Oh*,  Su-Mi Hur*",
+    "title": "Coarse-Grained Modeling of EUV Patterning Process Reflecting Photochemical Reactions and Chain Conformations",
+    "journal": "Polymers,",
+    "volume": "2023, 15(9), 1988",
     "doi": "https://www.mdpi.com/2073-4360/15/9/1988",
     "featured": false
   },
