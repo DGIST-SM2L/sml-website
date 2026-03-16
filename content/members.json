@@ -83,50 +83,43 @@
       "name": "Allan Perez Ramirez",
       "position": "Postdoc",
       "research": "Boundary Directed Epitaxy, Dielectric Spectroscopy",
-      "education": "Ph.D., Department of basic sciences and engineering, Metropolitan Autonomous University",
+      "education": "Ph.D., Department of Basic Sciences and Engineering, Metropolitan Autonomous University",
       "photo": "/images/members/allan.jpg"
     },
     {
       "name": "Vikram Thapar",
       "position": "Postdoc",
       "research": "Kinetics and Thermodynamics of BCP thin films",
-      "education": "Ph.D., Cornell University",
+      "education": "Ph.D., Department of Chemical Engineering, Cornell University",
       "photo": "/images/members/vikram.png"
     },
     {
       "name": "Jihun Ahn",
       "position": "Postdoc",
       "research": "Machine Learning for Materials Design, MD: Phase Transition of 2D Colloidal System",
-      "education": "Ph.D., Chonnam National University",
+      "education": "Ph.D., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/jihun.jpg"
     },
     {
       "name": "Gabriella Pasya Irianti",
       "position": "Ph.D. student",
       "research": "CG-MD of Polymeric Systems, ML for Materials Design",
-      "education": "B.S., University of Indonesia",
+      "education": "B.S., Metallurgy and Material Engineering, University of Indonesia",
       "photo": "/images/members/gabriella.jpg"
     },
     {
       "name": "Sehyun Yun",
       "position": "Ph.D. student",
       "research": "DSA on VIA Pattern, ML for Battery SOH",
-      "education": "B.S., Chonnam National University",
+      "education": "B.S., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/sehyun.jpg"
     },
     {
       "name": "Raehyun Jung",
       "position": "Ph.D. student",
       "research": "ML for Battery SOH, Mesoporous Particle-Polymer",
-      "education": "B.S., Chonnam National University",
+      "education": "B.S., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/raehyun.jpg"
-    },
-    {
-      "name": "Hyunseok Kim",
-      "position": "M.S. student",
-      "research": "EUV Lithography, Polymer Rod Brush",
-      "education": "B.S., Chonnam National University",
-      "photo": "/images/members/hyunseok.png"
     },
     {
       "name": "Sangyeop Lee",
@@ -199,6 +192,14 @@
       "research": "Cell nucleation of nano polymeric foam",
       "currentPosition": null,
       "photo": "/images/members/alumni-yeongyoon.png"
+    },
+    {
+      "name": "Hyunseok Kim",
+      "degree": "M.S.",
+      "period": "02/2024 – 02/2026",
+      "research": "EUV Lithography, Polymer Rod Brush",
+      "currentPosition": null,
+      "photo": "/images/members/hyunseok.png"
     }
   ]
 }
