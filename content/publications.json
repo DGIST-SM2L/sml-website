@@ -1,5 +1,32 @@
 [
   {
+    "year": 2021,
+    "authors": "In-Hwa Kang, Tae-Yi Kim, Su-Mi Hur, Chung-Hyun Ban, Jang-Gun Park, Hye-Keun Oh",
+    "title": "Line width roughness variation and printing failures caused by stochastic effect at extreme-ultraviolet exposure",
+    "journal": "Proc. SPIE",
+    "volume": "11609, Extreme Ultraviolet (EUV) Lithography XII, 116091K",
+    "doi": "https://www.spiedigitallibrary.org/conference-proceedings-of-spie/11609/116091K/Line-width-roughness-variation-and-printing-failures-caused-by-stochastic/10.1117/12.2583690.full",
+    "featured": false
+  },
+  {
+    "year": 2021,
+    "authors": "Jihun Ahn, Ye Chan Kim, So Youn Kim, Su-Mi Hur*, Vikram Thapar*",
+    "title": "Defect recognition in line-space patterns aided by deep learning with data augmentation",
+    "journal": "Journal of Micro/Nanopatterning, Materials, and Metrology",
+    "volume": "20(4), 041202",
+    "doi": "https://www.spiedigitallibrary.org/journals/journal-of-micro-nanopatterning-materials-and-metrology/volume-20/issue-4/041203/Defect-recognition-in-line-space-patterns-aided-by-deep-learning/10.1117/1.JMM.20.4.041203.full",
+    "featured": false
+  },
+  {
+    "year": 2021,
+    "authors": "Tae-Yi Kim, Ga Ryang Kang, Myungwoong Kim*, Vikram Thapar, Su-Mi Hur*",
+    "title": "Full parameter space exploration of microphase separation of block copolymer brushes within a single simulation framework",
+    "journal": "Molecular Systems Design & Engineering (MSDE),",
+    "volume": "2021, 6, 1087-1097",
+    "doi": "https://pubs.rsc.org/en/content/articlehtml/2021/me/d1me00126d",
+    "featured": false
+  },
+  {
     "year": 2023,
     "authors": "Carlos Salinas-Soto, Yeojin Choe, Su-Mi Hur*, Abelardo Ramírez-Hernández*",
     "title": "Exploring conformations of comb-like polymers with varying grafting density in dilute solutions",
@@ -127,25 +154,25 @@
   },
   {
     "year": 2022,
-    "authors": "Juhae Park, Vikram Thapar, Yeojin Choe, Luis Adrian Padilla Salas , Abelardo Ramírez-Hernández*, Juan J. de Pablo*, Su-Mi Hur *",
+    "authors": "Juhae Park, Vikram Thapar, Yeojin Choe, Luis Adrian Padilla Salas, Abelardo Ramírez-Hernández*, Juan J. de Pablo*, Su-Mi Hur *",
     "title": "Coarse-grained Simulation of Bottlebrush: From Single-Chain Properties to Self-Assembly",
-    "journal": "ACS Macro Letters ,  2022, 11, 9, 1167-1173",
-    "volume": "",
+    "journal": "ACS Macro Letters,",
+    "volume": "2022, 11, 9, 1167-1173",
     "doi": "https://pubs.acs.org/doi/full/10.1021/acsmacrolett.2c00310",
     "featured": false
   },
   {
     "year": 2022,
-    "authors": "Eun Ji Kim, Jaeman J. Shin, Gue Seon Lee, Sejong Kim, Sora Park, Juhae Park, Yeojin Choe , Dahye Lee, Jinwoong Choi, Joona Bang, Young Hun Kim, Sheng Li, Su-Mi Hur* , Jeung Gon Kim*, Bumjoon J. Kim*",
+    "authors": "Eun Ji Kim, Jaeman J. Shin, Gue Seon Lee, Sejong Kim, Sora Park, Juhae Park, Yeojin Choe, Dahye Lee, Jinwoong Choi, Joona Bang, Young Hun Kim, Sheng Li, Su-Mi Hur*, Jeung Gon Kim*, Bumjoon J. Kim*",
     "title": "Synthesis and Self-Assembly of Poly(vinylpyridine)-Containing Brush Block Copolymers: Combined Synthesis of Grafting-through and Grafting-to Approaches",
-    "journal": "Macromolecules,  2022, 55, 5, 1590-1599",
-    "volume": "",
+    "journal": "Macromolecules,",
+    "volume": "2022, 55, 5, 1590-1599",
     "doi": "https://pubs.acs.org/doi/full/10.1021/acs.macromol.1c02631",
     "featured": false
   },
   {
     "year": 2021,
-    "authors": "J Park , A Ramírez-Hernández*, V Thapar *, SM Hur *",
+    "authors": "Juhae Park, Abelardo Ramírez-Hernández*, Vikram Thapar*, Su-Mi Hur*",
     "title": "Mesoscale Simulations of Polymer Solution Self-Assembly: Selection of Model Parameters within an Implicit Solvent Approximation",
     "journal": "Polymers",
     "volume": "13(6), 953",
@@ -154,7 +181,7 @@
   },
   {
     "year": 2021,
-    "authors": "EJ Kim, J J. Shin, T Do, GS Lee, J Park , V Thapar , J Choi, J Bang, GR Yi, SM Hur *, JG Kim*, and BJ Kim*",
+    "authors": "Eun Ji Kim, Jaeman J. Shin, Taeyang Do, Gue Seon Lee, Juhae Park, Vikram Thapar, Jinwoong Choi, Joona Bang, Gi-Ra Yi, Su-Mi Hur*, Jeung Gon Kim*, Bumjoon J. Kim*",
     "title": "Molecular Weight Dependent Morphological Transitions of Bottlebrush Block Copolymer Particles: Experiments and Simulations",
     "journal": "ACS Nano",
     "volume": "15 (3), 5513-5522",
@@ -163,8 +190,8 @@
   },
   {
     "year": 2021,
-    "authors": "J Zhou, V Thapa r, Y Chen, BW Wu, GSW Craig, PF Nealey, SM Hur *, TH Chang*, S Xiong*",
-    "title": "Self-Aligned Assembly of Poly(2-vinylpyridine)- b -polystyrene- b -poly(2-vinylpyridine) Triblock Copolymer on Graphene Nanoribons",
+    "authors": "J Zhou, V Thapar, Y Chen, BW Wu, GSW Craig, PF Nealey, SM Hur*, TH Chang*, S Xiong*",
+    "title": "Self-Aligned Assembly of Poly(2-vinylpyridine)-b-polystyrene-b-poly(2-vinylpyridine) Triblock Copolymer on Graphene Nanoribons",
     "journal": "ACS Appl. Mater. Interfaces",
     "volume": "13(34), 41190–41199",
     "doi": "https://pubs.acs.org/doi/full/10.1021/acsami.1c08940",
