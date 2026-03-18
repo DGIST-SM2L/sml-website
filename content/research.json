@@ -64,23 +64,23 @@
       "topics": [
         {
           "title": "Defect Detection and Classification",
-          "description": "Application of machine learning and computer vision techniques for automated detection and classification of defects in polymer thin films and patterned structures.",
-          "image": "/images/research/defect-detection.png"
+          "description": "Detection and classification of defects in directed self-assembly of block copolymers using machine learning (YOLOv3),\nAugmenting simulated data to limited experimental data to enhance the network training : testing efficiency for data mixing or transfer learning,\nEvaluating  data quality for network performance.",
+          "image": "/images/members/1773842736532-pcoy5j.png"
         },
         {
-          "title": "HAPPY (HierArchically Abstracted rePeat unit of PolYmer) - Novel String Representation",
-          "description": "Development of HAPPY, a novel hierarchical string representation for polymers that enables efficient machine learning on polymer datasets by encoding structural information.",
-          "image": "/images/research/happy.png"
+          "title": "Novel String Representation for Polymer Structures : HAPPY (HierArchically Abstracted rePeat unit of PolYmer)",
+          "description": "HAPPY provides a condensed representation, effectively expressing polymer structures,\nIt employs simple grammatical rules, enabling consistent string representation,\nMaintains graphical information while being more intuitive and interpretable,\nHAPPY present the potential of effective representation for further research of complex polymer architecture and inverse design of polymric material with machine learning.",
+          "image": "/images/members/1773842785872-p8hgr9.png"
         },
         {
-          "title": "Battery State-of-Health (SOH) Prediction",
-          "description": "Using machine learning models to predict battery state-of-health from electrochemical data, enabling better battery management and lifecycle prediction.",
-          "image": "/images/research/battery-soh.png"
+          "title": "Rapid Impedance-Based Battery Health Diagnostics and Lifetime Forecasting Across the Full Aging Regime Using High-Frequency EIS Data",
+          "description": "Applying deep learning to battery systems,\nEstimation: Prediction of state of health of battery using Electrochemical Impedance Spectroscopy data,\nFeature reduction : SHAP analysis for investigating the feature impact on SOH, PCA for simplifying complexity of the data.",
+          "image": "/images/members/1773842926170-i9lahz.png"
         },
         {
           "title": "Molecular Dynamic Simulations Combined with Machine Learning",
-          "description": "Combining molecular dynamics simulations with machine learning to develop surrogate models and accelerate the exploration of materials design spaces.",
-          "image": "/images/research/md-ml.png"
+          "description": "Precise measurement of Glass Transition Temperature (Tg) achieved by clustering the Radius of Gyration (Rg) across multiple timeframes and temperatures,\nObserving the Tg depiction of polymer free-standing thins films as a function of thickness and further insights into the different Tg of interface and center region of the film using clustering method.",
+          "image": "/images/members/1773842953323-ocg4oi.png"
         }
       ]
     },
@@ -91,13 +91,13 @@
       "topics": [
         {
           "title": "Emulsified BCP Droplets",
-          "description": "Studying the self-assembly of block copolymers within emulsified droplets, where spherical confinement leads to frustrated and novel morphologies.",
-          "image": "/images/research/emulsified-droplet-1.png"
+          "description": "Predicting structure and shape evolution in emulsified BCP droplets,\nInvestigating the effects of surface energy difference on the final morphology.",
+          "image": "/images/members/1773842993710-3wlz6d.png"
         },
         {
           "title": "Boundary Directed Epitaxy",
-          "description": "Developing boundary-directed epitaxy as a novel approach to direct the self-assembly of block copolymers using lithographically defined chemical patterns.",
-          "image": "/images/research/boundary-epitaxy.jpg"
+          "description": "Development of efficient simulation approaches using Monte Carlo and Molecular Dynamics frameworks to investigate complicated geometric surface effects,\nValidation of these approaches by quantifying the importance of non-flat free top surface in the experimental system of self-assembly of tri-block copolymer on graphene nano-ribbons,\nFurther studies to understand the role of 3D bottom substrates in the mechanism of defect annihilation for lamellae-forming block copolymer systems.",
+          "image": ""
         }
       ]
     }
