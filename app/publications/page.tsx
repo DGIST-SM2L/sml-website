@@ -18,6 +18,7 @@ interface Publication {
 
 interface PublicationsData {
   boldJournal: boolean;
+  boldAuthors?: string[];
   publications: Publication[];
 }
 
@@ -53,6 +54,7 @@ export default function PublicationsPage() {
   );
   const publications = data.publications;
   const boldJournal = data.boldJournal ?? false;
+  const boldAuthors = data.boldAuthors ?? [];
 
   const highlightAuthors = useMemo(() => {
     const names: string[] = [];
@@ -63,8 +65,11 @@ export default function PublicationsPage() {
     if (Array.isArray(membersJson.alumni)) {
       for (const a of membersJson.alumni) if (a.name) names.push(a.name);
     }
+    for (const name of boldAuthors) {
+      if (name && !names.includes(name)) names.push(name);
+    }
     return names;
-  }, []);
+  }, [boldAuthors]);
 
   const [search, setSearch] = useState("");
   const [selectedYear, setSelectedYear] = useState<number | null>(null);

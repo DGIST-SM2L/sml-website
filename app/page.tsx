@@ -94,13 +94,13 @@ function HomeInner() {
           transition={{ duration: 0.8 }}
           className="relative mx-auto max-w-5xl px-6 py-32 sm:py-44"
         >
-          <p className="text-base font-bold uppercase tracking-widest text-blue-400">
+          <p className="text-3xl font-bold uppercase tracking-widest text-blue-400 sm:text-4xl">
             DGIST
           </p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
-            Simulation and Machine Learning
+            <span className="text-blue-400">S</span>imulation and <span className="text-blue-400">M</span>achine Learning
             <br />
-            for <span className="text-blue-400">Soft Matter Lab</span>
+            for <span className="text-blue-400">S</span>oft <span className="text-blue-400">M</span>atter <span className="text-blue-400">L</span>ab
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
             Computational Polymer Science &amp; AI — developing mesoscale

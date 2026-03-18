@@ -1,0 +1,8 @@
+[
+  { "href": "/", "label": "Home" },
+  { "href": "/people", "label": "People" },
+  { "href": "/research", "label": "Research" },
+  { "href": "/publications", "label": "Publications" },
+  { "href": "/news", "label": "News & Gallery" },
+  { "href": "/contact", "label": "Contact" }
+]

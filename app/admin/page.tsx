@@ -118,10 +118,13 @@ type GalleryItem = {
 
 type PublicationsData = {
   boldJournal: boolean;
+  boldAuthors?: string[];
   publications: Publication[];
 };
 
-type Tab = "publications" | "members" | "research" | "news-gallery" | "contact" | "home";
+type NavLink = { href: string; label: string };
+
+type Tab = "publications" | "members" | "research" | "news-gallery" | "contact" | "home" | "nav";
 
 // ─── Helper ──────────────────────────────────────────────────────
 async function api(path: string, options?: RequestInit) {
@@ -288,16 +291,21 @@ function PublicationsTab({
   onChange,
   boldJournal,
   onBoldJournalChange,
+  boldAuthors,
+  onBoldAuthorsChange,
 }: {
   data: Publication[];
   onChange: (d: Publication[]) => void;
   boldJournal: boolean;
   onBoldJournalChange: (v: boolean) => void;
+  boldAuthors: string[];
+  onBoldAuthorsChange: (v: string[]) => void;
 }) {
   const [editing, setEditing] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<Publication>(EMPTY_PUB);
   const [addForm, setAddForm] = useState<Publication>(EMPTY_PUB);
   const [reorderMode, setReorderMode] = useState(false);
+  const [newBoldAuthor, setNewBoldAuthor] = useState("");
 
   const sorted = [...data].sort((a, b) => b.year - a.year);
 
@@ -355,6 +363,53 @@ function PublicationsTab({
           />
           Bold journal names
         </label>
+      </div>
+
+      {/* Bold authors */}
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <h4 className="mb-2 text-sm font-medium text-slate-700">Additional bold authors (besides lab members)</h4>
+        <div className="mb-3 flex gap-2">
+          <input
+            value={newBoldAuthor}
+            onChange={(e) => setNewBoldAuthor(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && newBoldAuthor.trim()) {
+                onBoldAuthorsChange([...boldAuthors, newBoldAuthor.trim()]);
+                setNewBoldAuthor("");
+              }
+            }}
+            placeholder="Author name"
+            className="flex-1 rounded border border-slate-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+          />
+          <button
+            onClick={() => {
+              if (!newBoldAuthor.trim()) return;
+              onBoldAuthorsChange([...boldAuthors, newBoldAuthor.trim()]);
+              setNewBoldAuthor("");
+            }}
+            className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            Add
+          </button>
+        </div>
+        {boldAuthors.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {boldAuthors.map((name, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-sm text-blue-700"
+              >
+                {name}
+                <button
+                  onClick={() => onBoldAuthorsChange(boldAuthors.filter((_, j) => j !== i))}
+                  className="ml-0.5 text-blue-400 hover:text-blue-600"
+                >
+                  &times;
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Add new */}
@@ -2148,11 +2203,75 @@ function GalleryTab({
   );
 }
 
+// ─── Navigation Tab ──────────────────────────────────────────────
+function NavTab({
+  data,
+  onChange,
+}: {
+  data: NavLink[];
+  onChange: (d: NavLink[]) => void;
+}) {
+  const moveUp = (i: number) => {
+    if (i <= 1) return; // index 0 is Home (locked), so min movable is index 1 going to 1
+    const next = [...data];
+    [next[i - 1], next[i]] = [next[i], next[i - 1]];
+    onChange(next);
+  };
+
+  const moveDown = (i: number) => {
+    if (i === 0 || i >= data.length - 1) return;
+    const next = [...data];
+    [next[i], next[i + 1]] = [next[i + 1], next[i]];
+    onChange(next);
+  };
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-slate-500">Drag order of navigation links. &quot;Home&quot; is always first.</p>
+      <div className="space-y-2">
+        {data.map((link, i) => {
+          const isHome = link.href === "/";
+          return (
+            <div
+              key={link.href}
+              className={`flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 ${isHome ? "opacity-60" : ""}`}
+            >
+              <div className="flex shrink-0 flex-col gap-1">
+                <button
+                  onClick={() => moveUp(i)}
+                  disabled={isHome || i <= 1}
+                  className="rounded px-1.5 py-0.5 text-xs text-slate-600 hover:bg-slate-100 disabled:opacity-30"
+                >
+                  ↑
+                </button>
+                <button
+                  onClick={() => moveDown(i)}
+                  disabled={isHome || i >= data.length - 1}
+                  className="rounded px-1.5 py-0.5 text-xs text-slate-600 hover:bg-slate-100 disabled:opacity-30"
+                >
+                  ↓
+                </button>
+              </div>
+              <div className="flex-1">
+                <span className="text-sm font-medium text-slate-900">{link.label}</span>
+                <span className="ml-2 text-xs text-slate-400">{link.href}</span>
+              </div>
+              {isHome && (
+                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-500">Locked</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Dashboard ──────────────────────────────────────────────
 function Dashboard() {
   const [tab, setTab] = useState<Tab>("publications");
   const [publications, setPublications] = useState<Publication[]>([]);
-  const [pubConfig, setPubConfig] = useState<{ boldJournal: boolean }>({ boldJournal: false });
+  const [pubConfig, setPubConfig] = useState<{ boldJournal: boolean; boldAuthors: string[] }>({ boldJournal: false, boldAuthors: [] });
   const [members, setMembers] = useState<MembersData | null>(null);
   const [research, setResearch] = useState<ResearchData | null>(null);
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -2166,6 +2285,7 @@ function Dashboard() {
     overlayColor: "#0f172a",
     overlayOpacity: 0.65,
   });
+  const [navLinks, setNavLinks] = useState<NavLink[]>([]);
   const [heroUploading, setHeroUploading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -2178,7 +2298,7 @@ function Dashboard() {
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [pubs, mem, res, nws, gal, con, her] = await Promise.all([
+      const [pubs, mem, res, nws, gal, con, her, nav] = await Promise.all([
         api("/api/content/publications"),
         api("/api/content/members"),
         api("/api/content/research"),
@@ -2186,6 +2306,7 @@ function Dashboard() {
         api("/api/content/gallery"),
         api("/api/content/contact"),
         api("/api/content/hero"),
+        api("/api/content/nav"),
       ]);
       // publications.json is now { highlightAuthors, boldJournal, publications: [...] }
       if (Array.isArray(pubs)) {
@@ -2193,7 +2314,7 @@ function Dashboard() {
       } else {
         const pd = pubs as PublicationsData;
         setPublications(pd.publications);
-        setPubConfig({ boldJournal: pd.boldJournal ?? false });
+        setPubConfig({ boldJournal: pd.boldJournal ?? false, boldAuthors: pd.boldAuthors ?? [] });
       }
       setMembers(mem);
       setResearch(res);
@@ -2201,6 +2322,7 @@ function Dashboard() {
       setGallery(gal);
       setContact(con);
       setHero(her);
+      setNavLinks(Array.isArray(nav) ? nav : []);
     } catch (err) {
       setMessage({
         type: "error",
@@ -2288,6 +2410,15 @@ function Dashboard() {
           })
         );
       }
+      if (dirty.has("nav")) {
+        promises.push(
+          api("/api/content/nav", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(navLinks),
+          })
+        );
+      }
       await Promise.all(promises);
       setMessage({ type: "success", text: "Changes saved locally." });
       setDirty(new Set());
@@ -2313,6 +2444,7 @@ function Dashboard() {
       if (gallery) files.gallery = gallery;
       if (contact) files.contact = contact;
       if (hero) files.hero = hero;
+      if (navLinks) files.nav = navLinks;
 
       await api("/api/github/commit", {
         method: "POST",
@@ -2352,6 +2484,7 @@ function Dashboard() {
     { key: "research", label: "Research" },
     { key: "news-gallery", label: "News & Gallery" },
     { key: "contact", label: "Contact" },
+    { key: "nav", label: "Navigation" },
   ];
 
   const TAB_URLS: Record<string, string> = {
@@ -2361,6 +2494,7 @@ function Dashboard() {
     research: "/research",
     "news-gallery": "/news",
     contact: "/contact",
+    nav: "/",
   };
 
   const [previewUrl, setPreviewUrl] = useState("/");
@@ -2391,7 +2525,8 @@ function Dashboard() {
     sessionStorage.setItem("preview_gallery", JSON.stringify(gallery));
     sessionStorage.setItem("preview_contact", JSON.stringify(contact));
     sessionStorage.setItem("preview_hero", JSON.stringify(hero));
-  }, [publications, members, research, news, gallery, contact, hero]);
+    sessionStorage.setItem("preview_nav", JSON.stringify(navLinks));
+  }, [publications, members, research, news, gallery, contact, hero, navLinks]);
 
   // 🔄 Refresh 클릭 시 현재 설정 반영
   const refreshPreview = useCallback(() => {
@@ -2540,6 +2675,11 @@ function Dashboard() {
               setPubConfig((prev) => ({ ...prev, boldJournal: v }));
               markDirty("publications");
             }}
+            boldAuthors={pubConfig.boldAuthors}
+            onBoldAuthorsChange={(v) => {
+              setPubConfig((prev) => ({ ...prev, boldAuthors: v }));
+              markDirty("publications");
+            }}
           />
         )}
         {tab === "members" && members && (
@@ -2592,6 +2732,15 @@ function Dashboard() {
             onChange={(d) => {
               setContact(d);
               markDirty("contact");
+            }}
+          />
+        )}
+        {tab === "nav" && (
+          <NavTab
+            data={navLinks}
+            onChange={(d) => {
+              setNavLinks(d);
+              markDirty("nav");
             }}
           />
         )}

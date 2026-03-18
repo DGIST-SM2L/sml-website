@@ -7,10 +7,10 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navLinks = [
+const defaultNavLinks = [
   { href: "/", label: "Home" },
-  { href: "/research", label: "Research" },
   { href: "/people", label: "People" },
+  { href: "/research", label: "Research" },
   { href: "/publications", label: "Publications" },
   { href: "/news", label: "News & Gallery" },
   { href: "/contact", label: "Contact" },
@@ -21,8 +21,23 @@ export default function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState(defaultNavLinks);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    fetch("/api/content/nav")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          // Ensure Home is always first
+          const home = data.find((l: { href: string }) => l.href === "/");
+          const rest = data.filter((l: { href: string }) => l.href !== "/");
+          setNavLinks(home ? [home, ...rest] : data);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">

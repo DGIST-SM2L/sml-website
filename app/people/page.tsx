@@ -127,14 +127,14 @@ export default function PeoplePage() {
                   )}
                   {pi.phone && pi.phone !== "XXXXX" && (
                     <span>
-                      <span className="font-medium text-slate-700 dark:text-slate-300">Phone:</span>{" "}
+                      <span className="font-medium text-slate-700 dark:text-slate-300">Tel:</span>{" "}
                       {pi.phone}
                     </span>
                   )}
                 </div>
               )}
 
-              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <div className="mt-6 space-y-6">
                 <div>
                   <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Education
@@ -164,20 +164,19 @@ export default function PeoplePage() {
                     ))}
                   </ul>
                 </div>
-              </div>
-
-              <div className="mt-6">
-                <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  Awards
-                </h5>
-                <ul className="space-y-1">
-                  {pi.awards.map((award, i) => (
-                    <li key={i} className="text-sm text-slate-700 dark:text-slate-300">
-                      {award.name}{" "}
-                      <span className="text-slate-500">({award.year})</span>
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Awards
+                  </h5>
+                  <ul className="space-y-1">
+                    {pi.awards.map((award, i) => (
+                      <li key={i} className="text-sm text-slate-700 dark:text-slate-300">
+                        {award.name}{" "}
+                        <span className="text-slate-500">({award.year})</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
