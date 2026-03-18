@@ -1207,6 +1207,8 @@ function ResearchTab({
   onChange: (d: ResearchData) => void;
 }) {
   const [editingCat, setEditingCat] = useState<number | null>(null);
+  const [editingTopic, setEditingTopic] = useState<{ ci: number; ti: number } | null>(null);
+  const [topicEditForm, setTopicEditForm] = useState<{ title: string; description: string; image?: string }>({ title: "", description: "", image: "" });
   const [newTopic, setNewTopic] = useState<{ title: string; description: string; image?: string }>({
     title: "",
     description: "",
@@ -1310,66 +1312,92 @@ function ResearchTab({
           </div>
 
           <div className="mt-4 space-y-2">
-            {cat.topics.map((topic, ti) => (
+            {cat.topics.map((topic, ti) => {
+              const isEditingThis = editingTopic?.ci === ci && editingTopic?.ti === ti;
+              return (
               <div
                 key={ti}
-                className="flex items-start justify-between gap-3 rounded border border-slate-100 bg-slate-50 p-3"
+                className="rounded border border-slate-100 bg-slate-50 p-3"
               >
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-slate-800">
-                    {topic.title}
-                  </p>
-                  <p className="text-xs text-slate-500">{topic.description}</p>
-                  <div className="mt-2 flex items-center gap-3">
-                    {topic.image && (
-                      <img
-                        src={topic.image}
-                        alt={topic.title}
-                        className="h-14 w-20 rounded object-cover border border-slate-200"
-                      />
-                    )}
-                    <label className="cursor-pointer rounded border border-slate-300 bg-white px-2 py-1 text-xs text-slate-600 hover:bg-slate-50">
-                      {topicUploading === `${ci}-${ti}` ? "Uploading..." : topic.image ? "Change Figure" : "Add Figure"}
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        disabled={topicUploading !== null}
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (!file) return;
-                          uploadTopicImage(file, `${ci}-${ti}`, (url) => {
-                            const updated = cat.topics.map((t, i) =>
-                              i === ti ? { ...t, image: url } : t
-                            );
-                            updateCategory(ci, { topics: updated });
-                          });
-                        }}
-                      />
-                    </label>
-                    {topic.image && (
+                {isEditingThis ? (
+                  <div className="space-y-2">
+                    <input
+                      value={topicEditForm.title}
+                      onChange={(e) => setTopicEditForm({ ...topicEditForm, title: e.target.value })}
+                      className="w-full rounded border border-slate-300 px-3 py-1.5 text-sm font-medium focus:border-blue-500 focus:outline-none"
+                      placeholder="Topic title"
+                    />
+                    <textarea
+                      value={topicEditForm.description}
+                      onChange={(e) => setTopicEditForm({ ...topicEditForm, description: e.target.value })}
+                      rows={4}
+                      className="w-full rounded border border-slate-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
+                      placeholder="Description (each sentence becomes a bullet point)"
+                    />
+                    <div className="flex items-center gap-3">
+                      {topicEditForm.image && (
+                        <img src={topicEditForm.image} alt="preview" className="h-14 w-20 rounded object-cover border border-slate-200" />
+                      )}
+                      <label className="cursor-pointer rounded border border-slate-300 bg-white px-2 py-1 text-xs text-slate-600 hover:bg-slate-50">
+                        {topicUploading === `${ci}-${ti}` ? "Uploading..." : topicEditForm.image ? "Change Figure" : "Add Figure"}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          disabled={topicUploading !== null}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            uploadTopicImage(file, `${ci}-${ti}`, (url) => setTopicEditForm((f) => ({ ...f, image: url })));
+                          }}
+                        />
+                      </label>
+                      {topicEditForm.image && (
+                        <button onClick={() => setTopicEditForm({ ...topicEditForm, image: "" })} className="text-xs text-red-500 hover:underline">Remove figure</button>
+                      )}
+                    </div>
+                    <div className="flex gap-2 pt-1">
                       <button
                         onClick={() => {
-                          const updated = cat.topics.map((t, i) =>
-                            i === ti ? { ...t, image: "" } : t
-                          );
+                          const updated = cat.topics.map((t, i) => i === ti ? { ...topicEditForm } : t);
                           updateCategory(ci, { topics: updated });
+                          setEditingTopic(null);
                         }}
-                        className="text-xs text-red-500 hover:underline"
-                      >
-                        Remove figure
-                      </button>
-                    )}
+                        className="rounded bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
+                      >Save</button>
+                      <button
+                        onClick={() => setEditingTopic(null)}
+                        className="rounded border border-slate-300 px-3 py-1.5 text-xs hover:bg-slate-50"
+                      >Cancel</button>
+                    </div>
                   </div>
-                </div>
-                <button
-                  onClick={() => removeTopic(ci, ti)}
-                  className="shrink-0 rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
-                >
-                  Remove
-                </button>
+                ) : (
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-slate-800">{topic.title}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{topic.description}</p>
+                      {topic.image && (
+                        <img src={topic.image} alt={topic.title} className="mt-2 h-14 w-20 rounded object-cover border border-slate-200" />
+                      )}
+                    </div>
+                    <div className="flex shrink-0 gap-1">
+                      <button
+                        onClick={() => {
+                          setEditingTopic({ ci, ti });
+                          setTopicEditForm({ title: topic.title, description: topic.description, image: topic.image ?? "" });
+                        }}
+                        className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
+                      >Edit</button>
+                      <button
+                        onClick={() => removeTopic(ci, ti)}
+                        className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
+                      >Remove</button>
+                    </div>
+                  </div>
+                )}
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Add topic */}
