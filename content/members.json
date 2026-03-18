@@ -47,28 +47,28 @@
     ],
     "awards": [
       {
-        "name": "Member of the National Academy of Engineering of Korea",
-        "year": "2026"
-      },
-      {
         "name": "LG Chem Mid-Career Academic Award",
-        "year": "2024"
+        "year": 2024
       },
       {
         "name": "ASML Research Incentive Award",
-        "year": "2018"
+        "year": 2018
       },
       {
         "name": "ASML Tech Talk Young Prof Award",
-        "year": "2017"
+        "year": 2017
       },
       {
         "name": "Doh Wonsuk Memorial Award by Korean Institue of Chemical Engineering US Chapter",
-        "year": "2010"
+        "year": 2010
       },
       {
         "name": "IBM Ph.D. Fellowship Award",
         "year": "2009, 2010"
+      },
+      {
+        "name": "Member of the National Academy of Engineering of Korea",
+        "year": "2026"
       }
     ]
   },
