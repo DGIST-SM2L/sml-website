@@ -6,9 +6,19 @@
     "Seong Eun Kim†, Gabriella Pasya Irianti†",
     "Seung-Mo Kang†, Allan Pérez Ramírez†",
     "Sehyun Yun†, Jihun Ahn†",
-    "ㅇㅇ"
+    "Su-Mi Hur",
+    "Yeojin Choe"
   ],
   "publications": [
+    {
+      "year": 2026,
+      "authors": "Jihun Ahn†, Gabriella Pasya Irianti†, Vikram Thapar*, Su-Mi Hur*",
+      "title": "Chemically Informed Learning Enables Interpretable Prediction and Generation of Polymers under Complex Constraints",
+      "journal": "Nature",
+      "volume": "",
+      "doi": "",
+      "featured": false
+    },
     {
       "year": 2026,
       "authors": "Sehyun Yun†, Changhyeon Lee†, Jihun Ahn, Su-Mi Hur*",
@@ -110,7 +120,7 @@
     },
     {
       "year": 2025,
-      "authors": "Seong Eun Kim, Gabriella Pasya Irianti, Hyunwoo Kim, Vikram Thapar, Jungki Ryu, Su-Mi Hur*, So Youn Kim*",
+      "authors": "Seong Eun Kim†, Gabriella Pasya Irianti†, Hyunwoo Kim, Vikram Thapar, Jungki Ryu, Su-Mi Hur*, So Youn Kim*",
       "title": "Direct approach to high-resolution, square-lattice alternating nanodot array by breaking hexagonal symmetry of block copolymer spheres",
       "journal": "Sci. Adv.",
       "volume": "11, eadx1235(2025).",
@@ -119,7 +129,7 @@
     },
     {
       "year": 2025,
-      "authors": "Seung-Mo Kang, Allan Pérez Ramírez, Jae Kyeong Lee, Luis Adrián Padilla Salas, Junho Jang, Byung Jo Um, Hyeon-Gyun Im, Su-Mi Hur*, Byeong-Soo Bae*",
+      "authors": "Seung-Mo Kang†, Allan Pérez Ramírez†, Jae Kyeong Lee, Luis Adrián Padilla Salas, Junho Jang, Byung Jo Um, Hyeon-Gyun Im, Su-Mi Hur*, Byeong-Soo Bae*",
       "title": "A fluorine-free siloxane material with low dielectric loss in gigahertz frequencies for high-speed electronic devices",
       "journal": "Cell Reports Physical Science",
       "volume": "(2025)",
@@ -128,7 +138,7 @@
     },
     {
       "year": 2025,
-      "authors": "Sehyun Yun, Jihun Ahn, Vikram Thapar, Sangyeop Lee, Sheng Li*, Su-Mi Hur*",
+      "authors": "Sehyun Yun†, Jihun Ahn†, Vikram Thapar, Sangyeop Lee, Sheng Li*, Su-Mi Hur*",
       "title": "Defect Rectification in High-Density Patterns through Directed Self-Assembly of Advanced Block Copolymer Architectures",
       "journal": "Adv. Funct. Mater.",
       "volume": "2025, 35, 2422231.",
@@ -164,7 +174,7 @@
     },
     {
       "year": 2024,
-      "authors": "Jihun Ahn, Gabriella Pasya Irianti, Yeojin Choe, Su-Mi Hur*",
+      "authors": "Jihun Ahn†, Gabriella Pasya Irianti, Yeojin Choe, Su-Mi Hur*",
       "title": "Enhancing deep learning predictive models with HAPPY (Hierarchically Abstracted rePeat unit of PolYmers) representation",
       "journal": "npj Computational Materials",
       "volume": "10, 110 (2024)",
