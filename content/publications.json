@@ -19,6 +19,24 @@
   "publications": [
     {
       "year": 2026,
+      "authors": "Seung-Hwan Oh†, Jinhoon Lee†, Seunghyun Lee, Raehyun Jung, Sangyeop Lee, Su-Mi Hur*, Dong Woog Lee*, and Soo-Hyung Choi*",
+      "title": "(Submitted) Sticker Valence Governs Chain Collapse and Liquid-Liquid Phase Separation in Peptide-Inspired Associative Polymers",
+      "journal": "",
+      "volume": "",
+      "doi": "",
+      "featured": false
+    },
+    {
+      "year": 2026,
+      "authors": "Sung Kwan Tae†, Gabriella Pasya Irianti†, Ye Chan Kim†, Su-Mi Hur*, So Youn Kim*",
+      "title": "(Accepted) From Order to Disorder: Quantitative Control of Nanopatterned Block Copolymer Arrays",
+      "journal": "Nature Communications",
+      "volume": "",
+      "doi": "",
+      "featured": false
+    },
+    {
+      "year": 2026,
       "authors": "Jihun Ahn†, Gabriella Pasya Irianti†, Vikram Thapar*, Su-Mi Hur*",
       "title": "(Submitted) Chemically Informed Learning Enables Interpretable Prediction and Generation of Polymers under Complex Constraints",
       "journal": "Nature",
