@@ -60,7 +60,9 @@ function HomeInner() {
     overlayOpacity: previewOo ? parseFloat(previewOo) : (heroData as { overlayOpacity: number }).overlayOpacity,
   };
 
-  const recentPubs = publicationsData.publications.slice(0, 3);
+  const recentPubs = [...publicationsData.publications]
+    .sort((a, b) => b.year - a.year)
+    .slice(0, 3);
   const recentNews = (newsData as NewsItem[])
     .sort((a, b) => {
       if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
