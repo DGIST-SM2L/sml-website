@@ -117,7 +117,6 @@ type GalleryItem = {
 };
 
 type PublicationsData = {
-  highlightAuthors: string[];
   boldJournal: boolean;
   publications: Publication[];
 };
@@ -287,9 +286,13 @@ function PubForm({
 function PublicationsTab({
   data,
   onChange,
+  boldJournal,
+  onBoldJournalChange,
 }: {
   data: Publication[];
   onChange: (d: Publication[]) => void;
+  boldJournal: boolean;
+  onBoldJournalChange: (v: boolean) => void;
 }) {
   const [editing, setEditing] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<Publication>(EMPTY_PUB);
@@ -341,6 +344,19 @@ function PublicationsTab({
 
   return (
     <div className="space-y-6">
+      {/* Bold journal toggle */}
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <label className="flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={boldJournal}
+            onChange={() => onBoldJournalChange(!boldJournal)}
+            className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+          />
+          Bold journal names
+        </label>
+      </div>
+
       {/* Add new */}
       <div className="rounded-lg border border-slate-200 bg-white p-6">
         <h3 className="mb-4 text-lg font-semibold">Add Publication</h3>
@@ -944,7 +960,7 @@ function MembersTab({
       {/* Current Members */}
       <div>
         <h3 className="mb-3 text-lg font-semibold">
-          Current Members ({data.members.length})
+          Group Members ({data.members.length})
         </h3>
         <div className="space-y-2">
           {data.members.map((m, i) => (
@@ -969,6 +985,28 @@ function MembersTab({
                     </p>
                   </div>
                   <div className="flex shrink-0 gap-1">
+                    <button
+                      onClick={() => {
+                        if (i === 0) return;
+                        const newArr = [...data.members];
+                        [newArr[i - 1], newArr[i]] = [newArr[i], newArr[i - 1]];
+                        onChange({ ...data, members: newArr });
+                      }}
+                      disabled={i === 0}
+                      className="rounded px-2 py-1 text-xs text-slate-500 hover:bg-slate-100 disabled:opacity-30"
+                      title="Move up"
+                    >↑</button>
+                    <button
+                      onClick={() => {
+                        if (i === data.members.length - 1) return;
+                        const newArr = [...data.members];
+                        [newArr[i], newArr[i + 1]] = [newArr[i + 1], newArr[i]];
+                        onChange({ ...data, members: newArr });
+                      }}
+                      disabled={i === data.members.length - 1}
+                      className="rounded px-2 py-1 text-xs text-slate-500 hover:bg-slate-100 disabled:opacity-30"
+                      title="Move down"
+                    >↓</button>
                     <button
                       onClick={() => startEditMember(i)}
                       className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
@@ -1108,6 +1146,28 @@ function MembersTab({
                     </div>
                     <div className="flex gap-2 shrink-0">
                       <button
+                        onClick={() => {
+                          if (i === 0) return;
+                          const newArr = [...data.alumni];
+                          [newArr[i - 1], newArr[i]] = [newArr[i], newArr[i - 1]];
+                          onChange({ ...data, alumni: newArr });
+                        }}
+                        disabled={i === 0}
+                        className="rounded px-2 py-1 text-xs text-slate-500 hover:bg-slate-100 disabled:opacity-30"
+                        title="Move up"
+                      >↑</button>
+                      <button
+                        onClick={() => {
+                          if (i === data.alumni.length - 1) return;
+                          const newArr = [...data.alumni];
+                          [newArr[i], newArr[i + 1]] = [newArr[i + 1], newArr[i]];
+                          onChange({ ...data, alumni: newArr });
+                        }}
+                        disabled={i === data.alumni.length - 1}
+                        className="rounded px-2 py-1 text-xs text-slate-500 hover:bg-slate-100 disabled:opacity-30"
+                        title="Move down"
+                      >↓</button>
+                      <button
                         onClick={() => setEditingAlumni(i)}
                         className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
                       >
@@ -1118,7 +1178,7 @@ function MembersTab({
                         className="rounded px-2 py-1 text-xs text-green-700 hover:bg-green-50"
                         title="Restore to Members"
                       >
-                        ↑
+                        Restore
                       </button>
                       <button
                         onClick={() => removeAlumni(i)}
@@ -2064,7 +2124,7 @@ function GalleryTab({
 function Dashboard() {
   const [tab, setTab] = useState<Tab>("publications");
   const [publications, setPublications] = useState<Publication[]>([]);
-  const [pubConfig, setPubConfig] = useState<{ highlightAuthors: string[]; boldJournal: boolean }>({ highlightAuthors: [], boldJournal: false });
+  const [pubConfig, setPubConfig] = useState<{ boldJournal: boolean }>({ boldJournal: false });
   const [members, setMembers] = useState<MembersData | null>(null);
   const [research, setResearch] = useState<ResearchData | null>(null);
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -2105,7 +2165,7 @@ function Dashboard() {
       } else {
         const pd = pubs as PublicationsData;
         setPublications(pd.publications);
-        setPubConfig({ highlightAuthors: pd.highlightAuthors ?? [], boldJournal: pd.boldJournal ?? false });
+        setPubConfig({ boldJournal: pd.boldJournal ?? false });
       }
       setMembers(mem);
       setResearch(res);
@@ -2445,6 +2505,11 @@ function Dashboard() {
             data={publications}
             onChange={(d) => {
               setPublications(d);
+              markDirty("publications");
+            }}
+            boldJournal={pubConfig.boldJournal}
+            onBoldJournalChange={(v) => {
+              setPubConfig((prev) => ({ ...prev, boldJournal: v }));
               markDirty("publications");
             }}
           />

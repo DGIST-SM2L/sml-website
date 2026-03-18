@@ -3,6 +3,7 @@
 import { useState, useMemo, ReactNode } from "react";
 import { motion } from "framer-motion";
 import pubsJson from "@/content/publications.json";
+import membersJson from "@/content/members.json";
 import { getPreviewData } from "@/hooks/usePreviewData";
 
 interface Publication {
@@ -16,7 +17,6 @@ interface Publication {
 }
 
 interface PublicationsData {
-  highlightAuthors: string[];
   boldJournal: boolean;
   publications: Publication[];
 }
@@ -52,8 +52,19 @@ export default function PublicationsPage() {
     pubsJson as unknown as PublicationsData
   );
   const publications = data.publications;
-  const highlightAuthors = data.highlightAuthors ?? [];
   const boldJournal = data.boldJournal ?? false;
+
+  const highlightAuthors = useMemo(() => {
+    const names: string[] = [];
+    if (membersJson.pi?.name) names.push(membersJson.pi.name);
+    if (Array.isArray(membersJson.members)) {
+      for (const m of membersJson.members) if (m.name) names.push(m.name);
+    }
+    if (Array.isArray(membersJson.alumni)) {
+      for (const a of membersJson.alumni) if (a.name) names.push(a.name);
+    }
+    return names;
+  }, []);
 
   const [search, setSearch] = useState("");
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
