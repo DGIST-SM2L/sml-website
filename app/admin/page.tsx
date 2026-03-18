@@ -944,6 +944,28 @@ function MembersTab({
               <div className="space-y-2">
                 {piForm.awards.map((award, i) => (
                   <div key={i} className="flex gap-2">
+                    <div className="flex flex-col gap-0.5">
+                      <button
+                        onClick={() => {
+                          if (i === 0) return;
+                          const updated = [...piForm.awards];
+                          [updated[i - 1], updated[i]] = [updated[i], updated[i - 1]];
+                          setPiForm({ ...piForm, awards: updated });
+                        }}
+                        disabled={i === 0}
+                        className="rounded px-1 py-0.5 text-xs text-slate-400 hover:bg-slate-100 disabled:opacity-20"
+                      >↑</button>
+                      <button
+                        onClick={() => {
+                          if (i === piForm.awards.length - 1) return;
+                          const updated = [...piForm.awards];
+                          [updated[i], updated[i + 1]] = [updated[i + 1], updated[i]];
+                          setPiForm({ ...piForm, awards: updated });
+                        }}
+                        disabled={i === piForm.awards.length - 1}
+                        className="rounded px-1 py-0.5 text-xs text-slate-400 hover:bg-slate-100 disabled:opacity-20"
+                      >↓</button>
+                    </div>
                     <input
                       placeholder="Award name"
                       value={award.name}
