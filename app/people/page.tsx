@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import membersJson from "@/content/members.json";
 import { getPreviewData } from "@/hooks/usePreviewData";
@@ -59,54 +59,16 @@ type MembersData = typeof membersJson;
 
 export default function PeoplePage() {
   const [membersData, setMembersData] = useState<MembersData>(membersJson);
-  const [reorderMode, setReorderMode] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-
   useEffect(() => {
     fetch("/api/content/members")
       .then((r) => r.json())
       .then((d) => setMembersData(d))
       .catch(() => {});
-    setIsAdmin(!!sessionStorage.getItem("admin_auth"));
   }, []);
 
   const members = getPreviewData("members", membersData);
   const [alumniOpen, setAlumniOpen] = useState(false);
   const { pi } = members;
-
-  const swapMembers = useCallback(
-    async (arr: MembersData["members"], idx: number, dir: -1 | 1) => {
-      const newIdx = idx + dir;
-      if (newIdx < 0 || newIdx >= arr.length) return;
-      const newArr = [...arr];
-      [newArr[idx], newArr[newIdx]] = [newArr[newIdx], newArr[idx]];
-      const updated = { ...membersData, members: newArr };
-      setMembersData(updated as MembersData);
-      await fetch("/api/content/members", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updated),
-      });
-    },
-    [membersData]
-  );
-
-  const swapAlumni = useCallback(
-    async (arr: MembersData["alumni"], idx: number, dir: -1 | 1) => {
-      const newIdx = idx + dir;
-      if (newIdx < 0 || newIdx >= arr.length) return;
-      const newArr = [...arr];
-      [newArr[idx], newArr[newIdx]] = [newArr[newIdx], newArr[idx]];
-      const updated = { ...membersData, alumni: newArr };
-      setMembersData(updated as MembersData);
-      await fetch("/api/content/members", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updated),
-      });
-    },
-    [membersData]
-  );
 
   return (
     <>
@@ -230,23 +192,9 @@ export default function PeoplePage() {
         transition={{ duration: 0.5 }}
         className="mb-16"
       >
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-            Group Members
-          </h3>
-          {isAdmin && (
-            <button
-              onClick={() => setReorderMode(!reorderMode)}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-                reorderMode
-                  ? "bg-blue-600 text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400"
-              }`}
-            >
-              {reorderMode ? "Done Reordering" : "Reorder"}
-            </button>
-          )}
-        </div>
+        <h3 className="mb-6 text-xl font-bold text-slate-900 dark:text-white">
+          Group Members
+        </h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {members.members.map((member, i) => {
             const researchTopics = member.research
@@ -259,26 +207,8 @@ export default function PeoplePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="relative flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+                className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
               >
-                {reorderMode && (
-                  <div className="absolute right-2 top-2 flex flex-col gap-1">
-                    <button
-                      onClick={() => swapMembers(members.members, i, -1)}
-                      disabled={i === 0}
-                      className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
-                    >
-                      ↑
-                    </button>
-                    <button
-                      onClick={() => swapMembers(members.members, i, 1)}
-                      disabled={i === members.members.length - 1}
-                      className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
-                    >
-                      ↓
-                    </button>
-                  </div>
-                )}
                 <Avatar name={member.name} photo={member.photo} size="sm" />
                 <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
                   {member.name}
@@ -302,35 +232,21 @@ export default function PeoplePage() {
 
       {/* Alumni */}
       <section>
-        <div className="mb-6 flex items-center justify-between">
-          <button
-            onClick={() => setAlumniOpen(!alumniOpen)}
-            className="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white"
+        <button
+          onClick={() => setAlumniOpen(!alumniOpen)}
+          className="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white"
+        >
+          Alumni
+          <svg
+            className={`h-5 w-5 transition-transform ${alumniOpen ? "rotate-180" : ""}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
           >
-            Alumni
-            <svg
-              className={`h-5 w-5 transition-transform ${alumniOpen ? "rotate-180" : ""}`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          {isAdmin && alumniOpen && (
-            <button
-              onClick={() => setReorderMode(!reorderMode)}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
-                reorderMode
-                  ? "bg-blue-600 text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400"
-              }`}
-            >
-              {reorderMode ? "Done Reordering" : "Reorder"}
-            </button>
-          )}
-        </div>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
         <AnimatePresence>
           {alumniOpen && (
             <motion.div
@@ -347,26 +263,8 @@ export default function PeoplePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="relative flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+                    className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
                   >
-                    {reorderMode && (
-                      <div className="absolute right-2 top-2 flex flex-col gap-1">
-                        <button
-                          onClick={() => swapAlumni(members.alumni, i, -1)}
-                          disabled={i === 0}
-                          className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
-                        >
-                          ↑
-                        </button>
-                        <button
-                          onClick={() => swapAlumni(members.alumni, i, 1)}
-                          disabled={i === members.alumni.length - 1}
-                          className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
-                        >
-                          ↓
-                        </button>
-                      </div>
-                    )}
                     <Avatar name={alum.name} photo={alum.photo || undefined} size="sm" />
                     <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
                       {alum.name}
