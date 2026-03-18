@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { motion } from "framer-motion";
-import publications from "@/content/publications.json";
+import publicationsData from "@/content/publications.json";
 import research from "@/content/research.json";
 import newsData from "@/content/news.json";
 import heroData from "@/content/hero.json";
@@ -60,7 +60,7 @@ function HomeInner() {
     overlayOpacity: previewOo ? parseFloat(previewOo) : (heroData as { overlayOpacity: number }).overlayOpacity,
   };
 
-  const recentPubs = publications.slice(0, 3);
+  const recentPubs = publicationsData.publications.slice(0, 3);
   const recentNews = (newsData as NewsItem[])
     .sort((a, b) => {
       if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
@@ -92,7 +92,7 @@ function HomeInner() {
           transition={{ duration: 0.8 }}
           className="relative mx-auto max-w-5xl px-6 py-32 sm:py-44"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-400">
+          <p className="text-base font-bold uppercase tracking-widest text-blue-400">
             DGIST
           </p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">

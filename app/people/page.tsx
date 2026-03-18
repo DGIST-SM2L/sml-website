@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import membersJson from "@/content/members.json";
 import { getPreviewData } from "@/hooks/usePreviewData";
 import SectionHeading from "@/components/SectionHeading";
 
-function Avatar({ name, photo, size = "lg" }: { name: string; photo?: string; size?: "sm" | "lg" }) {
+function Avatar({ name, photo, size = "lg" }: { name: string; photo?: string; size?: "sm" | "lg" | "xl" }) {
   const initials = name
     .split(" ")
     .map((n) => n[0])
@@ -26,14 +26,22 @@ function Avatar({ name, photo, size = "lg" }: { name: string; photo?: string; si
     "bg-orange-500",
   ];
   const color = colors[name.length % colors.length];
-  const sizeClass = size === "lg" ? "h-32 w-32 text-3xl" : "h-20 w-20 text-lg";
+  const sizeClass =
+    size === "lg"
+      ? "h-48 w-48 text-4xl"
+      : size === "xl"
+        ? "h-40 w-40 text-3xl"
+        : "h-40 w-40 text-3xl";
+
+  const imgSize =
+    size === "lg" ? "h-48 w-48" : "h-40 w-40";
 
   if (photo) {
     return (
       <img
         src={photo}
         alt={name}
-        className={`${size === "lg" ? "h-32 w-32" : "h-20 w-20"} rounded-full object-cover shadow-md`}
+        className={`${imgSize} rounded-full object-cover shadow-md`}
       />
     );
   }
@@ -47,10 +55,58 @@ function Avatar({ name, photo, size = "lg" }: { name: string; photo?: string; si
   );
 }
 
+type MembersData = typeof membersJson;
+
 export default function PeoplePage() {
-  const members = getPreviewData("members", membersJson);
+  const [membersData, setMembersData] = useState<MembersData>(membersJson);
+  const [reorderMode, setReorderMode] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/content/members")
+      .then((r) => r.json())
+      .then((d) => setMembersData(d))
+      .catch(() => {});
+    setIsAdmin(!!sessionStorage.getItem("admin_auth"));
+  }, []);
+
+  const members = getPreviewData("members", membersData);
   const [alumniOpen, setAlumniOpen] = useState(false);
   const { pi } = members;
+
+  const swapMembers = useCallback(
+    async (arr: MembersData["members"], idx: number, dir: -1 | 1) => {
+      const newIdx = idx + dir;
+      if (newIdx < 0 || newIdx >= arr.length) return;
+      const newArr = [...arr];
+      [newArr[idx], newArr[newIdx]] = [newArr[newIdx], newArr[idx]];
+      const updated = { ...membersData, members: newArr };
+      setMembersData(updated as MembersData);
+      await fetch("/api/content/members", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated),
+      });
+    },
+    [membersData]
+  );
+
+  const swapAlumni = useCallback(
+    async (arr: MembersData["alumni"], idx: number, dir: -1 | 1) => {
+      const newIdx = idx + dir;
+      if (newIdx < 0 || newIdx >= arr.length) return;
+      const newArr = [...arr];
+      [newArr[idx], newArr[newIdx]] = [newArr[newIdx], newArr[idx]];
+      const updated = { ...membersData, alumni: newArr };
+      setMembersData(updated as MembersData);
+      await fetch("/api/content/members", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated),
+      });
+    },
+    [membersData]
+  );
 
   return (
     <>
@@ -96,6 +152,25 @@ export default function PeoplePage() {
                 </span>
               </h4>
               <p className="mt-1 text-blue-600 dark:text-blue-400">{pi.title}</p>
+              {pi.department && pi.department !== "XXXXX" && (
+                <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">{pi.department}</p>
+              )}
+              {(pi.email && pi.email !== "XXXXX" || pi.phone && pi.phone !== "XXXXX") && (
+                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600 dark:text-slate-400">
+                  {pi.email && pi.email !== "XXXXX" && (
+                    <span>
+                      <span className="font-medium text-slate-700 dark:text-slate-300">Email:</span>{" "}
+                      <a href={`mailto:${pi.email}`} className="text-blue-600 hover:underline dark:text-blue-400">{pi.email}</a>
+                    </span>
+                  )}
+                  {pi.phone && pi.phone !== "XXXXX" && (
+                    <span>
+                      <span className="font-medium text-slate-700 dark:text-slate-300">Phone:</span>{" "}
+                      {pi.phone}
+                    </span>
+                  )}
+                </div>
+              )}
 
               <div className="mt-6 grid gap-6 sm:grid-cols-2">
                 <div>
@@ -114,14 +189,15 @@ export default function PeoplePage() {
                 </div>
                 <div>
                   <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Experience
+                    Work Experience
                   </h5>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-2">
                     {pi.experience.map((exp, i) => (
                       <li key={i} className="text-sm text-slate-700 dark:text-slate-300">
+                        <span className="mr-1.5 text-slate-400">·</span>
                         <span className="font-medium">{exp.role}</span>, {exp.institution}
                         <br />
-                        <span className="text-slate-500">{exp.years}</span>
+                        <span className="ml-4 text-slate-500">{exp.years}</span>
                       </li>
                     ))}
                   </ul>
@@ -146,7 +222,7 @@ export default function PeoplePage() {
         </div>
       </motion.section>
 
-      {/* Current Members */}
+      {/* Group Members */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -154,54 +230,107 @@ export default function PeoplePage() {
         transition={{ duration: 0.5 }}
         className="mb-16"
       >
-        <h3 className="mb-6 text-xl font-bold text-slate-900 dark:text-white">
-          Current Members
-        </h3>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {members.members.map((member, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+        <div className="mb-6 flex items-center justify-between">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+            Group Members
+          </h3>
+          {isAdmin && (
+            <button
+              onClick={() => setReorderMode(!reorderMode)}
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                reorderMode
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400"
+              }`}
             >
-              <Avatar name={member.name} photo={member.photo} size="sm" />
-              <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">
-                {member.name}
-              </h4>
-              <p className="text-sm text-blue-600 dark:text-blue-400">
-                {member.position}
-              </p>
-              <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                {member.research}
-              </p>
-              <p className="mt-1 text-xs text-slate-500">
-                {member.education}
-              </p>
-            </motion.div>
-          ))}
+              {reorderMode ? "Done Reordering" : "Reorder"}
+            </button>
+          )}
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {members.members.map((member, i) => {
+            const researchTopics = member.research
+              .split(", ")
+              .slice(0, 5);
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                className="relative flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+              >
+                {reorderMode && (
+                  <div className="absolute right-2 top-2 flex flex-col gap-1">
+                    <button
+                      onClick={() => swapMembers(members.members, i, -1)}
+                      disabled={i === 0}
+                      className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      onClick={() => swapMembers(members.members, i, 1)}
+                      disabled={i === members.members.length - 1}
+                      className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
+                    >
+                      ↓
+                    </button>
+                  </div>
+                )}
+                <Avatar name={member.name} photo={member.photo} size="sm" />
+                <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
+                  {member.name}
+                </h4>
+                <p className="text-base font-semibold text-blue-600 dark:text-blue-400">
+                  {member.position}
+                </p>
+                <ul className="mt-2 list-disc list-inside text-sm text-slate-600 dark:text-slate-400 text-left">
+                  {researchTopics.map((topic, ti) => (
+                    <li key={ti}>{topic}</li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-sm text-slate-500 text-center break-words hyphens-auto">
+                  {member.education}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.section>
 
       {/* Alumni */}
       <section>
-        <button
-          onClick={() => setAlumniOpen(!alumniOpen)}
-          className="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white"
-        >
-          Alumni
-          <svg
-            className={`h-5 w-5 transition-transform ${alumniOpen ? "rotate-180" : ""}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+        <div className="mb-6 flex items-center justify-between">
+          <button
+            onClick={() => setAlumniOpen(!alumniOpen)}
+            className="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+            Alumni
+            <svg
+              className={`h-5 w-5 transition-transform ${alumniOpen ? "rotate-180" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {isAdmin && alumniOpen && (
+            <button
+              onClick={() => setReorderMode(!reorderMode)}
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                reorderMode
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400"
+              }`}
+            >
+              {reorderMode ? "Done Reordering" : "Reorder"}
+            </button>
+          )}
+        </div>
         <AnimatePresence>
           {alumniOpen && (
             <motion.div
@@ -218,20 +347,38 @@ export default function PeoplePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+                    className="relative flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
                   >
+                    {reorderMode && (
+                      <div className="absolute right-2 top-2 flex flex-col gap-1">
+                        <button
+                          onClick={() => swapAlumni(members.alumni, i, -1)}
+                          disabled={i === 0}
+                          className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
+                        >
+                          ↑
+                        </button>
+                        <button
+                          onClick={() => swapAlumni(members.alumni, i, 1)}
+                          disabled={i === members.alumni.length - 1}
+                          className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-600 hover:bg-slate-200 disabled:opacity-30 dark:bg-slate-800 dark:text-slate-400"
+                        >
+                          ↓
+                        </button>
+                      </div>
+                    )}
                     <Avatar name={alum.name} photo={alum.photo || undefined} size="sm" />
-                    <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">
+                    <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
                       {alum.name}
                     </h4>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                    <p className="text-base font-semibold text-blue-600 dark:text-blue-400">
                       {alum.degree} · {alum.period}
                     </p>
-                    <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                       {alum.research}
                     </p>
                     {alum.currentPosition && (
-                      <p className="mt-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                      <p className="mt-1 text-sm font-medium text-emerald-600 dark:text-emerald-400">
                         Now at: {alum.currentPosition}
                       </p>
                     )}

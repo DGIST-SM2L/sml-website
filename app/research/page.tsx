@@ -252,9 +252,19 @@ function CategorySection({
                           <h3 className="mb-3 text-lg font-semibold text-slate-900 dark:text-white">
                             {openTopic.title}
                           </h3>
-                          <p className="leading-relaxed text-slate-600 dark:text-slate-400">
-                            {openTopic.description}
-                          </p>
+                          {(() => {
+                            const sentences = openTopic.description
+                              .split(/(?:\. |; )/)
+                              .map((s: string) => s.replace(/\.?$/, "").trim())
+                              .filter(Boolean);
+                            return (
+                              <ul className="list-disc ml-4 space-y-1 leading-relaxed text-slate-600 dark:text-slate-400">
+                                {sentences.map((s: string, idx: number) => (
+                                  <li key={idx}>{s}.</li>
+                                ))}
+                              </ul>
+                            );
+                          })()}
                         </div>
                       </div>
                     </div>

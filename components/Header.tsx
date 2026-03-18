@@ -33,7 +33,7 @@ export default function Header() {
           </span>
           <span className="hidden flex-col sm:flex leading-tight">
             <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">Simulation and Machine Learning</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">Soft Matter Lab</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">for Soft Matter Lab</span>
           </span>
         </Link>
 

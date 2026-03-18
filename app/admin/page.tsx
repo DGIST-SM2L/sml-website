@@ -116,6 +116,12 @@ type GalleryItem = {
   date: string;
 };
 
+type PublicationsData = {
+  highlightAuthors: string[];
+  boldJournal: boolean;
+  publications: Publication[];
+};
+
 type Tab = "publications" | "members" | "research" | "news-gallery" | "contact" | "home";
 
 // ─── Helper ──────────────────────────────────────────────────────
@@ -288,6 +294,7 @@ function PublicationsTab({
   const [editing, setEditing] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<Publication>(EMPTY_PUB);
   const [addForm, setAddForm] = useState<Publication>(EMPTY_PUB);
+  const [reorderMode, setReorderMode] = useState(false);
 
   const sorted = [...data].sort((a, b) => b.year - a.year);
 
@@ -314,6 +321,24 @@ function PublicationsTab({
     onChange(data.filter((_, i) => i !== original));
   };
 
+  const handleMoveUp = (sortedIdx: number) => {
+    if (sortedIdx === 0) return;
+    const origA = data.indexOf(sorted[sortedIdx]);
+    const origB = data.indexOf(sorted[sortedIdx - 1]);
+    const next = [...data];
+    [next[origA], next[origB]] = [next[origB], next[origA]];
+    onChange(next);
+  };
+
+  const handleMoveDown = (sortedIdx: number) => {
+    if (sortedIdx >= sorted.length - 1) return;
+    const origA = data.indexOf(sorted[sortedIdx]);
+    const origB = data.indexOf(sorted[sortedIdx + 1]);
+    const next = [...data];
+    [next[origA], next[origB]] = [next[origB], next[origA]];
+    onChange(next);
+  };
+
   return (
     <div className="space-y-6">
       {/* Add new */}
@@ -325,6 +350,21 @@ function PublicationsTab({
           onSave={handleAdd}
           saveLabel="Add"
         />
+      </div>
+
+      {/* List header with reorder toggle */}
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold">Publications ({sorted.length})</h3>
+        <button
+          onClick={() => { setReorderMode(!reorderMode); setEditing(null); }}
+          className={`rounded px-3 py-1.5 text-xs font-medium transition-colors ${
+            reorderMode
+              ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
+              : "border border-slate-300 text-slate-600 hover:bg-slate-50"
+          }`}
+        >
+          {reorderMode ? "Done Reordering" : "Reorder"}
+        </button>
       </div>
 
       {/* List with inline edit */}
@@ -347,6 +387,24 @@ function PublicationsTab({
                 />
               ) : (
                 <div className="flex items-start justify-between gap-4">
+                  {reorderMode && (
+                    <div className="flex shrink-0 flex-col gap-1">
+                      <button
+                        onClick={() => handleMoveUp(i)}
+                        disabled={i === 0}
+                        className="rounded px-1.5 py-0.5 text-xs text-slate-600 hover:bg-slate-100 disabled:opacity-30"
+                      >
+                        ↑
+                      </button>
+                      <button
+                        onClick={() => handleMoveDown(i)}
+                        disabled={i >= sorted.length - 1}
+                        className="rounded px-1.5 py-0.5 text-xs text-slate-600 hover:bg-slate-100 disabled:opacity-30"
+                      >
+                        ↓
+                      </button>
+                    </div>
+                  )}
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-slate-900">
                       {pub.featured && (
@@ -361,20 +419,22 @@ function PublicationsTab({
                       {pub.journal}, {pub.volume} ({pub.year})
                     </p>
                   </div>
-                  <div className="flex shrink-0 gap-1">
-                    <button
-                      onClick={() => startEdit(i)}
-                      className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(i)}
-                      className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  {!reorderMode && (
+                    <div className="flex shrink-0 gap-1">
+                      <button
+                        onClick={() => startEdit(i)}
+                        className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(i)}
+                        className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1312,78 +1372,21 @@ function ResearchTab({
 // ─── News Tab ─────────────────────────────────────────────────────
 const NEWS_CATEGORIES = ["Award", "Conference", "Member", "Lab Life", "Group Photo", "Event"];
 
-function NewsTab({
-  data,
-  onChange,
+function NewsForm({
+  form,
+  setForm,
+  onSave,
+  onCancel,
+  saveLabel,
 }: {
-  data: NewsItem[];
-  onChange: (d: NewsItem[]) => void;
+  form: NewsItem;
+  setForm: (f: NewsItem) => void;
+  onSave: () => void;
+  onCancel?: () => void;
+  saveLabel: string;
 }) {
-  const [editing, setEditing] = useState<number | null>(null);
-  const [form, setForm] = useState<NewsItem>({
-    id: "",
-    date: new Date().toISOString().split("T")[0],
-    title: "",
-    content: "",
-    category: "Event",
-    image: null,
-    pinned: false,
-  });
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState(false);
-
-  const sorted = [...data].sort((a, b) => {
-    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
-    return b.date.localeCompare(a.date);
-  });
-
-  const resetForm = () => {
-    setForm({
-      id: "",
-      date: new Date().toISOString().split("T")[0],
-      title: "",
-      content: "",
-      category: "Event",
-      image: null,
-      pinned: false,
-    });
-    setEditing(null);
-    setPreview(false);
-  };
-
-  const generateId = (title: string, date: string) => {
-    const slug = title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "")
-      .slice(0, 40);
-    return `${date}-${slug}`;
-  };
-
-  const handleSave = () => {
-    if (!form.title || !form.content) return;
-    const item = {
-      ...form,
-      id: form.id || generateId(form.title, form.date),
-    };
-    if (editing !== null) {
-      onChange(data.map((n, i) => (i === editing ? item : n)));
-    } else {
-      onChange([item, ...data]);
-    }
-    resetForm();
-  };
-
-  const handleEdit = (idx: number) => {
-    const original = data.indexOf(sorted[idx]);
-    setEditing(original);
-    setForm({ ...sorted[idx] });
-  };
-
-  const handleDelete = (idx: number) => {
-    const original = data.indexOf(sorted[idx]);
-    onChange(data.filter((_, i) => i !== original));
-  };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -1428,145 +1431,258 @@ function NewsTab({
   };
 
   return (
-    <div className="space-y-6">
-      <div className="rounded-lg border border-slate-200 bg-white p-6">
-        <h3 className="mb-4 text-lg font-semibold">
-          {editing !== null ? "Edit News Post" : "Add News Post"}
-        </h3>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <input
-            type="date"
-            value={form.date}
-            onChange={(e) => setForm({ ...form, date: e.target.value })}
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <select
-            value={form.category}
-            onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          >
-            {NEWS_CATEGORIES.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-          <input
-            placeholder="Title"
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-          />
-          <div className="col-span-full">
-            <div className="mb-1 flex items-center gap-2">
-              <span className="text-xs text-slate-500">Content (supports **bold**, [links](url), - lists)</span>
-              <button
-                type="button"
-                onClick={() => setPreview(!preview)}
-                className="text-xs text-blue-600 hover:underline"
-              >
-                {preview ? "Edit" : "Preview"}
-              </button>
-            </div>
-            {preview ? (
-              <div
-                className="min-h-[120px] rounded border border-slate-200 bg-slate-50 p-3 text-sm"
-                dangerouslySetInnerHTML={{ __html: renderMarkdownPreview(form.content) }}
-              />
-            ) : (
-              <textarea
-                placeholder="Content (markdown supported)"
-                value={form.content}
-                onChange={(e) => setForm({ ...form, content: e.target.value })}
-                rows={5}
-                className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-              />
-            )}
-          </div>
-          <div className="col-span-full flex items-center gap-4">
-            <label className="text-sm text-slate-600">
-              Image:
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/gif"
-                onChange={handleImageUpload}
-                className="ml-2 text-sm"
-                disabled={uploading}
-              />
-            </label>
-            {uploading && <span className="text-xs text-slate-500">Uploading...</span>}
-            {form.image && (
-              <div className="flex items-center gap-2">
-                <img src={form.image} alt="" className="h-10 w-10 rounded object-cover" />
-                <button
-                  onClick={() => setForm({ ...form, image: null })}
-                  className="text-xs text-red-600 hover:underline"
-                >
-                  Remove
-                </button>
-              </div>
-            )}
-          </div>
-          <label className="col-span-full flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={form.pinned}
-              onChange={(e) => setForm({ ...form, pinned: e.target.checked })}
-            />
-            Pin to top
-          </label>
-        </div>
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={handleSave}
-            className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            {editing !== null ? "Update" : "Add"}
-          </button>
-          {editing !== null && (
+    <div className="space-y-3">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <input
+          type="date"
+          value={form.date}
+          onChange={(e) => setForm({ ...form, date: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <select
+          value={form.category}
+          onChange={(e) => setForm({ ...form, category: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        >
+          {NEWS_CATEGORIES.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+        <input
+          placeholder="Title"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
+          className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+        <div className="col-span-full">
+          <div className="mb-1 flex items-center gap-2">
+            <span className="text-xs text-slate-500">Content (supports **bold**, [links](url), - lists)</span>
             <button
-              onClick={resetForm}
-              className="rounded border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
+              type="button"
+              onClick={() => setPreview(!preview)}
+              className="text-xs text-blue-600 hover:underline"
             >
-              Cancel
+              {preview ? "Edit" : "Preview"}
             </button>
+          </div>
+          {preview ? (
+            <div
+              className="min-h-[120px] rounded border border-slate-200 bg-slate-50 p-3 text-sm"
+              dangerouslySetInnerHTML={{ __html: renderMarkdownPreview(form.content) }}
+            />
+          ) : (
+            <textarea
+              placeholder="Content (markdown supported)"
+              value={form.content}
+              onChange={(e) => setForm({ ...form, content: e.target.value })}
+              rows={5}
+              className="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+            />
           )}
         </div>
+        <div className="col-span-full flex items-center gap-4">
+          <label className="text-sm text-slate-600">
+            Image:
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              onChange={handleImageUpload}
+              className="ml-2 text-sm"
+              disabled={uploading}
+            />
+          </label>
+          {uploading && <span className="text-xs text-slate-500">Uploading...</span>}
+          {form.image && (
+            <div className="flex items-center gap-2">
+              <img src={form.image} alt="" className="h-10 w-10 rounded object-cover" />
+              <button
+                onClick={() => setForm({ ...form, image: null })}
+                className="text-xs text-red-600 hover:underline"
+              >
+                Remove
+              </button>
+            </div>
+          )}
+        </div>
+        <label className="col-span-full flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={form.pinned}
+            onChange={(e) => setForm({ ...form, pinned: e.target.checked })}
+          />
+          Pin to top
+        </label>
       </div>
+      <div className="flex gap-2">
+        <button
+          onClick={onSave}
+          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
+          {saveLabel}
+        </button>
+        {onCancel && (
+          <button
+            onClick={onCancel}
+            className="rounded border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function NewsTab({
+  data,
+  onChange,
+}: {
+  data: NewsItem[];
+  onChange: (d: NewsItem[]) => void;
+}) {
+  const [editingSortedIdx, setEditingSortedIdx] = useState<number | null>(null);
+  const [adding, setAdding] = useState(false);
+  const [form, setForm] = useState<NewsItem>({
+    id: "",
+    date: new Date().toISOString().split("T")[0],
+    title: "",
+    content: "",
+    category: "Event",
+    image: null,
+    pinned: false,
+  });
+
+  const sorted = [...data].sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+    return b.date.localeCompare(a.date);
+  });
+
+  const resetForm = () => {
+    setForm({
+      id: "",
+      date: new Date().toISOString().split("T")[0],
+      title: "",
+      content: "",
+      category: "Event",
+      image: null,
+      pinned: false,
+    });
+    setEditingSortedIdx(null);
+    setAdding(false);
+  };
+
+  const generateId = (title: string, date: string) => {
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, 40);
+    return `${date}-${slug}`;
+  };
+
+  const handleAdd = () => {
+    if (!form.title || !form.content) return;
+    const item = {
+      ...form,
+      id: form.id || generateId(form.title, form.date),
+    };
+    onChange([item, ...data]);
+    resetForm();
+  };
+
+  const handleSaveEdit = () => {
+    if (editingSortedIdx === null) return;
+    if (!form.title || !form.content) return;
+    const original = data.indexOf(sorted[editingSortedIdx]);
+    const item = {
+      ...form,
+      id: form.id || generateId(form.title, form.date),
+    };
+    onChange(data.map((n, i) => (i === original ? item : n)));
+    resetForm();
+  };
+
+  const handleEdit = (idx: number) => {
+    setAdding(false);
+    setEditingSortedIdx(idx);
+    setForm({ ...sorted[idx] });
+  };
+
+  const handleDelete = (idx: number) => {
+    const original = data.indexOf(sorted[idx]);
+    onChange(data.filter((_, i) => i !== original));
+    if (editingSortedIdx === idx) resetForm();
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Add button / Add form at top */}
+      {adding ? (
+        <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-6">
+          <h3 className="mb-4 text-lg font-semibold">Add News Post</h3>
+          <NewsForm
+            form={form}
+            setForm={setForm}
+            onSave={handleAdd}
+            onCancel={resetForm}
+            saveLabel="Add"
+          />
+        </div>
+      ) : (
+        <button
+          onClick={() => { resetForm(); setAdding(true); }}
+          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
+          + Add News Post
+        </button>
+      )}
 
       <div className="space-y-2">
         {sorted.map((item, i) => (
-          <div
-            key={item.id}
-            className="flex items-start justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4"
-          >
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-slate-900">
-                {item.pinned && (
-                  <span className="mr-2 inline-block rounded bg-red-100 px-1.5 py-0.5 text-xs text-red-700">
-                    Pinned
+          <div key={item.id}>
+            <div className="flex items-start justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4">
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-slate-900">
+                  {item.pinned && (
+                    <span className="mr-2 inline-block rounded bg-red-100 px-1.5 py-0.5 text-xs text-red-700">
+                      Pinned
+                    </span>
+                  )}
+                  <span className="mr-2 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600">
+                    {item.category}
                   </span>
-                )}
-                <span className="mr-2 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600">
-                  {item.category}
-                </span>
-                {item.title}
-              </p>
-              <p className="mt-1 text-xs text-slate-500">{item.date}</p>
-              <p className="mt-1 text-xs text-slate-400 line-clamp-2">{item.content}</p>
+                  {item.title}
+                </p>
+                <p className="mt-1 text-xs text-slate-500">{item.date}</p>
+                <p className="mt-1 text-xs text-slate-400 line-clamp-2">{item.content}</p>
+              </div>
+              <div className="flex shrink-0 gap-1">
+                <button
+                  onClick={() => editingSortedIdx === i ? resetForm() : handleEdit(i)}
+                  className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
+                >
+                  {editingSortedIdx === i ? "Close" : "Edit"}
+                </button>
+                <button
+                  onClick={() => handleDelete(i)}
+                  className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            <div className="flex shrink-0 gap-1">
-              <button
-                onClick={() => handleEdit(i)}
-                className="rounded px-2 py-1 text-xs text-blue-600 hover:bg-blue-50"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(i)}
-                className="rounded px-2 py-1 text-xs text-red-600 hover:bg-red-50"
-              >
-                Delete
-              </button>
-            </div>
+            {/* Inline edit form below this item */}
+            {editingSortedIdx === i && (
+              <div className="ml-4 mt-2 rounded-lg border border-blue-200 bg-blue-50/50 p-4">
+                <NewsForm
+                  form={form}
+                  setForm={setForm}
+                  onSave={handleSaveEdit}
+                  onCancel={resetForm}
+                  saveLabel="Update"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -1948,6 +2064,7 @@ function GalleryTab({
 function Dashboard() {
   const [tab, setTab] = useState<Tab>("publications");
   const [publications, setPublications] = useState<Publication[]>([]);
+  const [pubConfig, setPubConfig] = useState<{ highlightAuthors: string[]; boldJournal: boolean }>({ highlightAuthors: [], boldJournal: false });
   const [members, setMembers] = useState<MembersData | null>(null);
   const [research, setResearch] = useState<ResearchData | null>(null);
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -1982,7 +2099,14 @@ function Dashboard() {
         api("/api/content/contact"),
         api("/api/content/hero"),
       ]);
-      setPublications(pubs);
+      // publications.json is now { highlightAuthors, boldJournal, publications: [...] }
+      if (Array.isArray(pubs)) {
+        setPublications(pubs);
+      } else {
+        const pd = pubs as PublicationsData;
+        setPublications(pd.publications);
+        setPubConfig({ highlightAuthors: pd.highlightAuthors ?? [], boldJournal: pd.boldJournal ?? false });
+      }
       setMembers(mem);
       setResearch(res);
       setNews(nws);
@@ -2013,11 +2137,12 @@ function Dashboard() {
     try {
       const promises = [];
       if (dirty.has("publications")) {
+        const pubData: PublicationsData = { ...pubConfig, publications };
         promises.push(
           api("/api/content/publications", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(publications),
+            body: JSON.stringify(pubData),
           })
         );
       }
@@ -2093,7 +2218,7 @@ function Dashboard() {
     setMessage(null);
     try {
       const files: Record<string, unknown> = {};
-      if (publications) files.publications = publications;
+      if (publications) files.publications = { ...pubConfig, publications };
       if (members) files.members = members;
       if (research) files.research = research;
       if (news) files.news = news;
@@ -2171,7 +2296,7 @@ function Dashboard() {
 
   // sessionStorage에 현재 데이터 저장 (preview 페이지에서 읽음)
   const syncPreviewStorage = useCallback(() => {
-    sessionStorage.setItem("preview_publications", JSON.stringify(publications));
+    sessionStorage.setItem("preview_publications", JSON.stringify({ ...pubConfig, publications }));
     if (members) sessionStorage.setItem("preview_members", JSON.stringify(members));
     if (research) sessionStorage.setItem("preview_research", JSON.stringify(research));
     sessionStorage.setItem("preview_news", JSON.stringify(news));

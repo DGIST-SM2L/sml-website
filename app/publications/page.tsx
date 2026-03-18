@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, ReactNode } from "react";
 import { motion } from "framer-motion";
 import pubsJson from "@/content/publications.json";
 import { getPreviewData } from "@/hooks/usePreviewData";
@@ -15,8 +15,46 @@ interface Publication {
   featured?: boolean;
 }
 
+interface PublicationsData {
+  highlightAuthors: string[];
+  boldJournal: boolean;
+  publications: Publication[];
+}
+
+/** Highlight matching author names in bold (case-insensitive, preserves original casing). */
+function highlightAuthorsInText(
+  text: string,
+  names: string[]
+): ReactNode {
+  if (!names.length || !text) return text;
+
+  // Build a single regex that matches any of the names (case-insensitive)
+  const escaped = names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const regex = new RegExp(`(${escaped.join("|")})`, "gi");
+
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+
+  return parts.map((part, idx) => {
+    if (regex.test(part)) {
+      // Reset regex lastIndex since we reuse it
+      regex.lastIndex = 0;
+      return <strong key={idx}>{part}</strong>;
+    }
+    regex.lastIndex = 0;
+    return part;
+  });
+}
+
 export default function PublicationsPage() {
-  const publications = getPreviewData<Publication[]>("publications", pubsJson as Publication[]);
+  const data = getPreviewData<PublicationsData>(
+    "publications",
+    pubsJson as unknown as PublicationsData
+  );
+  const publications = data.publications;
+  const highlightAuthors = data.highlightAuthors ?? [];
+  const boldJournal = data.boldJournal ?? false;
+
   const [search, setSearch] = useState("");
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
@@ -41,7 +79,7 @@ export default function PublicationsPage() {
       );
     }
     return result;
-  }, [search, selectedYear]);
+  }, [search, selectedYear, publications]);
 
   const grouped = useMemo(() => {
     const map = new Map<number, Publication[]>();
@@ -171,11 +209,13 @@ export default function PublicationsPage() {
                         {pub.title}
                       </a>
                       <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400">
-                        {pub.authors}
+                        {highlightAuthorsInText(pub.authors, highlightAuthors)}
                       </p>
                       {pub.journal && (
                         <p className="mt-1 text-sm text-slate-500">
-                          <span className="italic">{pub.journal}</span>
+                          <span className={`italic${boldJournal ? " font-bold" : ""}`}>
+                            {pub.journal}
+                          </span>
                           {pub.volume ? `, ${pub.volume}` : ""}
                         </p>
                       )}
