@@ -1,9 +1,19 @@
 {
   "boldJournal": true,
   "boldAuthors": [
-    "Raehyun Jung†, Vikram Thapar, Su-Mi Hur*"
+    "Raehyun Jung†, Vikram Thapar, Su-Mi Hur*",
+    "Sehyun Yun†, Changhyeon Lee†,  Jihun Ahn, Su-Mi Hur*"
   ],
   "publications": [
+    {
+      "year": 2026,
+      "authors": "Sehyun Yun†, Changhyeon Lee†,  Jihun Ahn, Su-Mi Hur*",
+      "title": "(Under Revision) Directed Self-Assembly of Linear and Janus-Type Bottlebrush Block Copolymers for Enhanced EUV Lithography Pattern Quality",
+      "journal": "Journal of Micro/Nanopatterning, Materials, and Metrology (JM3)",
+      "volume": "",
+      "doi": "",
+      "featured": false
+    },
     {
       "year": 2026,
       "authors": "Seulgi Kim†, Se Eun Kim†, Raehyun Jung†, Woo Jin Gil†, Yechan Chang, Vikram Thapar, Saetbyeol Jeon, Marta Gonçalves, Seung A Chae, Hwan Hee Oh, Don Woong Choi, Jae Hyung Park, Chan-Hwa Chung, Gi-Ra Yi*, Chul-Su Yang*, Su-Mi Hur*, Jin Woong Kim*",
