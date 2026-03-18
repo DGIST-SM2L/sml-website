@@ -134,45 +134,54 @@ export default function PeoplePage() {
                 </div>
               )}
 
-              <div className="mt-6 space-y-6">
+              <div className="mt-6 space-y-5 border-t border-slate-100 pt-6 dark:border-slate-800">
+                {/* Education */}
                 <div>
-                  <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  <h5 className="mb-2 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
                     Education
                   </h5>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-2">
                     {pi.education.map((edu, i) => (
-                      <li key={i} className="text-sm text-slate-700 dark:text-slate-300">
-                        <span className="font-medium">{edu.degree}</span>, {edu.field}
-                        <br />
-                        <span className="text-slate-500">{edu.institution} ({edu.years})</span>
+                      <li key={i} className="flex gap-2 text-sm text-slate-700 dark:text-slate-300">
+                        <span className="mt-1 shrink-0 text-slate-400">·</span>
+                        <span>
+                          <span className="font-medium">{edu.degree}</span>, {edu.field},{" "}
+                          <span className="text-slate-500">{edu.institution} ({edu.years})</span>
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
+                {/* Work Experience */}
                 <div>
-                  <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  <h5 className="mb-2 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
                     Work Experience
                   </h5>
                   <ul className="space-y-2">
                     {pi.experience.map((exp, i) => (
-                      <li key={i} className="text-sm text-slate-700 dark:text-slate-300">
-                        <span className="mr-1.5 text-slate-400">·</span>
-                        <span className="font-medium">{exp.role}</span>, {exp.institution}
-                        <br />
-                        <span className="ml-4 text-slate-500">{exp.years}</span>
+                      <li key={i} className="flex gap-2 text-sm text-slate-700 dark:text-slate-300">
+                        <span className="mt-1 shrink-0 text-slate-400">·</span>
+                        <span>
+                          <span className="font-medium">{exp.role}</span>, {exp.institution},{" "}
+                          <span className="text-slate-500">{exp.years}</span>
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
+                {/* Awards */}
                 <div>
-                  <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Awards
+                  <h5 className="mb-2 text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                    Awards &amp; Honors
                   </h5>
-                  <ul className="space-y-1">
+                  <ul className="space-y-2">
                     {pi.awards.map((award, i) => (
-                      <li key={i} className="text-sm text-slate-700 dark:text-slate-300">
-                        {award.name}{" "}
-                        <span className="text-slate-500">({award.year})</span>
+                      <li key={i} className="flex gap-2 text-sm text-slate-700 dark:text-slate-300">
+                        <span className="mt-1 shrink-0 text-slate-400">·</span>
+                        <span>
+                          {award.name}{" "}
+                          <span className="text-slate-500">({award.year})</span>
+                        </span>
                       </li>
                     ))}
                   </ul>
