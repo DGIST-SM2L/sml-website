@@ -91,13 +91,23 @@
       "topics": [
         {
           "title": "Emulsified BCP Droplets",
-          "description": "Studying the self-assembly of block copolymers within emulsified droplets, where spherical confinement leads to frustrated and novel morphologies.",
-          "image": "/images/research/emulsified-droplet-1.png"
+          "description": "Predicting structure and shape evolution in emulsified BCP droplets,\nInvestigating the effects of surface energy difference on the final morphology.",
+          "image": "/images/members/1773844529976-37cj73.png"
         },
         {
           "title": "Boundary Directed Epitaxy",
-          "description": "Developing boundary-directed epitaxy as a novel approach to direct the self-assembly of block copolymers using lithographically defined chemical patterns.",
-          "image": "/images/research/boundary-epitaxy.jpg"
+          "description": "Development of efficient simulation approaches using Monte Carlo and Molecular Dynamics frameworks to investigate complicated geometric surface effects,\nValidation of these approaches by quantifying the importance of non-flat free top surface in the experimental system of self-assembly of tri-block copolymer on graphene nano-ribbons,\nFurther studies to understand the role of 3D bottom substrates in the mechanism of defect annihilation for lamellae-forming block copolymer systems.",
+          "image": "/images/members/1773844665771-nt8bhh.webp"
+        },
+        {
+          "title": "Multicomponent Polymer brushes",
+          "description": "Morphologies of block copolymer brushes and mixed polymer brushes under various conditions, Investigation on the effect of system parameters (e.g. molar composition, grafting density, segregation strength, surface interactions, solvent quality) on phase behavior of brushes.",
+          "image": "/images/members/1773844715499-txag6t.png"
+        },
+        {
+          "title": "Phase Evolution of Block Copolymer on Preferential Substrate",
+          "description": "Morphology formation and phase evolution of block copolymer films depending on interfacial wetting condition, Effect of irreversibly adsorbed layer on phase behavior of BCP.",
+          "image": "/images/members/1773844745837-lpfx1c.png"
         }
       ]
     }
