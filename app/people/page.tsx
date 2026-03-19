@@ -210,6 +210,12 @@ export default function PeoplePage() {
               .map((s) => s.trim())
               .filter(Boolean)
               .slice(0, 5);
+        
+            const educationItems = member.education
+              .split("\n")
+              .map((edu) => edu.trim())
+              .filter(Boolean);
+        
             return (
               <motion.div
                 key={i}
@@ -217,7 +223,7 @@ export default function PeoplePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+                className="flex min-h-[34rem] flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
               >
                 <Avatar name={member.name} photo={member.photo} size="sm" />
                 <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
@@ -226,21 +232,32 @@ export default function PeoplePage() {
                 <p className="text-base font-semibold text-blue-600 dark:text-blue-400">
                   {member.position}
                 </p>
-                <ul className="mt-2 list-disc list-inside text-sm text-slate-600 dark:text-slate-400 text-left">
-                  {researchTopics.map((topic, ti) => (
-                    <li key={ti}>{topic}</li>
-                  ))}
-                </ul>
-
-                <ul className="mt-2 list-disc list-inside text-sm text-slate-500 text-left">
-                  {member.education
-                    .split("\n")
-                    .map((edu) => edu.trim())
-                    .filter(Boolean)
-                    .map((edu, ei) => (
-                      <li key={ei}>{edu}</li>
-                    ))}
-                </ul>
+                
+                {researchTopics.length > 0 && (
+                  <div className="mt-4 w-full text-left">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                      Research Areas
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-slate-600 dark:text-slate-400">
+                      {researchTopics.map((topic, ti) => (
+                        <li key={ti}>{topic}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {educationItems.length > 0 && (
+                  <div className="mt-auto w-full pt-6 text-left">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                      Education
+                    </p>
+                    <ul className="list-disc pl-7 space-y-1 text-sm text-slate-500 dark:text-slate-400">
+                      {educationItems.map((edu, ei) => (
+                        <li key={ei}>{edu}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </motion.div>
             );
           })}
