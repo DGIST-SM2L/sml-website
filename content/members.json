@@ -84,56 +84,56 @@
       "name": "Vikram Thapar",
       "position": "Postdoc (Senior Researcher)",
       "research": "Kinetics and Thermodynamics of BCP thin films",
-      "education": "Ph.D., Department of Chemical Engineering\nCornell University",
+      "education": "Ph.D., Department of Chemical Engineering, Cornell University",
       "photo": "/images/members/vikram.png"
     },
     {
       "name": "Jihun Ahn",
       "position": "Postdoc",
-      "research": "Machine Learning for Materials Design\nMD: Phase Transition of 2D Colloidal System",
-      "education": "Ph.D., School of Polymer Science and Engineering\nChonnam National University",
+      "research": "Machine Learning for Materials Design, MD: Phase Transition of 2D Colloidal System",
+      "education": "Ph.D., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/jihun.jpg"
     },
     {
       "name": "Manoj Kumar Maurya",
       "position": "Postdoc",
-      "research": "Phase Separation in Moving Polymer brushes\nHeat Transport Coefficient in Complex Polymeric System",
-      "education": "PhD., Department of Mechanical Engineering\nIndian Institute of Technology Kanpur, India",
+      "research": "Phase Separation in Moving Polymer brushes, Heat Transport Coefficient in Complex Polymeric System",
+      "education": "PhD., Department of Mechanical Engineering, Indian Institute of Technology Kanpur, India",
       "photo": "/images/members/1773630170616-vzk2hk.jpg"
     },
     {
       "name": "Gabriella Pasya Irianti",
       "position": "Ph.D. student",
-      "research": "CG-MD of Polymeric Systems\nML for Materials Design",
-      "education": "B.S., Metallurgy and Material Engineering\nUniversity of Indonesia",
+      "research": "CG-MD of Polymeric Systems, ML for Materials Design",
+      "education": "B.S., Metallurgy and Material Engineering, University of Indonesia",
       "photo": "/images/members/gabriella.jpg"
     },
     {
       "name": "Sehyun Yun",
       "position": "Ph.D. student",
-      "research": "DSA on VIA Pattern\nML for Battery SOH",
-      "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
+      "research": "DSA on VIA Pattern, ML for Battery SOH",
+      "education": "B.S., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/sehyun.jpg"
     },
     {
       "name": "Raehyun Jung",
       "position": "Ph.D. student",
-      "research": "Machine Learning for Battery Lifetime Prediction\nOrganic-Inorganic Composites Interaction Modeling",
-      "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
+      "research": "Machine Learning for Battery Lifetime Prediction, Organic-Inorganic Composites Interaction Modeling",
+      "education": "B.S., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/raehyun.jpg"
     },
     {
       "name": "Sangyeop Lee",
       "position": "M.S. student",
       "research": "Bottlebrush Polymer Phase (CG Simulation)",
-      "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
+      "education": "B.S., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/sangyeop.jpg"
     },
     {
       "name": "Seunggeon Lee",
       "position": "M.S. student",
       "research": "MD for Anion Exchange Membrane",
-      "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
+      "education": "B.S., School of Polymer Science and Engineering, Chonnam National University",
       "photo": "/images/members/seunggeon.jpg"
     }
   ],
@@ -142,7 +142,7 @@
       "name": "Hyunseok Kim",
       "degree": "M.S.",
       "period": "02/2024 – 02/2026",
-      "research": "EUV Lithography\nPolymer Rod Brush",
+      "research": "EUV Lithography, Polymer Rod Brush",
       "currentPosition": null,
       "photo": "/images/members/hyunseok.png"
     },
@@ -150,7 +150,7 @@
       "name": "Changhyeon Lee",
       "degree": "M.S.",
       "period": "09/2022 – 08/2024",
-      "research": "Directed Self-assembly on EUV pattern\nDSA on VIA pattern\nEUV lithography Photoresist",
+      "research": "Directed Self-assembly on EUV pattern, DSA on VIA pattern, EUV lithography Photoresist",
       "currentPosition": null,
       "photo": "/images/members/alumni-changhyeon.png"
     },
@@ -158,7 +158,7 @@
       "name": "Yeojin Choe",
       "degree": "M.S.",
       "period": "02/2022 – 02/2024",
-      "research": "Solution Assembly of Grafting Polymer\nMolecular Dynamic Simulation for Thermal Expansion",
+      "research": "Solution Assembly of Grafting Polymer, Molecular Dynamic Simulation for Thermal Expansion",
       "currentPosition": null,
       "photo": "/images/members/alumni-yeojin.png"
     },
@@ -166,7 +166,7 @@
       "name": "Taeyi Kim",
       "degree": "M.S.",
       "period": "03/2020 – 08/2023",
-      "research": "Polymer Brushes\nExtreme Ultraviolet Resist",
+      "research": "Polymer Brushes, Extreme Ultraviolet Resist",
       "currentPosition": "Samsung Electronics",
       "photo": "/images/members/alumni-taeyi.png"
     },
@@ -174,7 +174,7 @@
       "name": "Luis Adrián Padilla Salas",
       "degree": "Postdoc",
       "period": "05/2021 – 02/2023",
-      "research": "Self-assembly of polymers and colloids\nPhase transitions\nComputational physics",
+      "research": "Self-assembly of polymers and colloids, phase transitions, computational physics",
       "currentPosition": null,
       "photo": "/images/members/alumni-luis.png"
     },
