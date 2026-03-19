@@ -247,15 +247,15 @@ export default function PeoplePage() {
                 )}
                 
                 {educationItems.length > 0 && (
-                  <div className="mt-auto w-full pt-6 text-left">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  <div className="mt-auto pt-4 w-full text-left border-t border-slate-100 dark:border-slate-800">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
                       Education
                     </p>
-                    <ul className="list-disc pl-7 space-y-1 text-sm text-slate-500 dark:text-slate-400">
+                    <div className="space-y-1 text-sm text-slate-500">
                       {educationItems.map((edu, ei) => (
-                        <li key={ei}>{edu}</li>
+                        <p key={ei}>{edu}</p>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
               </motion.div>
