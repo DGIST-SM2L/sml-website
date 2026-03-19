@@ -206,7 +206,9 @@ export default function PeoplePage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {members.members.map((member, i) => {
             const researchTopics = member.research
-              .split(", ")
+              .split("\n")
+              .map((s) => s.trim())
+              .filter(Boolean)
               .slice(0, 5);
             return (
               <motion.div
@@ -229,9 +231,16 @@ export default function PeoplePage() {
                     <li key={ti}>{topic}</li>
                   ))}
                 </ul>
-                <p className="mt-2 text-sm text-slate-500 text-center break-words hyphens-auto">
-                  {member.education}
-                </p>
+
+                <ul className="mt-2 list-disc list-inside text-sm text-slate-500 text-left">
+                  {member.education
+                    .split("\n")
+                    .map((edu) => edu.trim())
+                    .filter(Boolean)
+                    .map((edu, ei) => (
+                      <li key={ei}>{edu}</li>
+                    ))}
+                </ul>
               </motion.div>
             );
           })}
