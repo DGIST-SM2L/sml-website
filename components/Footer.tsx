@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t border-slate-200 pt-8 dark:border-slate-800">
           <p className="text-center text-xs text-slate-500 dark:text-slate-500">
-            &copy; {new Date().getFullYear()} Soft Matter Lab, DGIST. All rights reserved.
+            &copy; {new Date().getFullYear()} Simulation and Machine Learning for Soft Matter Lab, DGIST. All rights reserved.
           </p>
         </div>
       </div>
