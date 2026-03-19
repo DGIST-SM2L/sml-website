@@ -223,7 +223,7 @@ export default function PeoplePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="flex min-h-[34rem] flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
+                className="flex min-h-[30rem] flex-col items-center rounded-lg border border-slate-200 bg-white p-5 text-center dark:border-slate-800 dark:bg-slate-900"
               >
                 <Avatar name={member.name} photo={member.photo} size="sm" />
                 <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
@@ -247,7 +247,7 @@ export default function PeoplePage() {
                 )}
                 
                 {educationItems.length > 0 && (
-                  <div className="mt-auto pt-4 w-full text-left border-t border-slate-100 dark:border-slate-800">
+                  <div className="mt-4 pt-4 w-full text-left border-t border-slate-100 dark:border-slate-800">
                     <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
                       Education
                     </p>
