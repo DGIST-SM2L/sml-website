@@ -247,7 +247,7 @@ export default function PeoplePage() {
                 )}
                 
                 {educationItems.length > 0 && (
-                  <div className="mt-auto w-full border-t border-slate-100 pt-4 text-left dark:border-slate-800">
+                  <div className="mt-auto w-full border-t border-slate-100 pt-5 text-left dark:border-slate-800">
                     <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
                       Education
                     </p>
