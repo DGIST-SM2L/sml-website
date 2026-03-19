@@ -253,7 +253,7 @@ function CategorySection({
                             {openTopic.title}
                           </h3>
                           {(() => {
-                            const sentences = openTopic.description
+                            const bullets = openTopic.description
                               .split("\n")
                               .map((s: string) => s.trim())
                               .filter(Boolean);
