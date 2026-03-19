@@ -247,14 +247,18 @@ export default function PeoplePage() {
                 )}
                 
                 {educationItems.length > 0 && (
-                  <div className="mt-auto w-full border-t border-slate-100 pt-5 text-left dark:border-slate-800">
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
-                      Education
-                    </p>
-                    <div className="space-y-1 text-sm text-slate-500">
-                      {educationItems.map((edu, ei) => (
-                        <p key={ei}>{edu}</p>
-                      ))}
+                  <div className="mt-auto w-full text-left">
+                    <div className="mt-3 border-t border-slate-100 dark:border-slate-800"></div>
+                
+                    <div className="pt-5">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+                        Education
+                      </p>
+                      <div className="space-y-1 text-sm text-slate-500">
+                        {educationItems.map((edu, ei) => (
+                          <p key={ei}>{edu}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
