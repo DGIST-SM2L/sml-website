@@ -551,15 +551,17 @@ function MemberForm({
           onChange={(e) => onChange({ ...value, position: e.target.value })}
           className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
         />
-        <input
-          placeholder="Research areas"
+        <textarea
+          placeholder="Research areas (한 줄에 한 항목씩 입력)"
           value={value.research}
+          rows={4}
           onChange={(e) => onChange({ ...value, research: e.target.value })}
           className="col-span-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
         />
-        <input
-          placeholder="Education"
+        <textarea
+          placeholder="Education (한 줄에 한 항목씩 입력)"
           value={value.education}
+          rows={3}
           onChange={(e) => onChange({ ...value, education: e.target.value })}
           className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
         />
@@ -1491,9 +1493,10 @@ function ResearchTab({
                 }
                 className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
               />
-              <input
-                placeholder="Description"
+              <textarea
+                placeholder="Description (한 줄에 한 bullet씩 입력)"
                 value={newTopic.description}
+                rows={5}
                 onChange={(e) =>
                   setNewTopic({ ...newTopic, description: e.target.value })
                 }
