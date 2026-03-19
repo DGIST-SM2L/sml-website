@@ -12,47 +12,47 @@
         },
         {
           "title": "Morphological Diversity in Graft-Linear Block Copolymer (BCPs)",
-          "description": "Coarse-grained molecular simulation of comb polymer\\nInvestigating the effects of grafting density on phase transitions\\nPredicting conformation and phase behaivor of comb polymer system",
+          "description": "Coarse-grained molecular simulation of comb polymer\nInvestigating the effects of grafting density on phase transitions\nPredicting conformation and phase behaivor of comb polymer system",
           "image": "/images/members/1773839463993-wt2pc8.png"
         },
         {
           "title": "Mesoscale Simulation Model for Solution Assembly",
-          "description": "Generic Framework of Mesoscale Simulations for Solution Self-Assembly of Polymers\\nInvestigating the relationship between the model parameters and experimentally measurable quantities (e.g., single-chain conformation, chain density, interfacial and surface tensions)\\nPolymer solution assembly over a wide range of concentrations and solvent qualities\\nPredicting structure and shape evolution in emulsified BCP droplets\\n",
+          "description": "Generic Framework of Mesoscale Simulations for Solution Self-Assembly of Polymers\nInvestigating the relationship between the model parameters and experimentally measurable quantities (e.g., single-chain conformation, chain density, interfacial and surface tensions)\nPolymer solution assembly over a wide range of concentrations and solvent qualities\nPredicting structure and shape evolution in emulsified BCP droplets",
           "image": "/images/members/1773841913899-jx289c.png"
         },
         {
           "title": "Solution Assembly of Amphiphilic Grafting Polymer",
-          "description": "Developed a coarse-grained model-based simulator for grafting polymer self-assembly with diverse chain architectures,\nExplored effects of chain architecture on amphiphilic grafting polymers in solutions, considering grafting density, distribution of grafting points, and polymer concentration.",
+          "description": "Developed a coarse-grained model-based simulator for grafting polymer self-assembly with diverse chain architectures\nExplored effects of chain architecture on amphiphilic grafting polymers in solutions, considering grafting density, distribution of grafting points, and polymer concentration",
           "image": "/images/members/1773841927961-mkl6m8.png"
         },
         {
           "title": "Modeling of Extreme Ultraviolet (EUV) Photoresist & Patterning Process",
-          "description": "Development of coarse-grained molecular simulation reflecting both chain conformation and stochastic terms (e.g. photon shot noise, acid diffusion) for EUV patterning process,\nInvestigation on the effect of photon distribution, material conformation, acid diffusion, initial chain alignment, and glass transition temperature (Tg) of polymer on the final roughness of EUV resist.",
+          "description": "Development of coarse-grained molecular simulation reflecting both chain conformation and stochastic terms (e.g. photon shot noise, acid diffusion) for EUV patterning process\nInvestigation on the effect of photon distribution, material conformation, acid diffusion, initial chain alignment, and glass transition temperature (Tg) of polymer on the final roughness of EUV resist",
           "image": "/images/members/1773842019276-16egqf.png"
         },
         {
           "title": "High-resolution Patterning Combined with EUV and DSA (Directed Self-Assembly)",
-          "description": "Exploring the application of Directed Self-Assembly (DSA) on EUV Lithography Patterns for Line Patterns or Cylindrical Patterns and defect removal through simulation and modeling,\nUnderstanding the relationship between the chemical structure and self-assembly characteristics of polymers,\nExploring new materials and mechanisms that can create optimal structures when combined with EUV lithography​​.",
+          "description": "Exploring the application of Directed Self-Assembly (DSA) on EUV Lithography Patterns for Line Patterns or Cylindrical Patterns and defect removal through simulation and modeling\nUnderstanding the relationship between the chemical structure and self-assembly characteristics of polymers\nExploring new materials and mechanisms that can create optimal structures when combined with EUV lithography​​",
           "image": "/images/members/1773842218949-6tvp7g.jpg"
         },
         {
           "title": "Dielectric Spectroscopy of Low Permittivity Polymers",
-          "description": "Dielectric constant estimation for polymers in melt using Molecular Dynamic simulations,\nExploring the effect of different functional groups in the complex permittivity as function of frequency,\nEvaluate the suitability of additives that maintain or improve the dielectric properties of the studied polymers.",
+          "description": "Dielectric constant estimation for polymers in melt using Molecular Dynamic simulations\nExploring the effect of different functional groups in the complex permittivity as function of frequency\nEvaluate the suitability of additives that maintain or improve the dielectric properties of the studied polymers",
           "image": "/images/members/1773842252687-hkb0b9.png"
         },
         {
           "title": "Organic / Inorganic Composites Interaction Modeling",
-          "description": "Developing a coarse-grained simulation model for porous particles and polymer,\nUnderstanding structural parameters effect on cohesion strength.",
+          "description": "Developing a coarse-grained simulation model for porous particles and polymer\nUnderstanding structural parameters effect on cohesion strength",
           "image": "/images/members/1773842298692-rf7ijj.png"
         },
         {
           "title": "Solvent Vapor Annealing",
-          "description": "Molecular dynamic simulation of our virial model to observe the dynamic sphere splitting phenomenon behind pattern multiplication during Solvent Vapor Annealing,\nBy mapping the local energies, it is found that local interfacial energies are the main driving force of the splitting rather than chain stretching/compressing.",
+          "description": "Molecular dynamic simulation of our virial model to observe the dynamic sphere splitting phenomenon behind pattern multiplication during Solvent Vapor Annealing\nBy mapping the local energies, it is found that local interfacial energies are the main driving force of the splitting rather than chain stretching/compressing",
           "image": "/images/members/1773842325414-gb9fdk.png"
         },
         {
           "title": "Nanoscale Organic Lattices with Strongly-Correlated Disorder",
-          "description": "Large scale up to 1M MD simulation based on Hard-core/Soft-shell potential targeting for BCP nano lattices,\nWe conducted 2D melting simulations of HCSS(Hard-Core Soft Shell) particles using Langevin Molecular Dynamics,\nWe analyzed the melting scenario by varying the system's density and temperature.",
+          "description": "Large scale up to 1M MD simulation based on Hard-core/Soft-shell potential targeting for BCP nano lattices\nWe conducted 2D melting simulations of HCSS(Hard-Core Soft Shell) particles using Langevin Molecular Dynamics\nWe analyzed the melting scenario by varying the system's density and temperature",
           "image": "/images/members/1773842356432-z2yfk6.png"
         }
       ]
@@ -64,22 +64,22 @@
       "topics": [
         {
           "title": "Defect Detection and Classification",
-          "description": "Detection and classification of defects in directed self-assembly of block copolymers using machine learning (YOLOv3),\nAugmenting simulated data to limited experimental data to enhance the network training : testing efficiency for data mixing or transfer learning,\nEvaluating  data quality for network performance.",
+          "description": "Detection and classification of defects in directed self-assembly of block copolymers using machine learning (YOLOv3)\nAugmenting simulated data to limited experimental data to enhance the network training : testing efficiency for data mixing or transfer learning\nEvaluating  data quality for network performance",
           "image": "/images/members/1773842736532-pcoy5j.png"
         },
         {
           "title": "Novel String Representation for Polymer Structures : HAPPY (HierArchically Abstracted rePeat unit of PolYmer)",
-          "description": "HAPPY provides a condensed representation, effectively expressing polymer structures,\nIt employs simple grammatical rules, enabling consistent string representation,\nMaintains graphical information while being more intuitive and interpretable,\nHAPPY present the potential of effective representation for further research of complex polymer architecture and inverse design of polymric material with machine learning.",
+          "description": "HAPPY provides a condensed representation, effectively expressing polymer structures\nIt employs simple grammatical rules, enabling consistent string representation\nMaintains graphical information while being more intuitive and interpretable\nHAPPY present the potential of effective representation for further research of complex polymer architecture and inverse design of polymric material with machine learning",
           "image": "/images/members/1773842785872-p8hgr9.png"
         },
         {
           "title": "Rapid Impedance-Based Battery Health Diagnostics and Lifetime Forecasting Across the Full Aging Regime Using High-Frequency EIS Data",
-          "description": "Applying deep learning to battery systems,\nEstimation: Prediction of state of health of battery using Electrochemical Impedance Spectroscopy data,\nFeature reduction : SHAP analysis for investigating the feature impact on SOH, PCA for simplifying complexity of the data.",
+          "description": "Applying deep learning to battery systems\nEstimation: Prediction of state of health of battery using Electrochemical Impedance Spectroscopy data\nFeature reduction : SHAP analysis for investigating the feature impact on SOH, PCA for simplifying complexity of the data",
           "image": "/images/members/1773842926170-i9lahz.png"
         },
         {
           "title": "Molecular Dynamic Simulations Combined with Machine Learning",
-          "description": "Precise measurement of Glass Transition Temperature (Tg) achieved by clustering the Radius of Gyration (Rg) across multiple timeframes and temperatures,\nObserving the Tg depiction of polymer free-standing thins films as a function of thickness and further insights into the different Tg of interface and center region of the film using clustering method.",
+          "description": "Precise measurement of Glass Transition Temperature (Tg) achieved by clustering the Radius of Gyration (Rg) across multiple timeframes and temperatures\nObserving the Tg depiction of polymer free-standing thins films as a function of thickness and further insights into the different Tg of interface and center region of the film using clustering method",
           "image": "/images/members/1773842953323-ocg4oi.png"
         }
       ]
@@ -91,22 +91,22 @@
       "topics": [
         {
           "title": "Emulsified BCP Droplets",
-          "description": "Predicting structure and shape evolution in emulsified BCP droplets,\nInvestigating the effects of surface energy difference on the final morphology.",
+          "description": "Predicting structure and shape evolution in emulsified BCP droplets\nInvestigating the effects of surface energy difference on the final morphology",
           "image": "/images/members/1773842993710-3wlz6d.png"
         },
         {
           "title": "Boundary Directed Epitaxy",
-          "description": "Development of efficient simulation approaches using Monte Carlo and Molecular Dynamics frameworks to investigate complicated geometric surface effects,\nValidation of these approaches by quantifying the importance of non-flat free top surface in the experimental system of self-assembly of tri-block copolymer on graphene nano-ribbons,\nFurther studies to understand the role of 3D bottom substrates in the mechanism of defect annihilation for lamellae-forming block copolymer systems.",
+          "description": "Development of efficient simulation approaches using Monte Carlo and Molecular Dynamics frameworks to investigate complicated geometric surface effects\nValidation of these approaches by quantifying the importance of non-flat free top surface in the experimental system of self-assembly of tri-block copolymer on graphene nano-ribbons\nFurther studies to understand the role of 3D bottom substrates in the mechanism of defect annihilation for lamellae-forming block copolymer systems",
           "image": "/images/members/1773895895794-ssmuvm.jpg"
         },
         {
           "title": "Multicomponent Polymer brushes",
-          "description": "Morphologies of block copolymer brushes and mixed polymer brushes under various conditions, Investigation on the effect of system parameters (e.g. molar composition, grafting density, segregation strength, surface interactions, solvent quality) on phase behavior of brushes.",
+          "description": "Morphologies of block copolymer brushes and mixed polymer brushes under various conditions\nInvestigation on the effect of system parameters (e.g. molar composition, grafting density, segregation strength, surface interactions, solvent quality) on phase behavior of brushes",
           "image": "/images/members/1773895388465-1llv06.png"
         },
         {
           "title": "Phase Evolution of Block Copolymer on Preferential Substrate",
-          "description": "Morphology formation and phase evolution of block copolymer films depending on interfacial wetting condition, Effect of irreversibly adsorbed layer on phase behavior of BCP.",
+          "description": "Morphology formation and phase evolution of block copolymer films depending on interfacial wetting condition\nEffect of irreversibly adsorbed layer on phase behavior of BCP",
           "image": "/images/members/1773895432238-tpj93a.png"
         }
       ]
