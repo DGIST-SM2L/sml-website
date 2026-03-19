@@ -28,15 +28,16 @@ export default function ContactPage() {
 
       <div className="mx-auto max-w-6xl px-6 py-16">
         {/* Top: Contact Info + Map side by side */}
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid items-stretch gap-8 lg:grid-cols-2">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="h-full"
           >
-            <div className="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+            <div className="h-full rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
               <h3 className="mb-4 text-lg font-bold text-slate-900 dark:text-white">{c.labName}</h3>
               <div className="space-y-4">
                 {/* Address */}
@@ -105,18 +106,18 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              className="h-full"
             >
-              <div className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+              <div className="h-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
                 <iframe
                   src={c.mapEmbed}
                   width="100%"
-                  height="350"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Lab Location"
-                  className="w-full"
+                  className="h-full w-full"
                 />
               </div>
             </motion.div>
