@@ -39,7 +39,7 @@ const newsCategoryColors: Record<string, string> = {
 };
 
 const categoryImages = [
-  "/images/home/simulation.png",
+  "/images/home/developing_mathematical_models.png",
   "/images/home/computer.png",
   "/images/home/molecules.jpg",
 ];
