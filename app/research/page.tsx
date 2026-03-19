@@ -254,13 +254,14 @@ function CategorySection({
                           </h3>
                           {(() => {
                             const sentences = openTopic.description
-                              .split(/(?:\. |; )/)
-                              .map((s: string) => s.replace(/\.?$/, "").trim())
+                              .split("\n")
+                              .map((s: string) => s.trim())
                               .filter(Boolean);
+                          
                             return (
                               <ul className="list-disc ml-4 space-y-1 leading-relaxed text-slate-600 dark:text-slate-400">
-                                {sentences.map((s: string, idx: number) => (
-                                  <li key={idx}>{s}.</li>
+                                {bullets.map((item: string, idx: number) => (
+                                  <li key={idx}>{item}</li>
                                 ))}
                               </ul>
                             );
