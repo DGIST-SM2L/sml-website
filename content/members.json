@@ -75,6 +75,7 @@
   "members": [
     {
       "name": "Allan Pérez Ramírez",
+      "email": "",
       "position": "Postdoc",
       "research": "Boundary Directed Epitaxy\nDielectric Spectroscopy",
       "education": "Ph.D., Department of Basic Sciences and Engineering\nMetropolitan Autonomous University",
@@ -82,6 +83,7 @@
     },
     {
       "name": "Vikram Thapar",
+      "email": "",
       "position": "Postdoc (Senior Researcher)",
       "research": "Kinetics and Thermodynamics of BCP thin films",
       "education": "Ph.D., Department of Chemical Engineering\nCornell University",
@@ -89,6 +91,7 @@
     },
     {
       "name": "Jihun Ahn",
+      "email": "ajh@dgist.ac.kr",
       "position": "Postdoc",
       "research": "Machine Learning for Materials Design\nMD: Phase Transition of 2D Colloidal System",
       "education": "Ph.D., School of Polymer Science and Engineering\nChonnam National University",
@@ -96,6 +99,7 @@
     },
     {
       "name": "Manoj Kumar Maurya",
+      "email": "manoj@dgist.ac.kr",
       "position": "Postdoc",
       "research": "Phase Separation in Moving Polymer brushes\nHeat Transport Coefficient in Complex Polymeric System",
       "education": "PhD., Department of Mechanical Engineering\nIndian Institute of Technology Kanpur, India",
@@ -103,6 +107,7 @@
     },
     {
       "name": "Gabriella Pasya Irianti",
+      "email": "gabriellapasya@dgist.ac.kr",
       "position": "Ph.D. student",
       "research": "CG-MD of Polymeric Systems\nML for Materials Design",
       "education": "B.S., Metallurgy and Material Engineering\nUniversity of Indonesia",
@@ -110,6 +115,7 @@
     },
     {
       "name": "Sehyun Yun",
+      "email": "",
       "position": "Ph.D. student",
       "research": "DSA on VIA Pattern\nML for Battery SOH",
       "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
@@ -117,6 +123,7 @@
     },
     {
       "name": "Raehyun Jung",
+      "email": "freddiefogus@dgist.ac.kr",
       "position": "Ph.D. student",
       "research": "Machine Learning for Battery Lifetime Prediction\nOrganic-Inorganic Composites Interaction Modeling",
       "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
@@ -125,6 +132,7 @@
     },
     {
       "name": "Sangyeop Lee",
+      "email": "",
       "position": "M.S. student",
       "research": "Bottlebrush Polymer Phase (CG Simulation)",
       "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
@@ -132,6 +140,7 @@
     },
     {
       "name": "Seunggeon Lee",
+      "email": "lsg0318@dgist.ac.kr",
       "position": "M.S. student",
       "research": "MD for Anion Exchange Membrane",
       "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
@@ -141,6 +150,7 @@
   "alumni": [
     {
       "name": "Hyunseok Kim",
+      "email": "rlagustjr107@gmail.com",
       "degree": "M.S.",
       "period": "02/2024 – 02/2026",
       "research": "EUV Lithography, Polymer Rod Brush",
@@ -149,6 +159,7 @@
     },
     {
       "name": "Changhyeon Lee",
+      "email": "jioun0651@gmail.com",
       "degree": "M.S.",
       "period": "09/2022 – 08/2024",
       "research": "Directed Self-assembly on EUV pattern, DSA on VIA pattern, EUV lithography Photoresist",
@@ -157,6 +168,7 @@
     },
     {
       "name": "Yeojin Choe",
+      "email": "cjsrhddl@gmail.com",
       "degree": "M.S.",
       "period": "02/2022 – 02/2024",
       "research": "Solution Assembly of Grafting Polymer, Molecular Dynamic Simulation for Thermal Expansion",
@@ -165,6 +177,7 @@
     },
     {
       "name": "Taeyi Kim",
+      "email": "taeyik97@gmail.com",
       "degree": "M.S.",
       "period": "03/2020 – 08/2023",
       "research": "Polymer Brushes, Extreme Ultraviolet Resist",
@@ -173,6 +186,7 @@
     },
     {
       "name": "Luis Adrián Padilla Salas",
+      "email": "",
       "degree": "Postdoc",
       "period": "05/2021 – 02/2023",
       "research": "Self-assembly of polymers and colloids, phase transitions, computational physics",
@@ -181,6 +195,7 @@
     },
     {
       "name": "Juhae Park",
+      "email": "juhae0514@gmail.com",
       "degree": "M.S. + Researcher",
       "period": "03/2018 – 08/2021",
       "research": "Studies of EUV Resist for Sub-10nm Patterning from Molecular Approach",
@@ -189,6 +204,7 @@
     },
     {
       "name": "Ga Ryang Kang",
+      "email": "717582@naver.com",
       "degree": "M.S.",
       "period": "09/2017 – 08/2019",
       "research": "Phase behavior of block copolymer (BCP) brushes",
@@ -197,6 +213,7 @@
     },
     {
       "name": "Yeong Yoon Kim",
+      "email": "",
       "degree": "Postdoc",
       "period": "2018 – 2019",
       "research": "Cell nucleation of nano polymeric foam",
