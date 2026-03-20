@@ -56,6 +56,7 @@ type Publication = {
 
 type Member = {
   name: string;
+  email?: string;
   position: string;
   research: string;
   education: string;
@@ -545,11 +546,19 @@ function MemberForm({
           onChange={(e) => onChange({ ...value, name: e.target.value })}
           className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
         />
+      
+        <input
+          placeholder="Email"
+          value={value.email}
+          onChange={(e) => onChange({ ...value, email: e.target.value })}
+          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+      
         <input
           placeholder="Position (e.g. Postdoc, Ph.D. student)"
           value={value.position}
           onChange={(e) => onChange({ ...value, position: e.target.value })}
-          className="rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          className="sm:col-span-2 rounded border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
         />
         <textarea
           placeholder="Research areas (한 줄에 한 항목씩 입력)"
@@ -617,8 +626,8 @@ function MembersTab({
   onChange: (d: MembersData) => void;
 }) {
     const [editingMember, setEditingMember] = useState<number | null>(null);
-  const [memberEditForm, setMemberEditForm] = useState<Member>({ name: "", position: "", research: "", education: "", photo: "" });
-  const [addMemberForm, setAddMemberForm] = useState<Member>({ name: "", position: "", research: "", education: "", photo: "" });
+  const [memberEditForm, setMemberEditForm] = useState<Member>({ name: "", email: "", position: "", research: "", education: "", photo: "" });
+  const [addMemberForm, setAddMemberForm] = useState<Member>({ name: "", email: "", position: "", research: "", education: "", photo: "" });
 
   const [piForm, setPiForm] = useState(data.pi);
   const [showPiEdit, setShowPiEdit] = useState(false);
@@ -658,7 +667,7 @@ function MembersTab({
   const addMember = () => {
     if (!addMemberForm.name) return;
     onChange({ ...data, members: [...data.members, addMemberForm] });
-    setAddMemberForm({ name: "", position: "", research: "", education: "", photo: "" });
+    setAddMemberForm({ name: "", email: "", position: "", research: "", education: "", photo: "" });
   };
 
   const startEditMember = (idx: number) => {
