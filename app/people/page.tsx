@@ -314,7 +314,14 @@ export default function PeoplePage() {
                     <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
                       {alum.name}
                     </h4>
-                    <p className="text-base font-semibold text-blue-600 dark:text-blue-400">
+                    
+                    {alum.email && (
+                      <p className="text-base text-slate-500 dark:text-slate-400">
+                        {alum.email}
+                      </p>
+                    )}
+                    
+                    <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
                       {alum.degree} · {alum.period}
                     </p>
                     <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
