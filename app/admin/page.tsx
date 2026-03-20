@@ -65,6 +65,7 @@ type Member = {
 
 type Alumni = {
   name: string;
+  email?: string;
   degree: string;
   period: string;
   research: string;
@@ -689,6 +690,7 @@ function MembersTab({
     const member = data.members[idx];
     const alumnus: Alumni = {
       name: member.name,
+      email: member.email || "",
       degree: member.position,
       period: "",
       research: member.research,
@@ -710,6 +712,7 @@ function MembersTab({
     const a = data.alumni[idx];
     const member: Member = {
       name: a.name,
+      email: a.email || "",
       position: a.degree,
       research: a.research,
       education: "",
@@ -1143,15 +1146,15 @@ function MembersTab({
                         className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
                       />
                       <input
-                        placeholder="Degree (e.g. M.S., Ph.D.)"
-                        value={a.degree}
-                        onChange={(e) => updateAlumni(i, { ...a, degree: e.target.value })}
+                        placeholder="Email"
+                        value={a.email ?? ""}
+                        onChange={(e) => updateAlumni(i, { ...a, email: e.target.value })}
                         className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
                       />
                       <input
-                        placeholder="Period (e.g. 03/2020 – 08/2023)"
-                        value={a.period}
-                        onChange={(e) => updateAlumni(i, { ...a, period: e.target.value })}
+                        placeholder="Degree (e.g. M.S., Ph.D.)"
+                        value={a.degree}
+                        onChange={(e) => updateAlumni(i, { ...a, degree: e.target.value })}
                         className="rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-blue-500 focus:outline-none"
                       />
                       <input
@@ -1222,6 +1225,9 @@ function MembersTab({
                       <p className="text-sm font-medium text-slate-900">
                         {a.name}{a.degree ? ` (${a.degree})` : ""}
                       </p>
+                      {a.email && (
+                        <p className="text-xs text-slate-500">{a.email}</p>
+                      )}
                       {a.period && (
                         <p className="text-xs text-slate-500">{a.period}</p>
                       )}
