@@ -20,8 +20,8 @@
     {
       "year": 2026,
       "authors": "Seung-Hwan Oh†, Jinhoon Lee†, Seunghyun Lee, Raehyun Jung, Sangyeop Lee, Su-Mi Hur*, Dong Woog Lee*, and Soo-Hyung Choi*",
-      "title": "(Submitted) Sticker Valence Governs Chain Collapse and Liquid-Liquid Phase Separation in Peptide-Inspired Associative Polymers",
-      "journal": "",
+      "title": "Sticker Valence Governs Chain Collapse and Liquid-Liquid Phase Separation in Peptide-Inspired Associative Polymers ",
+      "journal": "(Submitted)",
       "volume": "",
       "doi": "",
       "featured": false
@@ -38,8 +38,8 @@
     {
       "year": 2026,
       "authors": "Jihun Ahn†, Gabriella Pasya Irianti†, Vikram Thapar*, Su-Mi Hur*",
-      "title": "(Submitted) Chemically Informed Learning Enables Interpretable Prediction and Generation of Polymers under Complex Constraints",
-      "journal": "Nature",
+      "title": "Chemically Informed Learning Enables Interpretable Prediction and Generation of Polymers under Complex Constraints",
+      "journal": "(Submitted)",
       "volume": "",
       "doi": "",
       "featured": false
@@ -47,8 +47,8 @@
     {
       "year": 2026,
       "authors": "Sehyun Yun†, Changhyeon Lee†, Jihun Ahn, Su-Mi Hur*",
-      "title": "(Under Revision) Directed Self-Assembly of Linear and Janus-Type Bottlebrush Block Copolymers for Enhanced EUV Lithography Pattern Quality",
-      "journal": "Journal of Micro/Nanopatterning, Materials, and Metrology (JM3)",
+      "title": "Directed Self-Assembly of Linear and Janus-Type Bottlebrush Block Copolymers for Enhanced EUV Lithography Pattern Quality",
+      "journal": "(Under Revision)",
       "volume": "",
       "doi": "",
       "featured": false
@@ -56,8 +56,8 @@
     {
       "year": 2026,
       "authors": "Seulgi Kim†, Se Eun Kim†, Raehyun Jung†, Woo Jin Gil†, Yechan Chang, Vikram Thapar, Saetbyeol Jeon, Marta Gonçalves, Seung A Chae, Hwan Hee Oh, Don Woong Choi, Jae Hyung Park, Chan-Hwa Chung, Gi-Ra Yi*, Chul-Su Yang*, Su-Mi Hur*, Jin Woong Kim*",
-      "title": "(Submitted) Multiscale Tissue Adhesion through Water-Mediated Mesoporous Silica-Biopolymer Integration",
-      "journal": "Advanced Materials",
+      "title": "Multiscale Tissue Adhesion through Water-Mediated Mesoporous Silica-Biopolymer Integration",
+      "journal": "(Submitted)",
       "volume": "",
       "doi": "",
       "featured": false
@@ -157,7 +157,7 @@
       "authors": "Seung-Mo Kang†, Allan Pérez Ramírez†, Jae Kyeong Lee, Luis Adrián Padilla Salas, Junho Jang, Byung Jo Um, Hyeon-Gyun Im, Su-Mi Hur*, Byeong-Soo Bae*",
       "title": "A fluorine-free siloxane material with low dielectric loss in gigahertz frequencies for high-speed electronic devices",
       "journal": "Cell Reports Physical Science",
-      "volume": "(2025)",
+      "volume": "6 (8), 102776",
       "doi": "https://www.sciencedirect.com/science/article/pii/S2666386425003753?via%3Dihub",
       "featured": false
     },
@@ -204,7 +204,7 @@
       "journal": "npj Computational Materials",
       "volume": "10, 110 (2024)",
       "doi": "https://www.nature.com/articles/s41524-024-01293-8",
-      "featured": true
+      "featured": false
     },
     {
       "year": 2024,
@@ -303,7 +303,7 @@
       "journal": "Nature Communications",
       "volume": "11, 4151, selected as editor's highlight",
       "doi": "https://www.nature.com/articles/s41467-020-17938-3",
-      "featured": true
+      "featured": false
     },
     {
       "year": 2019,
