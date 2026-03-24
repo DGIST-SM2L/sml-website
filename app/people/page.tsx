@@ -230,6 +230,10 @@ export default function PeoplePage() {
                   {member.name}
                 </h4>
                 
+                <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                  {member.position}
+                </p>
+                
                 {member.email && (
                   <p className="text-base text-slate-500 dark:text-slate-400">
                     {member.email}
@@ -314,6 +318,10 @@ export default function PeoplePage() {
                     <h4 className="mt-3 text-xl font-bold text-slate-900 dark:text-white">
                       {alum.name}
                     </h4>
+                    
+                    <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                      {alum.degree} · {alum.period}
+                    </p>
                     
                     {alum.email && (
                       <p className="text-base text-slate-500 dark:text-slate-400">
