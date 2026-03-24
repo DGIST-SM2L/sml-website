@@ -240,9 +240,6 @@ export default function PeoplePage() {
                   </p>
                 )}
                 
-                <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                  {member.position}
-                </p>
                 
                 {researchTopics.length > 0 && (
                   <div className="mt-4 w-full text-left">
@@ -328,10 +325,7 @@ export default function PeoplePage() {
                         {alum.email}
                       </p>
                     )}
-                    
-                    <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                      {alum.degree} · {alum.period}
-                    </p>
+
                     <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                       {alum.research}
                     </p>
