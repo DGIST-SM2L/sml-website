@@ -7,7 +7,8 @@ import Footer from "@/components/Footer";
 import { inter, spaceGrotesk } from "@/lib/fonts";
 
 const cloudflareAnalyticsToken =
-  process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
+  process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN ||
+  "b0c9993e33d847ed9dc2c542b2ed1ff0";
 
 export const metadata: Metadata = {
   title: {
