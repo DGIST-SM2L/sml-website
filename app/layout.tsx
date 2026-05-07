@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { inter, spaceGrotesk } from "@/lib/fonts";
+
+const cloudflareAnalyticsToken =
+  process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
 
 export const metadata: Metadata = {
   title: {
@@ -35,6 +39,16 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        {cloudflareAnalyticsToken && (
+          <Script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({
+              token: cloudflareAnalyticsToken,
+            })}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );
