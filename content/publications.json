@@ -37,15 +37,6 @@
     },
     {
       "year": 2026,
-      "authors": "Sung Kwan Tae†, Gabriella Pasya Irianti†, Ye Chan Kim†, Su-Mi Hur*, So Youn Kim*",
-      "title": "Quantitative control of orientational and positional disorder in nanopatterned arrays of metal-infiltrated block copolymers",
-      "journal": "Nature Communications",
-      "volume": "",
-      "doi": "https://www.nature.com/articles/s41467-026-72360-5#Ack1",
-      "featured": false
-    },
-    {
-      "year": 2026,
       "authors": "Jihun Ahn†, Gabriella Pasya Irianti†, Vikram Thapar*, Su-Mi Hur*",
       "title": "Chemically Informed Learning Enables Interpretable Prediction and Generation of Polymers under Complex Constraints",
       "journal": "(Submitted)",
@@ -69,6 +60,15 @@
       "journal": "(Submitted)",
       "volume": "",
       "doi": "",
+      "featured": false
+    },
+    {
+      "year": 2026,
+      "authors": "Sung Kwan Tae†, Gabriella Pasya Irianti†, Ye Chan Kim†, Su-Mi Hur*, So Youn Kim*",
+      "title": "Quantitative control of orientational and positional disorder in nanopatterned arrays of metal-infiltrated block copolymers",
+      "journal": "Nature Communications",
+      "volume": "",
+      "doi": "https://www.nature.com/articles/s41467-026-72360-5#Ack1",
       "featured": false
     },
     {
