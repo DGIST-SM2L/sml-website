@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
+import { createAdminToken, adminCookieOptions } from "@/lib/adminAuth";
 
 export async function POST(request: NextRequest) {
   const { password } = await request.json();
@@ -13,14 +13,9 @@ export async function POST(request: NextRequest) {
   }
 
   if (password === adminPassword) {
-    const token = crypto.randomBytes(32).toString("hex");
-    const response = NextResponse.json({ success: true, token });
-    response.cookies.set("admin_token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 4, // 4 hours
-    });
+    const token = createAdminToken();
+    const response = NextResponse.json({ success: true });
+    response.cookies.set("admin_token", token, adminCookieOptions);
     return response;
   }
 

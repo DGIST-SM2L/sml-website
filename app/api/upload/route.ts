@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
@@ -20,8 +21,7 @@ async function getFileSha(
 }
 
 export async function POST(request: NextRequest) {
-  const token = request.cookies.get("admin_token")?.value;
-  if (!token) {
+  if (!verifyAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

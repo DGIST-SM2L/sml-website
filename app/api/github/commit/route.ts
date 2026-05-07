@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 const CONTENT_FILES: Record<string, string> = {
   publications: "content/publications.json",
@@ -63,8 +64,7 @@ async function commitFile(
 }
 
 export async function POST(request: NextRequest) {
-  const adminToken = request.cookies.get("admin_token")?.value;
-  if (!adminToken) {
+  if (!verifyAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

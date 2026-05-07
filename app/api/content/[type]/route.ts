@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 import fs from "fs/promises";
 import path from "path";
 
@@ -37,8 +38,7 @@ export async function PUT(
     return NextResponse.json({ error: "Invalid content type" }, { status: 400 });
   }
 
-  const token = request.cookies.get("admin_token")?.value;
-  if (!token) {
+  if (!verifyAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
