@@ -8,7 +8,8 @@ import { inter, spaceGrotesk } from "@/lib/fonts";
 
 const cloudflareAnalyticsToken =
   process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
-const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const gaMeasurementId =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-9T5NH19MDY";
 
 export const metadata: Metadata = {
   title: {
