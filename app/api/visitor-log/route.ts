@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
     clientTimezone: truncate(body.timezone, 80),
     screen: truncate(body.screen, 80),
     ip: {
+      raw: ip,
       anonymized: anonymizeIp(ip),
       hash: hashIp(ip),
     },
