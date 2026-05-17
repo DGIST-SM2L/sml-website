@@ -66,7 +66,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Simulation and Machine Learning for Soft Matter Lab, DGIST. All rights reserved.
           </p>
           <p className="mt-2 text-center text-xs text-slate-400 dark:text-slate-600">
-            We collect access logs, including IP-derived location data, for site security, reliability, and regional visitor statistics.
+            We collect access logs, including IP-derived location data, for visitor statistics.
           </p>
         </div>
       </div>
