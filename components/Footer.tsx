@@ -65,6 +65,9 @@ export default function Footer() {
           <p className="text-center text-xs text-slate-500 dark:text-slate-500">
             &copy; {new Date().getFullYear()} Simulation and Machine Learning for Soft Matter Lab, DGIST. All rights reserved.
           </p>
+          <p className="mt-2 text-center text-xs text-slate-400 dark:text-slate-600">
+            We collect privacy-preserving, anonymized access logs for site reliability and regional visitor statistics.
+          </p>
         </div>
       </div>
     </footer>
