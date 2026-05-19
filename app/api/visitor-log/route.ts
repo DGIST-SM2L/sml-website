@@ -18,6 +18,62 @@ type VisitorEventBody = {
   timezone?: unknown;
 };
 
+type VisitorLogEvent = {
+  event: string;
+  timestamp: string;
+  path: string;
+  referrer: string | null;
+  userAgent: string | null;
+  language: string | null;
+  clientTimezone: string | null;
+  screen: string | null;
+  ip: {
+    raw: string | null;
+    anonymized: string | null;
+    hash: string | null;
+  };
+  geo: ReturnType<typeof getRequestGeo>;
+};
+
+async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
+  const supabaseUrl = process.env.SML_SUPABASE_URL?.replace(/\/$/, "");
+  const serviceKey = process.env.SML_SUPABASE_SERVICE_ROLE_KEY;
+  const table = process.env.SML_SUPABASE_VISITOR_TABLE || "visitor_logs";
+
+  if (!supabaseUrl || !serviceKey) return;
+
+  const record = {
+    site: "sml-web",
+    event: event.event,
+    timestamp: event.timestamp,
+    path: event.path,
+    referrer: event.referrer,
+    user_agent: event.userAgent,
+    language: event.language,
+    client_timezone: event.clientTimezone,
+    screen: event.screen,
+    ip_raw: event.ip.raw,
+    ip_anonymized: event.ip.anonymized,
+    ip_hash: event.ip.hash,
+    geo: event.geo,
+  };
+
+  const response = await fetch(`${supabaseUrl}/rest/v1/${table}`, {
+    method: "POST",
+    headers: {
+      apikey: serviceKey,
+      Authorization: `Bearer ${serviceKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify(record),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Supabase visitor log insert failed: ${response.status} ${await response.text()}`);
+  }
+}
+
 export async function POST(request: NextRequest) {
   let body: VisitorEventBody = {};
 
@@ -47,6 +103,12 @@ export async function POST(request: NextRequest) {
 
   // Vercel keeps this in function logs. Raw IP is intentionally not logged.
   console.info(JSON.stringify(event));
+
+  try {
+    await insertSupabaseVisitorLog(event);
+  } catch (error) {
+    console.error("visitor_log_supabase_insert_failed", error);
+  }
 
   return new NextResponse(null, {
     status: 204,
