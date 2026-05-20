@@ -35,12 +35,22 @@ type VisitorLogEvent = {
   geo: ReturnType<typeof getRequestGeo>;
 };
 
-async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
+type SupabaseInsertResult =
+  | { inserted: true; status: number; table: string }
+  | { inserted: false; status?: number; table?: string; reason: string };
+
+async function insertSupabaseVisitorLog(event: VisitorLogEvent): Promise<SupabaseInsertResult> {
   const supabaseUrl = process.env.SML_SUPABASE_URL?.replace(/\/$/, "");
   const serviceKey = process.env.SML_SUPABASE_SERVICE_ROLE_KEY;
   const table = process.env.SML_SUPABASE_VISITOR_TABLE || "visitor_logs";
 
-  if (!supabaseUrl || !serviceKey) return;
+  if (!supabaseUrl || !serviceKey) {
+    return {
+      inserted: false,
+      table,
+      reason: !supabaseUrl ? "missing SML_SUPABASE_URL" : "missing SML_SUPABASE_SERVICE_ROLE_KEY",
+    };
+  }
 
   const record = {
     site: "sml-web",
@@ -72,6 +82,8 @@ async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
   if (!response.ok) {
     throw new Error(`Supabase visitor log insert failed: ${response.status} ${await response.text()}`);
   }
+
+  return { inserted: true, status: response.status, table };
 }
 
 export async function POST(request: NextRequest) {
@@ -104,10 +116,34 @@ export async function POST(request: NextRequest) {
   // Vercel keeps this in function logs. Raw IP is intentionally not logged.
   console.info(JSON.stringify(event));
 
+  let supabaseResult: SupabaseInsertResult | null = null;
+
   try {
-    await insertSupabaseVisitorLog(event);
+    supabaseResult = await insertSupabaseVisitorLog(event);
   } catch (error) {
     console.error("visitor_log_supabase_insert_failed", error);
+    supabaseResult = {
+      inserted: false,
+      reason: error instanceof Error ? error.message : "unknown Supabase insert error",
+    };
+  }
+
+  if (request.headers.get("x-openclaw-debug") === "visitor-log") {
+    return NextResponse.json(
+      {
+        ok: supabaseResult?.inserted === true,
+        supabase: {
+          urlPresent: Boolean(process.env.SML_SUPABASE_URL),
+          serviceRoleKeyPresent: Boolean(process.env.SML_SUPABASE_SERVICE_ROLE_KEY),
+          table: process.env.SML_SUPABASE_VISITOR_TABLE || "visitor_logs",
+          result: supabaseResult,
+        },
+      },
+      {
+        status: supabaseResult?.inserted === true ? 200 : 500,
+        headers: { "Cache-Control": "no-store" },
+      },
+    );
   }
 
   return new NextResponse(null, {
