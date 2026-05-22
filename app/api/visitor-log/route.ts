@@ -21,6 +21,7 @@ type VisitorEventBody = {
 type VisitorLogEvent = {
   event: string;
   timestamp: string;
+  timestampKst: string;
   path: string;
   referrer: string | null;
   userAgent: string | null;
@@ -35,6 +36,11 @@ type VisitorLogEvent = {
   geo: ReturnType<typeof getRequestGeo>;
 };
 
+function getKstTimestamp(date = new Date()) {
+  const kst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+  return kst.toISOString().replace("Z", "+09:00");
+}
+
 async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
   const supabaseUrl = process.env.SML_SUPABASE_URL?.replace(/\/$/, "");
   const serviceKey = process.env.SML_SUPABASE_SERVICE_ROLE_KEY;
@@ -46,6 +52,7 @@ async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
     site: "sml-web",
     event: event.event,
     timestamp: event.timestamp,
+    timestamp_kst: event.timestampKst,
     path: event.path,
     referrer: event.referrer,
     user_agent: event.userAgent,
@@ -55,10 +62,13 @@ async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
     ip_raw: event.ip.raw,
     ip_anonymized: event.ip.anonymized,
     ip_hash: event.ip.hash,
-    geo: event.geo,
+    geo: {
+      ...event.geo,
+      timestamp_kst: event.timestampKst,
+    },
   };
 
-  const response = await fetch(`${supabaseUrl}/rest/v1/${table}`, {
+  const postRecord = async (candidate: typeof record | Omit<typeof record, "timestamp_kst">) => fetch(`${supabaseUrl}/rest/v1/${table}`, {
     method: "POST",
     headers: {
       apikey: serviceKey,
@@ -66,11 +76,19 @@ async function insertSupabaseVisitorLog(event: VisitorLogEvent) {
       "Content-Type": "application/json",
       Prefer: "return=minimal",
     },
-    body: JSON.stringify(record),
+    body: JSON.stringify(candidate),
   });
 
+  let response = await postRecord(record);
   if (!response.ok) {
-    throw new Error(`Supabase visitor log insert failed: ${response.status} ${await response.text()}`);
+    const errorText = await response.text();
+    if (errorText.includes("timestamp_kst")) {
+      const { timestamp_kst: _timestampKst, ...fallbackRecord } = record;
+      response = await postRecord(fallbackRecord);
+      if (response.ok) return;
+      throw new Error(`Supabase visitor log insert failed: ${response.status} ${await response.text()}; original=${errorText}`);
+    }
+    throw new Error(`Supabase visitor log insert failed: ${response.status} ${errorText}`);
   }
 }
 
@@ -84,9 +102,11 @@ export async function POST(request: NextRequest) {
   }
 
   const ip = getClientIp(request);
+  const now = new Date();
   const event = {
     event: "visitor_pageview",
-    timestamp: new Date().toISOString(),
+    timestamp: now.toISOString(),
+    timestampKst: getKstTimestamp(now),
     path: truncate(body.path, 200) || "/",
     referrer: truncate(body.referrer, 500),
     userAgent: truncate(request.headers.get("user-agent"), 500),
