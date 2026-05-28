@@ -18,6 +18,15 @@
   ],
   "publications": [
     {
+      "year": 2025,
+      "authors": "Yejin Ku†, Gayoung Kim, Minseung Kim, Hyungju Ahn, Jin-Kyun Lee*, Jiho Kim, Byeong-Gyu Park, Dohyun Moon, Sangsul Lee, Seohyeon Lee, Yu Ha Jang, Byung Jun Jung, Hyunseok Kim, Changhyeon Lee, Su-Mi Hur, Ji Young Park, Chawon Koh, Tsunehiro Nishi, Hyun-Woo Kim",
+      "title": "Tin-Oxo Nanocluster Extreme UV Photoresists Equipped with Chemical Features for Atmospheric Stability and High EUV Sensitivity",
+      "journal": "Advanced Functional Materials",
+      "volume": "36, no. 27 (2026)",
+      "doi": "https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/adfm.202525300",
+      "featured": false
+    },
+    {
       "year": 2026,
       "authors": "Boominathan Muniyappan†, Sangyeop Lee†, Jun Su Chae†, Jiyun Nam, Siyoung Q. Choi*, Su-Mi Hur*, Myungeun Seo*",
       "title": "Interfacial Mechanics Determines Emulsion Stability in Architectured Copolymers",
