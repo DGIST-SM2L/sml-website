@@ -42,7 +42,7 @@ type SupabaseConfig = {
   url: string;
   serviceKey: string;
   visitorTable: string;
-  ipGeoCacheTable: string;
+  ipGeoCacheTable: string | null;
 };
 
 function getSupabaseConfig(): SupabaseConfig | null {
@@ -55,7 +55,7 @@ function getSupabaseConfig(): SupabaseConfig | null {
     url,
     serviceKey,
     visitorTable: process.env.SML_SUPABASE_VISITOR_TABLE || "visitor_logs",
-    ipGeoCacheTable: process.env.SML_SUPABASE_IP_GEO_CACHE_TABLE || "ip_geo_cache",
+    ipGeoCacheTable: process.env.SML_SUPABASE_IP_GEO_CACHE_TABLE || null,
   };
 }
 
@@ -96,6 +96,8 @@ function cachedIpapiGeoFromValue(value: unknown, fetchedAt?: string, expiresAt?:
 }
 
 async function readDedicatedIpapiGeoCache(config: SupabaseConfig, ip: string): Promise<IpapiGeo | null> {
+  if (!config.ipGeoCacheTable) return null;
+
   const params = new URLSearchParams({
     select: "geo,fetched_at,expires_at",
     ip: `eq.${ip}`,
@@ -173,6 +175,8 @@ async function fetchIpapiGeo(ip: string): Promise<IpapiGeo | null> {
 }
 
 async function writeCachedIpapiGeo(config: SupabaseConfig, ip: string, geo: IpapiGeo) {
+  if (!config.ipGeoCacheTable) return;
+
   const record = {
     ip,
     provider: "ipapi.co",
