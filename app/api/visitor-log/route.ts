@@ -55,7 +55,7 @@ function getSupabaseConfig(): SupabaseConfig | null {
     url,
     serviceKey,
     visitorTable: process.env.SML_SUPABASE_VISITOR_TABLE || "visitor_logs",
-    ipGeoCacheTable: process.env.SML_SUPABASE_IP_GEO_CACHE_TABLE || null,
+    ipGeoCacheTable: process.env.SML_SUPABASE_IP_GEO_CACHE_TABLE || "ip_geo_cache",
   };
 }
 
