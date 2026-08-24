@@ -106,6 +106,14 @@
       "photo": "/images/members/1773630170616-vzk2hk.jpg"
     },
     {
+      "name": "Uk Jung Kang",
+      "email": "kujdhg010@digist.ac.kr",
+      "position": "Postdoc",
+      "research": "all atom MLIP/MD simulation\nML-based polymer/inorganic materials",
+      "education": "Ph.D., Department of Chemical and Energy Engineering\nUlsan National Institute of Science and Technology",
+      "photo": "/images/members/1787537481093-vlyktd.jpg"
+    },
+    {
       "name": "Gabriella Pasya Irianti",
       "email": "gabriellapasya@dgist.ac.kr",
       "position": "Ph.D. student",
@@ -144,6 +152,14 @@
       "research": "MD for Anion Exchange Membrane",
       "education": "B.S., School of Polymer Science and Engineering\nChonnam National University",
       "photo": "/images/members/seunggeon.jpg"
+    },
+    {
+      "name": "Rayhan Hagel",
+      "email": "rayhan.hagel@dgist.ac.kr",
+      "position": "M.S. student",
+      "research": "Machine Learning for CO2 adsorption in Cu-MOF prediction",
+      "education": "B.S., Metallurgy and Material Engineering\nUniversity of Indonesia",
+      "photo": "/images/members/1787537947178-51b4m1.jpg"
     }
   ],
   "alumni": [
